@@ -1,0 +1,153 @@
+﻿<Window x:Class="BananaScoreBoard.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BananaScoreBoard"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="600">
+    
+    <Grid>
+        <TextBox x:Name="Name1P" 
+                 HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,30,0,0"
+                 Text="{Binding Name1P}" TextWrapping="Wrap"
+                 VerticalContentAlignment="Center" HorizontalContentAlignment="Left" FontSize="20"
+                 Width="120" Height="40"/>
+
+        <!--
+        <Button x:Name="Name1PCommit" Content="✔" 
+                HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="15"
+                HorizontalAlignment="Left" Margin="155,30,0,0" VerticalAlignment="Top" 
+                Width="25" Height="40"/>
+        -->
+        
+        <TextBox x:Name="Name2P" 
+                 HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,30,30,0" 
+                 Text = "{Binding Name2P}" TextWrapping="Wrap"
+                 VerticalContentAlignment="Center" HorizontalContentAlignment="Right" FontSize="20"
+                 Width="120" Height="40"/>
+
+        <!--
+        <Button x:Name="Name2pCommit" Content="✔" 
+                HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="15"
+                HorizontalAlignment="Right" Margin="0,30,155,0" VerticalAlignment="Top" 
+                Width="25" Height="40"/>
+-->
+        
+        <TextBox x:Name="Score1p" Text= "{Binding Score1P}"
+               HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="50"
+               HorizontalAlignment="Left" Margin="30,80,0,0" VerticalAlignment="Top"
+               Width="100" Height="100"/>
+
+        <TextBox x:Name="Score2p" Text="{Binding Score2P}"
+               HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="50"
+               HorizontalAlignment="Right" Margin="0,80,30,0" VerticalAlignment="Top" 
+               Width="100" Height="100"/>
+
+        <Button x:Name="Score1pUp" Content="▲" 
+                HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="20"
+                HorizontalAlignment="Left" Margin="135,80,0,0" VerticalAlignment="Top" 
+                Width="45" Height="30"/>
+
+        <Button x:Name="Score1pReset" Content="0" 
+                HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="20"
+                HorizontalAlignment="Left" Margin="135,115,0,0" VerticalAlignment="Top" 
+                Width="45" Height="30"/>
+
+        <Button x:Name="Score1pDown" Content="▼" 
+                HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="20"
+                HorizontalAlignment="Left" Margin="135,150,0,0" VerticalAlignment="Top" 
+                Width="45" Height="30"/>
+
+        <Button x:Name="Score2pUp" Content="▲" 
+                HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="20"
+                HorizontalAlignment="Right" Margin="0,80,135,0" VerticalAlignment="Top" 
+                Width="45" Height="30"/>
+
+        <Button x:Name="Score2pReset" Content="0" 
+                HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="20"
+                HorizontalAlignment="Right" Margin="0,115, 135,0" VerticalAlignment="Top" 
+                Width="45" Height="30"/>
+
+        <Button x:Name="Score2pDown" Content="▼" 
+                HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="20"
+                HorizontalAlignment="Right" Margin="0,150,135,0" VerticalAlignment="Top" 
+                Width="45" Height="30"/>
+
+        <TextBox x:Name="TimerMinute" Text="{Binding Path=Minute, StringFormat= {}{0:00}}"
+               HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="40"
+               HorizontalAlignment="Center" Margin="0,110,100,0" VerticalAlignment="Top" 
+               Width="80" Height="65" />
+        <TextBox x:Name="TimerSecond" Text="{Binding Path=Second, StringFormat= {}{0:00}}"
+               HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="40"
+               HorizontalAlignment="Center" Margin="100,110,0,0" VerticalAlignment="Top" 
+               Width="80" Height="65" />
+        <Label x:Name="TimerDelimeter" Content=":" 
+               HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="50"
+               HorizontalAlignment="Center" Margin="0,100,0,0" VerticalAlignment="Top"
+               Width="20" Height="65"/>
+        <Button x:Name="TimerStart" Content="{Binding PlayButton}" 
+            HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="25"
+            HorizontalAlignment="Center" Margin="0,190,100,0" VerticalAlignment="Top" 
+            Width="80" Height="40"/>
+        <Button x:Name="TimerReset" Content="Reset" 
+            HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="25"
+            HorizontalAlignment="Center" Margin="100,190,0,0" VerticalAlignment="Top" 
+            Width="80" Height="40"/>
+
+        <TextBox x:Name="Round" Text="{Binding Round}"
+               HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="60"
+               HorizontalAlignment="Center" Margin="0,0,0,60" VerticalAlignment="Bottom" 
+               Width="100" Height="100" />
+        
+        <Button x:Name="RoundUp" Content="▲" 
+            HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="15"
+            HorizontalAlignment="Center" Margin="0,0,70,20" VerticalAlignment="Bottom" 
+            Width="30" Height="30"/>
+
+        <Button x:Name="RoundDown" Content="▼" 
+            HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="15"
+            HorizontalAlignment="Center" Margin="70,0,0,20" VerticalAlignment="Bottom" 
+            Width="30" Height="30"/>
+
+        <Button x:Name="RoundReset" Content="0" 
+            HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="15"
+            HorizontalAlignment="Center" Margin="0,0,0,20" VerticalAlignment="Bottom" 
+            Width="30" Height="30"/>
+
+        <TextBox x:Name="Note1_1P" 
+                 HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,280,0,0"
+                 Text="{Binding Note1_1P}" TextWrapping="Wrap"
+                 VerticalContentAlignment="Center" HorizontalContentAlignment="Left" FontSize="15"
+                 Width="155" Height="40"/>
+
+        <TextBox x:Name="Note2_1P" 
+                 HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,340,0,0"
+                 Text="{Binding Note2_1P}" TextWrapping="Wrap"
+                 VerticalContentAlignment="Center" HorizontalContentAlignment="Left" FontSize="15"
+                 Width="155" Height="40"/>
+
+        <TextBox x:Name="Note1_2P" 
+                 HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,280,30,0"
+                 Text="{Binding Note1_2P}" TextWrapping="Wrap"
+                 VerticalContentAlignment="Center" HorizontalContentAlignment="Right" FontSize="15"
+                 Width="155" Height="40"/>
+
+        <TextBox x:Name="Note2_2P" 
+                 HorizontalAlignment="Right" VerticalAlignment="Top" Margin="00,340,30,0"
+                 Text="{Binding Note2_2P}" TextWrapping="Wrap"
+                 VerticalContentAlignment="Center" HorizontalContentAlignment="Right" FontSize="15"
+                 Width="155" Height="40"/>
+        
+        <Rectangle Fill="#dddddd" HorizontalAlignment="Left" Height="150" Margin="190,30,0,0" Stroke="#dddddd" VerticalAlignment="Top" Width="2"/>
+        <Rectangle Fill="#dddddd" HorizontalAlignment="Right" Height="150" Margin="0,30,190,0" Stroke="#dddddd" VerticalAlignment="Top" Width="2"/>
+
+        <Button x:Name="Swap" Content="↔" 
+            HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="30"
+            HorizontalAlignment="Center" Margin="0,40,0,0" VerticalAlignment="Top" 
+            Width="80" Height="50"/>
+
+        
+
+    </Grid>
+</Window>
