@@ -1,0 +1,112 @@
+﻿<Page x:Class="BananaScoreBoard.View.MainView.SubView.MISCView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:BananaScoreBoard.View.MainView.SubView"
+      mc:Ignorable="d" 
+      d:DesignHeight="200" d:DesignWidth="600"
+      Title="MISCView">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="3*"/>
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0" 
+                   Content="Label"
+                    Padding="0,0,0,0"
+                   HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                   HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                   FontSize="15"/>
+
+            <TextBox Grid.Row="1"
+                        Padding="0,0,0,0"
+                       Text="{Binding Label, UpdateSourceTrigger=PropertyChanged}"
+                       HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                       VerticalContentAlignment="Center"
+                       Margin="10,10,10,10" FontSize="15"
+                       />
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="3*"/>
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0" Grid.Column="0" 
+                   Content="MISC1"
+                   Padding="0,0,0,0"
+                   HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                   HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                   FontSize="15"/>
+
+            <TextBox Grid.Row="1" Grid.Column="0"
+                       Text="{Binding MISC1, UpdateSourceTrigger=PropertyChanged}"
+                       HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                       Margin="10,10,10,10" FontSize="15"
+                     VerticalContentAlignment="Center"
+                       Padding="0,0,0,0"
+                       />
+
+            <Label Grid.Row="0" Grid.Column="1" 
+                   Content="MISC2"
+                   HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                   HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                   Padding="0,0,0,0"
+                   FontSize="15"/>
+
+            <TextBox Grid.Row="1" Grid.Column="1"
+                       Text="{Binding MISC2, UpdateSourceTrigger=PropertyChanged}"
+                       HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                       Padding="0,0,0,0"
+                     VerticalContentAlignment="Center"
+                       Margin="10,10,10,10" FontSize="15"
+                       />
+
+            <Label Grid.Row="2" Grid.Column="0" 
+                   Content="MISC3"
+                   HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                   HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                    Padding="0,0,0,0"
+                   FontSize="15"/>
+
+            <TextBox Grid.Row="3" Grid.Column="0"
+                       Text="{Binding MISC3, UpdateSourceTrigger=PropertyChanged}"
+                       HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                        Padding="0,0,0,0"
+                     VerticalContentAlignment="Center"
+                       Margin="10,10,10,10" FontSize="15"
+                       />
+
+            <Label Grid.Row="2" Grid.Column="1" 
+                   Content="MISC4"
+                   HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                   HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                    Padding="0,0,0,0"
+                   FontSize="15"/>
+
+            <TextBox Grid.Row="3" Grid.Column="1"
+                       Text="{Binding MISC4, UpdateSourceTrigger=PropertyChanged}"
+                       HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                        Padding="0,0,0,0" VerticalContentAlignment="Center"
+                       Margin="10,10,10,10" FontSize="15"
+                       />
+        </Grid>
+
+    </Grid>
+</Page>

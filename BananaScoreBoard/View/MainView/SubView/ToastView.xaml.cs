@@ -13,24 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-using BananaScoreBoard.ViewModel;
-using BananaScoreBoard.View.MainView;
-
-namespace BananaScoreBoard
+namespace BananaScoreBoard.View.MainView.SubView
 {
     /// <summary>
-    /// MainWindow.xaml에 대한 상호 작용 논리
+    /// ToastView.xaml에 대한 상호 작용 논리
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ToastView : Page
     {
-        //private MainView main_view;
-
-        
-        public MainWindow()
+        public ToastView()
         {
             InitializeComponent();
-            this.MainView.Content = new MainView();
         }
-        
     }
 }

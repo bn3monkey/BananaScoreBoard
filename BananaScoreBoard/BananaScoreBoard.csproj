@@ -37,6 +37,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -56,7 +57,47 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\Record.cs" />
+    <Compile Include="Model\Type\Player.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\MainViewModel\SubViewModel\FolderPathViewModel.cs" />
+    <Compile Include="ViewModel\MainViewModel\SubViewModel\MISCViewModel.cs" />
+    <Compile Include="ViewModel\MainViewModel\SubViewModel\ScoreViewModel.cs" />
+    <Compile Include="ViewModel\MainViewModel\SubViewModel\TimerViewModel.cs" />
+    <Compile Include="ViewModel\MainViewModel\SubViewModel\ToastViewModel.cs" />
+    <Compile Include="View\MainView\MainView.xaml.cs">
+      <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MainView\SubView\FolderPathView.xaml.cs">
+      <DependentUpon>FolderPathView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MainView\SubView\MISCView.xaml.cs">
+      <DependentUpon>MISCView.xaml</DependentUpon>
+    </Compile>
+    <Page Include="View\MainView\MainView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MainView\SubView\FolderPathView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MainView\SubView\MISCView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MainView\SubView\ScoreView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MainView\SubView\TimerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MainView\SubView\ToastView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -66,15 +107,22 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Model\Repository.cs" />
-    <Compile Include="Model\Type\Player.cs" />
+    <Compile Include="View\MainView\SubView\ScoreView.xaml.cs">
+      <DependentUpon>ScoreView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MainView\SubView\TimerView.xaml.cs">
+      <DependentUpon>TimerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MainView\SubView\ToastView.xaml.cs">
+      <DependentUpon>ToastView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\Type\Round.cs" />
-    <Compile Include="Model\Type\TimeView.cs" />
+    <Compile Include="Model\Type\Clock.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
