@@ -12,3 +12,16 @@ E:\repo\BananaScoreBoard\BananaScoreBoard\obj\Release\BananaScoreBoard.csproj.Ge
 E:\repo\BananaScoreBoard\BananaScoreBoard\obj\Release\BananaScoreBoard.csproj.CoreCompileInputs.cache
 E:\repo\BananaScoreBoard\BananaScoreBoard\obj\Release\BananaScoreBoard.exe
 E:\repo\BananaScoreBoard\BananaScoreBoard\obj\Release\BananaScoreBoard.pdb
+E:\repo\BananaScoreBoard\BananaScoreBoard\obj\Release\BananaScoreBoard.csproj.AssemblyReference.cache
+E:\repo\BananaScoreBoard\BananaScoreBoard\obj\Release\View\MainView\MainView.g.cs
+E:\repo\BananaScoreBoard\BananaScoreBoard\obj\Release\View\MainView\SubView\FolderPathView.g.cs
+E:\repo\BananaScoreBoard\BananaScoreBoard\obj\Release\View\MainView\SubView\MISCView.g.cs
+E:\repo\BananaScoreBoard\BananaScoreBoard\obj\Release\View\MainView\SubView\ScoreView.g.cs
+E:\repo\BananaScoreBoard\BananaScoreBoard\obj\Release\View\MainView\SubView\TimerView.g.cs
+E:\repo\BananaScoreBoard\BananaScoreBoard\obj\Release\View\MainView\SubView\ToastView.g.cs
+E:\repo\BananaScoreBoard\BananaScoreBoard\obj\Release\View\MainView\MainView.baml
+E:\repo\BananaScoreBoard\BananaScoreBoard\obj\Release\View\MainView\SubView\FolderPathView.baml
+E:\repo\BananaScoreBoard\BananaScoreBoard\obj\Release\View\MainView\SubView\MISCView.baml
+E:\repo\BananaScoreBoard\BananaScoreBoard\obj\Release\View\MainView\SubView\ScoreView.baml
+E:\repo\BananaScoreBoard\BananaScoreBoard\obj\Release\View\MainView\SubView\TimerView.baml
+E:\repo\BananaScoreBoard\BananaScoreBoard\obj\Release\View\MainView\SubView\ToastView.baml

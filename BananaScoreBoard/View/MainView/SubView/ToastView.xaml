@@ -9,12 +9,10 @@
       Title="ToastView">
 
     <Grid>
-        <Border Background="#dddddd" CornerRadius="10">
-            <Border.Child>
-                <TextBlock Text="{Binding Toast, UpdateSourceTrigger=PropertyChanged}"
-                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                    Margin="10,10,10,10" FontSize="10"/>
-            </Border.Child>
+        <Border  x:Name="ToastBackground" CornerRadius="10">
+            <TextBlock x:Name="Toast" Text="{Binding Toast}"
+                    HorizontalAlignment="Left" VerticalAlignment="Center"
+                    Margin="10,0,10,0" FontSize="15"/>
         </Border>
     </Grid>
 </Page>

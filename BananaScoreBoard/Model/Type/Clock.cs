@@ -21,10 +21,16 @@ namespace BananaScoreBoard.Model.Type
         private Timer timer;
 
         public delegate void Notifier(int minute, int second);
-        Notifier notifier= null;
-        public void registerCallback(Notifier notify)
+        Notifier ui_notifier= null;
+        Notifier file_notifier = null;
+
+        public void registerUICallback(Notifier notify)
         {
-            notifier = notify;
+            ui_notifier = notify;
+        }
+        public void registerFileCallback(Notifier notify)
+        {
+            file_notifier = notify;
         }
 
         public bool Start()
@@ -51,10 +57,13 @@ namespace BananaScoreBoard.Model.Type
                     }
                 }
 
-                
                 // Send To UI & Repository
-                if (notifier != null)
-                    notifier.Invoke(next_minute, next_second);
+                if (file_notifier != null)
+                    file_notifier.Invoke(next_minute, next_second);
+
+                // Send To UI & Repository
+                if (ui_notifier != null)
+                    ui_notifier.Invoke(next_minute, next_second);
             }, null, 1000, 1000);
             
             return true;

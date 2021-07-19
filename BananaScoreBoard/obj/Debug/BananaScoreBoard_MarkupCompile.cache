@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 E:\repo\BananaScoreBoard\BananaScoreBoard\App.xaml
-11151548125
+72021523469
 
-10-1318380995
-14-1290796308
-MainWindow.xaml;
+21-1442310139
+151397803362
+View\MainView\MainView.xaml;View\MainView\SubView\FolderPathView.xaml;View\MainView\SubView\MISCView.xaml;View\MainView\SubView\ScoreView.xaml;View\MainView\SubView\TimerView.xaml;View\MainView\SubView\ToastView.xaml;MainWindow.xaml;
 
 False
 

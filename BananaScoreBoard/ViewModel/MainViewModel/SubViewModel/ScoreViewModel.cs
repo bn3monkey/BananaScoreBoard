@@ -28,6 +28,7 @@ namespace BananaScoreBoard.ViewModel.MainViewModel.SubViewModel
             view.DataContext = this;
             view.Swap.Click += ClickSwap;
             view.Update.Click += ClickUpdate;
+            view.Reset.Click += ClickReset;
 
             view.Score1pUp.Click += ClickScore1PUp;
             view.Score1pReset.Click += ClickScore1PReset;
@@ -71,9 +72,17 @@ namespace BananaScoreBoard.ViewModel.MainViewModel.SubViewModel
                     Repository.Instance.record.WriteString(Record.Name.MISC2, parent.miscViewModel.MISC2);
                     Repository.Instance.record.WriteString(Record.Name.MISC3, parent.miscViewModel.MISC3);
                     Repository.Instance.record.WriteString(Record.Name.MISC4, parent.miscViewModel.MISC4);
+
+                    parent.toastVIewModel.Toast = "Update Done";
                 }
                 );
             task.Start();
+        }
+
+        void ClickReset(object sender, RoutedEventArgs e)
+        {
+            Score1P = 0;
+            Score2P = 0;
         }
 
         void ClickScore1PUp(object sender, RoutedEventArgs e)

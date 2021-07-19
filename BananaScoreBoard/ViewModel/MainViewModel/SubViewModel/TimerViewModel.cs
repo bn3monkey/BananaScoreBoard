@@ -58,7 +58,17 @@ namespace BananaScoreBoard.ViewModel.MainViewModel.SubViewModel
                 );
             };
 
-            Repository.Instance.clock.registerCallback(timerChangedUI);
+           
+
+            Repository.Instance.clock.registerUICallback(timerChangedUI);
+            Repository.Instance.clock.registerFileCallback((int minute, int second) =>
+            {
+                Task task = new Task(() => {
+                    Repository.Instance.record.writeClock(minute, second);
+                });
+                task.Start();
+            });
+
 
             view.TimerStart.Click += ClickTimerStart;
             view.TimerReset.Click += ClickTimerReset;

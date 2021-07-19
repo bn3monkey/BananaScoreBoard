@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BananaScoreBoard"
         mc:Ignorable="d"
-        Title="MainWindow" Height="800" Width="600">
+        Title="BananaScoreBoard" Height="800" Width="600">
     
     <Grid>
         <Frame x:Name="MainView"/>
