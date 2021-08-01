@@ -169,20 +169,33 @@ namespace BananaScoreBoard.Control
                 return;
             }
 
-            var itemsSource = GetSuggestion == null ? new List<string> { } : GetSuggestion(text);
-            AutoCompleteSuggestion.ItemsSource = itemsSource;
-            if (itemsSource.Count != 0)
+            Task task = new Task(() =>
             {
-                if (denySuggestion == false)
+                var itemsSource = GetSuggestion == null ? new List<string> { } : GetSuggestion(text);
+                this.Dispatcher.Invoke(() =>
                 {
-                    Suggest(SuggestionSendor.Key, itemsSource[0]);
-                }
-                OpenAutoSuggestion();
-            }
-            else
-            {
-                CloseAutoSuggestion();
-            }
+                    AutoCompleteSuggestion.ItemsSource = itemsSource;
+                    if (itemsSource.Count != 0)
+                    {
+                        if (denySuggestion == false)
+                        {
+                            Suggest(SuggestionSendor.Key, itemsSource[0]);
+                        }
+                        this.Dispatcher.Invoke(() =>
+                        {
+                            OpenAutoSuggestion();
+                        });
+                    }
+                    else
+                    {
+                        this.Dispatcher.Invoke(() =>
+                        {
+                            CloseAutoSuggestion();
+                        });
+                    }
+                });
+            });
+            task.Start();
 
         }
 

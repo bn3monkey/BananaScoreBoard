@@ -80,7 +80,7 @@ namespace BananaScoreBoard.Model.Type
             {
                 conn.Open();
                 var command = new SQLiteCommand(conn);
-                command.CommandText = @"SELECT * FROM Player WHERE name like '" + name + "%'";
+                command.CommandText = @"SELECT * FROM Player WHERE name like '" + name + "%' ORDER BY name ASC";
                 SQLiteDataReader rdr = command.ExecuteReader();
 
 
