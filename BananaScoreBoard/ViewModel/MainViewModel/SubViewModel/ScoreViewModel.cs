@@ -8,6 +8,7 @@ using BananaScoreBoard.View.MainView.SubView;
 
 using BananaScoreBoard.Model;
 using System.Windows;
+using System.Collections.ObjectModel;
 
 namespace BananaScoreBoard.ViewModel.MainViewModel.SubViewModel
 {
@@ -37,7 +38,22 @@ namespace BananaScoreBoard.ViewModel.MainViewModel.SubViewModel
             view.Score2pUp.Click += ClickScore2PUp;
             view.Score2pReset.Click += ClickScore2PReset;
             view.Score2pDown.Click += ClickScore2PDown;
+
+            BananaScoreBoard.Control.AutoComplete.GetItemSource suggestion = (string value) => {
+                var list = Repository.Instance.listPlayer(value);
+
+                if (list.Count == 1)
+                {
+                    if (value.CompareTo(list[0]) == 0)
+                        return new List<string> { };
+                }
+                return list;
+            };
+
+            view.Name1P.GetSuggestion = suggestion;
+            view.Name2P.GetSuggestion = suggestion;
         }
+
 
         void ClickSwap(object sender, RoutedEventArgs e)
         {
@@ -53,6 +69,8 @@ namespace BananaScoreBoard.ViewModel.MainViewModel.SubViewModel
                 Score1P = Score2P;
                 Score2P = temp;
             }
+
+            parent.toastVIewModel.Toast = "Player 1 and Player 2 is changed";
         }
 
         void ClickUpdate(object sender, RoutedEventArgs e)
@@ -60,29 +78,21 @@ namespace BananaScoreBoard.ViewModel.MainViewModel.SubViewModel
             Task task = new Task(
                 () =>
                 {
-                    Repository.Instance.record.WriteString(Record.Name.Name1P, Name1P);
-                    Repository.Instance.record.WriteString(Record.Name.Name2P, Name2P);
-
-                    Repository.Instance.record.WriteInt(Record.Name.Score1P, Score1P);
-                    Repository.Instance.record.WriteInt(Record.Name.Score2P, Score2P);
-
-
-                    Repository.Instance.record.WriteString(Record.Name.Label, parent.miscViewModel.Label);
-                    Repository.Instance.record.WriteString(Record.Name.MISC1, parent.miscViewModel.MISC1);
-                    Repository.Instance.record.WriteString(Record.Name.MISC2, parent.miscViewModel.MISC2);
-                    Repository.Instance.record.WriteString(Record.Name.MISC3, parent.miscViewModel.MISC3);
-                    Repository.Instance.record.WriteString(Record.Name.MISC4, parent.miscViewModel.MISC4);
+                    Repository.Instance.update();
+                    
 
                     parent.toastVIewModel.Toast = "Update Done";
                 }
                 );
             task.Start();
+
         }
 
         void ClickReset(object sender, RoutedEventArgs e)
         {
             Score1P = 0;
             Score2P = 0;
+            parent.toastVIewModel.Toast = "Reset Done";
         }
 
         void ClickScore1PUp(object sender, RoutedEventArgs e)
@@ -162,5 +172,7 @@ namespace BananaScoreBoard.ViewModel.MainViewModel.SubViewModel
                 OnPropertyUpdate("Score2P");
             }
         }
+
+        
     }
 }

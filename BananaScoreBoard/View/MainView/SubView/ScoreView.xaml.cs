@@ -24,5 +24,6 @@ namespace BananaScoreBoard.View.MainView.SubView
         {
             InitializeComponent();
         }
+
     }
 }

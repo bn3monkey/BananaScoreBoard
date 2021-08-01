@@ -29,6 +29,13 @@ namespace BananaScoreBoard.Model
             misc3 = "";
             misc4 = "";
             record = new Record();
+
+            Player.openPlayerList();
+        }
+
+        public List<string> listPlayer(string name)
+        {
+            return Player.listPlayer(name);
         }
 
         public void update()
@@ -42,6 +49,9 @@ namespace BananaScoreBoard.Model
             record.WriteString(Record.Name.MISC2, misc2);
             record.WriteString(Record.Name.MISC3, misc3);
             record.WriteString(Record.Name.MISC4, misc4);
+
+            player1.addPlayer();
+            player2.addPlayer();
         }
 
         public void load()

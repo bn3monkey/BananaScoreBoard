@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:BananaScoreBoard.View.MainView.SubView"
+      xmlns:UC="clr-namespace:BananaScoreBoard.Control"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ScoreView">
@@ -26,10 +27,17 @@
                    FontSize="20"
                    />
 
-        <TextBox Grid.Row="1" Grid.Column="0" x:Name="Name1P" 
+        <UC:AutoComplete x:Name="Name1P" Grid.Row="1" Grid.Column="0"
+                         HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,5,10,5"
+                         Text="{Binding Name1P}" />
+        <!--
+        <ComboBox Grid.Row="1" Grid.Column="0" x:Name="Name1P" 
                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,5,10,5"
-                 Text="{Binding Name1P, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap"
-                 VerticalContentAlignment="Center" HorizontalContentAlignment="Left" FontSize="20"/>
+                 Text="{Binding Name1P, UpdateSourceTrigger=PropertyChanged}"
+                 ItemsSource="{Binding Name1PCandidate}"
+                 VerticalContentAlignment="Center" HorizontalContentAlignment="Left" FontSize="20" IsEditable="True"
+                  />
+        -->
 
         <Grid Grid.Row="2" Grid.Column="0">
             <Grid.RowDefinitions>
@@ -100,11 +108,10 @@
                    FontSize="20"
                    />
 
-        <TextBox Grid.Row="1" Grid.Column="2" x:Name="Name2P" 
-                 HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,5,10,5"
-                 Text="{Binding Name2P, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap"
-                 VerticalContentAlignment="Center" HorizontalContentAlignment="Right" FontSize="20"/>
-
+        <UC:AutoComplete x:Name="Name2P" Grid.Row="1" Grid.Column="2"
+                         HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,5,10,5"
+                         Text="{Binding Name2P}" />
+        
         <Grid Grid.Row="2" Grid.Column="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
