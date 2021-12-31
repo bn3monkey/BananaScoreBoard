@@ -8,6 +8,8 @@ using BananaScoreBoard.View.MainView.SubView;
 
 using BananaScoreBoard.Model;
 using System.Windows;
+using System.Windows.Input;
+using BananaScoreBoard.Auxiliary;
 
 namespace BananaScoreBoard.ViewModel.MainViewModel.SubViewModel
 {
@@ -69,19 +71,32 @@ namespace BananaScoreBoard.ViewModel.MainViewModel.SubViewModel
                 task.Start();
             });
 
-
-            view.TimerStart.Click += ClickTimerStart;
-            view.TimerReset.Click += ClickTimerReset;
         }
 
-        private void ClickTimerReset(object sender, RoutedEventArgs e)
+        private ICommand timerResetCommand;
+        public ICommand TimerResetCommand
+        {
+            get
+            {
+                return timerResetCommand ?? (timerResetCommand = new DelegateCommand(TimerReset));
+            }
+        }
+        private void TimerReset()
         {
             IsTimerStarted = false;
             Minute = 0;
             Second = 0;
         }
 
-        private void ClickTimerStart(object sender, RoutedEventArgs e)
+        private ICommand timerStartCommand;
+        public ICommand TimerStartCommand
+        {
+            get
+            {
+                return timerStartCommand ?? (timerStartCommand = new DelegateCommand(TimerStart));
+            }
+        }
+        private void TimerStart()
         {
             IsTimerStarted = !IsTimerStarted;
             

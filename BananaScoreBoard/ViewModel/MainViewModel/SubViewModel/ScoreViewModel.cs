@@ -9,6 +9,8 @@ using BananaScoreBoard.View.MainView.SubView;
 using BananaScoreBoard.Model;
 using System.Windows;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
+using BananaScoreBoard.Auxiliary;
 
 namespace BananaScoreBoard.ViewModel.MainViewModel.SubViewModel
 {
@@ -27,18 +29,8 @@ namespace BananaScoreBoard.ViewModel.MainViewModel.SubViewModel
         {
             this.parent = parent;
             view.DataContext = this;
-            view.Swap.Click += ClickSwap;
-            view.Update.Click += ClickUpdate;
-            view.Reset.Click += ClickReset;
 
-            view.Score1pUp.Click += ClickScore1PUp;
-            view.Score1pReset.Click += ClickScore1PReset;
-            view.Score1pDown.Click += ClickScore1PDown;
-
-            view.Score2pUp.Click += ClickScore2PUp;
-            view.Score2pReset.Click += ClickScore2PReset;
-            view.Score2pDown.Click += ClickScore2PDown;
-
+            /*
             BananaScoreBoard.Control.AutoComplete.GetItemSource suggestion = (string value) => {
                 var list = Repository.Instance.listPlayer(value);
 
@@ -52,10 +44,19 @@ namespace BananaScoreBoard.ViewModel.MainViewModel.SubViewModel
 
             view.Name1P.GetSuggestion = suggestion;
             view.Name2P.GetSuggestion = suggestion;
+            */
         }
 
+        private ICommand swapCommand;
+        public ICommand SwapCommand
+        {
+            get
+            {
+                return swapCommand ?? (swapCommand = new DelegateCommand(Swap));
+            }
+        }
 
-        void ClickSwap(object sender, RoutedEventArgs e)
+        void Swap()
         {
             {
                 string temp;
@@ -73,7 +74,15 @@ namespace BananaScoreBoard.ViewModel.MainViewModel.SubViewModel
             parent.toastVIewModel.Toast = "Player 1 and Player 2 is changed";
         }
 
-        void ClickUpdate(object sender, RoutedEventArgs e)
+        private ICommand updateCommand;
+        public ICommand UpdateCommand
+        {
+            get
+            {
+                return updateCommand ?? (updateCommand = new DelegateCommand(Update));
+            }
+        }
+        void Update()
         {
             Task task = new Task(
                 () =>
@@ -88,35 +97,95 @@ namespace BananaScoreBoard.ViewModel.MainViewModel.SubViewModel
 
         }
 
-        void ClickReset(object sender, RoutedEventArgs e)
+        private ICommand resetCommand;
+        public ICommand ResetCommand
+        {
+            get
+            {
+                return resetCommand ?? (resetCommand = new DelegateCommand(Reset));
+            }
+        }
+        void Reset()
         {
             Score1P = 0;
             Score2P = 0;
             parent.toastVIewModel.Toast = "Reset Done";
         }
 
-        void ClickScore1PUp(object sender, RoutedEventArgs e)
+        private ICommand score1PUpCommand;
+        public ICommand Score1PUpCommand
+        {
+            get
+            {
+                return score1PUpCommand ?? (score1PUpCommand = new DelegateCommand(Score1PUp));
+            }
+        }
+        void Score1PUp()
         {
             Score1P += 1;
         }
-        void ClickScore1PDown(object sender, RoutedEventArgs e)
+
+        private ICommand score1PDownCommand;
+        public ICommand Score1PDownCommand
+        {
+            get
+            {
+                return score1PDownCommand ?? (score1PDownCommand = new DelegateCommand(Score1PDown));
+            }
+        }
+        void Score1PDown()
         {
             Score1P -= 1;
         }
-        void ClickScore1PReset(object sender, RoutedEventArgs e)
+
+        private ICommand score1PResetCommand;
+        public ICommand Score1PResetCommand
+        {
+            get
+            {
+                return score1PResetCommand ?? (score1PResetCommand = new DelegateCommand(Score1PReset));
+            }
+        }
+        void Score1PReset()
         {
             Score1P = 0;
         }
 
-        void ClickScore2PUp(object sender, RoutedEventArgs e)
+        private ICommand score2PUpCommand;
+        public ICommand Score2PUpCommand
+        {
+            get
+            {
+                return score2PUpCommand ?? (score2PUpCommand = new DelegateCommand(Score2PUp));
+            }
+        }
+        void Score2PUp()
         {
             Score2P += 1;
         }
-        void ClickScore2PDown(object sender, RoutedEventArgs e)
+
+        private ICommand score2PDownCommand;
+        public ICommand Score2PDownCommand
+        {
+            get
+            {
+                return score2PDownCommand ?? (score2PDownCommand = new DelegateCommand(Score2PDown));
+            }
+        }
+        void Score2PDown()
         {
             Score2P -= 1;
         }
-        void ClickScore2PReset(object sender, RoutedEventArgs e)
+
+        private ICommand score2PResetCommand;
+        public ICommand Score2PResetCommand
+        {
+            get
+            {
+                return score2PResetCommand ?? (score2PResetCommand = new DelegateCommand(Score2PReset));
+            }
+        }
+        void Score2PReset()
         {
             Score2P = 0;
         }

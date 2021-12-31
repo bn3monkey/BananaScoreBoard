@@ -39,13 +39,15 @@
         <Button Grid.Row="1" Grid.Column="0"
                x:Name="TimerStart" Content="Start"
                HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="20"
-               HorizontalAlignment="Stretch" Margin="10,10,10,10" VerticalAlignment="Stretch" 
+               HorizontalAlignment="Stretch" Margin="10,10,10,10" VerticalAlignment="Stretch"
+                Command="{Binding TimerStartCommand}"
                />
 
         <Button Grid.Row="1" Grid.Column="2"
                x:Name="TimerReset" Content="Reset"
                HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="20"
-               HorizontalAlignment="Stretch" Margin="10,10,10,10" VerticalAlignment="Stretch" 
+               HorizontalAlignment="Stretch" Margin="10,10,10,10" VerticalAlignment="Stretch"
+                Command="{Binding TimerResetCommand}"
                />
 
     </Grid>

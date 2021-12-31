@@ -27,18 +27,18 @@
                    FontSize="20"
                    />
 
+        <!--
         <UC:AutoComplete x:Name="Name1P" Grid.Row="1" Grid.Column="0"
                          HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,5,10,5"
                          Text="{Binding Name1P}" />
-        <!--
-        <ComboBox Grid.Row="1" Grid.Column="0" x:Name="Name1P" 
-                 HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,5,10,5"
-                 Text="{Binding Name1P, UpdateSourceTrigger=PropertyChanged}"
-                 ItemsSource="{Binding Name1PCandidate}"
-                 VerticalContentAlignment="Center" HorizontalContentAlignment="Left" FontSize="20" IsEditable="True"
-                  />
         -->
 
+        <TextBox Grid.Row="1" Grid.Column="0"
+                    x:Name="Name1P" Text="{Binding Name1P}"
+                    HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="20"
+                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                     Margin="10,5,10,5" />
+        
         <Grid Grid.Row="2" Grid.Column="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
@@ -60,18 +60,21 @@
                     x:Name="Score1pUp" Content="▲" 
                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="15"
                     HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                    Command="{Binding Score1PUpCommand}"
                     Margin="5,5,10,5" />
 
             <Button Grid.Column="1" Grid.Row="1"
                     x:Name="Score1pReset" Content="0" 
                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="15"
                     HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                    Command="{Binding Score1PResetCommand}"
                     Margin="5,5,10,5" />
 
             <Button Grid.Column="1" Grid.Row="2"
                     x:Name="Score1pDown" Content="▼" 
                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="15"
                     HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                    Command="{Binding Score1PDownCommand}"
                     Margin="5,5,10,5" />
 
         </Grid>
@@ -86,19 +89,22 @@
             <Button Grid.Row="0" 
                         x:Name="Swap" Content="↔" 
                         HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="25"
-                        HorizontalAlignment="Stretch" Margin="20,5,20,5" VerticalAlignment="Stretch" 
+                        HorizontalAlignment="Stretch" Margin="20,5,20,5" VerticalAlignment="Stretch"
+                        Command="{Binding SwapCommand}"
                         />
 
             <Button Grid.Row="1" 
                         x:Name="Update" Content="Update" 
                         HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="25"
-                        HorizontalAlignment="Stretch" Margin="20,5,20,5" VerticalAlignment="Stretch" 
+                        HorizontalAlignment="Stretch" Margin="20,5,20,5" VerticalAlignment="Stretch"
+                        Command="{Binding UpdateCommand}"
                         />
 
             <Button Grid.Row="2" 
                         x:Name="Reset" Content="Reset" 
                         HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="25"
                         HorizontalAlignment="Stretch" Margin="20,5,20,5" VerticalAlignment="Stretch" 
+                        Command="{Binding ResetCommand}"
                         />
         </Grid>
 
@@ -108,10 +114,18 @@
                    FontSize="20"
                    />
 
+        <!--
         <UC:AutoComplete x:Name="Name2P" Grid.Row="1" Grid.Column="2"
                          HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,5,10,5"
                          Text="{Binding Name2P}" />
+        -->
         
+        <TextBox Grid.Row="1" Grid.Column="2"
+                    x:Name="Name2P" Text="{Binding Name2P}"
+                    HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="20"
+                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                     Margin="10,5,10,5" />
+
         <Grid Grid.Row="2" Grid.Column="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
@@ -133,18 +147,21 @@
                     x:Name="Score2pUp" Content="▲" 
                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="15"
                     HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                    Command="{Binding Score2PUpCommand}"
                     Margin="10,5,5,5" />
 
             <Button Grid.Column="0" Grid.Row="1"
                     x:Name="Score2pReset" Content="0" 
                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="15"
                     HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                    Command="{Binding Score2PResetCommand}"
                     Margin="10,5,5,5" />
 
             <Button Grid.Column="0" Grid.Row="2"
                     x:Name="Score2pDown" Content="▼" 
                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="15"
                     HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                     Command="{Binding Score2PDownCommand}"
                     Margin="10,5,5,5" />
         </Grid>
     </Grid>

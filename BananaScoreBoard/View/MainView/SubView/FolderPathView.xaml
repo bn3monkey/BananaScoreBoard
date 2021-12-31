@@ -30,12 +30,14 @@
         <Button Grid.Column="2" x:Name="FindFolderPath" Content="Find" 
                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                 HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="15"
+                Command="{Binding FindFolderPathCommand}"
                 Margin="5,10,5,10"/>
         
         <Button Grid.Column="3" 
                 x:Name="ReadFolderPath" Content="Read" 
                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                 HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="15"
+                Command="{Binding ReadFolderPathCommand}"
                 Margin="5,10,5,10"/>
         
 

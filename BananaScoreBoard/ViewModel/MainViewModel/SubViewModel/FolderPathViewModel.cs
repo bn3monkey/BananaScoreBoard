@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 
 using BananaScoreBoard.Model;
 using System.Windows;
+using System.Windows.Input;
+using BananaScoreBoard.Auxiliary;
 
 namespace BananaScoreBoard.ViewModel.MainViewModel.SubViewModel
 {
@@ -28,19 +30,36 @@ namespace BananaScoreBoard.ViewModel.MainViewModel.SubViewModel
             this.parent = parent;
             view.DataContext = this;
 
-            view.FindFolderPath.Click += ClickFindFolderPath;
-            view.ReadFolderPath.Click += ClickReadFolderPath;
 
             Repository.Instance.record.loadPath();
         }
 
-        void ClickFindFolderPath(object sender, RoutedEventArgs e)
+        private ICommand findFolderPathCommand;
+        public ICommand FindFolderPathCommand
+        {
+            get
+            {
+                return this.findFolderPathCommand ?? (this.findFolderPathCommand = new DelegateCommand(FindFolderPath));
+            }
+        }
+
+        private ICommand readFolderPathCommand;
+        public ICommand ReadFolderPathCommand
+        {
+            get
+            {
+                return this.readFolderPathCommand ?? (this.readFolderPathCommand = new DelegateCommand(ReadFolderPath));
+            }
+        }
+
+
+        void FindFolderPath()
         {
             FolderPath = Repository.Instance.record.FindPath();
             Repository.Instance.record.savePath();
         }
 
-        void ClickReadFolderPath(object sender, RoutedEventArgs e)
+        void ReadFolderPath()
         {
             Task task = new Task(() =>
                 {

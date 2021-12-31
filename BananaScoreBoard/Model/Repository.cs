@@ -30,12 +30,12 @@ namespace BananaScoreBoard.Model
             misc4 = "";
             record = new Record();
 
-            Player.openPlayerList();
+            PlayerWithDB.openPlayerList();
         }
 
         public List<string> listPlayer(string name)
         {
-            return Player.listPlayer(name);
+            return PlayerWithDB.listPlayer(name);
         }
 
         public void update()
@@ -50,8 +50,8 @@ namespace BananaScoreBoard.Model
             record.WriteString(Record.Name.MISC3, misc3);
             record.WriteString(Record.Name.MISC4, misc4);
 
-            player1.addPlayer();
-            player2.addPlayer();
+            //player1.addPlayer();
+            //player2.addPlayer();
         }
 
         public void load()
@@ -61,12 +61,14 @@ namespace BananaScoreBoard.Model
             {
                 string name = record.ReadString(Record.Name.Name1P);
                 int score = record.ReadInt(Record.Name.Score1P);
+                // player1 = new PlayerWithDB(name, score);
                 player1 = new Player(name, score);
             }
 
             {
                 string name = record.ReadString(Record.Name.Name2P);
                 int score = record.ReadInt(Record.Name.Score2P);
+                // player2 = new PlayerWithDB(name, score);
                 player2 = new Player(name, score);
             }
 
