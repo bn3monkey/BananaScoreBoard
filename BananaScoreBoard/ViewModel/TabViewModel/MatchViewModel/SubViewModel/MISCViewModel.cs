@@ -1,4 +1,4 @@
-﻿using BananaScoreBoard.View.MainView.SubView;
+﻿using BananaScoreBoard.View.TabView.MatchView.SubView;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using BananaScoreBoard.Model;
 using System.Windows;
 
-namespace BananaScoreBoard.ViewModel.MainViewModel.SubViewModel
+namespace BananaScoreBoard.ViewModel.TabViewModel.MatchViewModel.SubViewModel
 {
     class MISCViewModel : INotifyPropertyChanged
     {
@@ -21,9 +21,18 @@ namespace BananaScoreBoard.ViewModel.MainViewModel.SubViewModel
             //    PropertyChanged(this, new PropertyChangedEventArgs(propertyname));
         }
 
-        public MISCViewModel(MainViewModel parent, MISCView view)
+        public MISCViewModel(MISCView view)
         {
-            view.DataContext = this;
+            Repository.Instance.registerReferehser(refresh);
+        }
+
+        void refresh()
+        {
+            OnPropertyUpdate("Label");
+            OnPropertyUpdate("MISC1");
+            OnPropertyUpdate("MISC2");
+            OnPropertyUpdate("MISC3");
+            OnPropertyUpdate("MISC4");
         }
 
         public string Label

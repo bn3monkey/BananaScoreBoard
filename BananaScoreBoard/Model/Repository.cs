@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Windows;
 using BananaScoreBoard.Model.Type;
 
 namespace BananaScoreBoard.Model
@@ -17,7 +17,9 @@ namespace BananaScoreBoard.Model
         public string misc1, misc2, misc3, misc4;
 
         public Record record;
+        public Toast toast;
 
+        
         Repository()
         {
             player1 = new Player("", 0);
@@ -29,9 +31,27 @@ namespace BananaScoreBoard.Model
             misc3 = "";
             misc4 = "";
             record = new Record();
+            toast = new Toast();
 
             PlayerWithDB.openPlayerList();
         }
+
+        public delegate void Refresher();    
+        private List<Refresher> refreshers = new List<Refresher>();
+
+        public void refresh()
+        {
+            foreach(var refresher in refreshers)
+            {
+                refresher.Invoke();
+            }
+        }
+        public void registerReferehser(Refresher refresher)
+        {
+            refreshers.Add(refresher);
+        }
+
+
 
         public List<string> listPlayer(string name)
         {
@@ -78,10 +98,12 @@ namespace BananaScoreBoard.Model
             misc3 = record.ReadString(Record.Name.MISC3);
             misc4 = record.ReadString(Record.Name.MISC3);
 
+            
             {
                 Tuple<int, int> param = record.readClock();
                 clock = new Clock(param);
             }
+            
         }
         
 

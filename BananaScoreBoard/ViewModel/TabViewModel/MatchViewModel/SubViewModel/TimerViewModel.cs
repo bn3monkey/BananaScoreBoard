@@ -4,14 +4,14 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BananaScoreBoard.View.MainView.SubView;
+using BananaScoreBoard.View.TabView.MatchView.SubView;
 
 using BananaScoreBoard.Model;
 using System.Windows;
 using System.Windows.Input;
 using BananaScoreBoard.Auxiliary;
 
-namespace BananaScoreBoard.ViewModel.MainViewModel.SubViewModel
+namespace BananaScoreBoard.ViewModel.TabViewModel.MatchViewModel.SubViewModel
 {
     class TimerViewModel : INotifyPropertyChanged
     {
@@ -23,10 +23,8 @@ namespace BananaScoreBoard.ViewModel.MainViewModel.SubViewModel
             //    PropertyChanged(this, new PropertyChangedEventArgs(propertyname));
         }
 
-        public TimerViewModel(MainViewModel parent, TimerView view)
+        public TimerViewModel(TimerView view)
         {
-            view.DataContext = this;
-
             timerStartedUI = (bool value) =>
             {
                 view.Dispatcher.Invoke(() =>
@@ -71,6 +69,13 @@ namespace BananaScoreBoard.ViewModel.MainViewModel.SubViewModel
                 task.Start();
             });
 
+            Repository.Instance.registerReferehser(refresh);
+        }
+
+        void refresh()
+        {
+            OnPropertyUpdate("Minute");
+            OnPropertyUpdate("Second");
         }
 
         private ICommand timerResetCommand;

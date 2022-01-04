@@ -116,48 +116,62 @@
       <DependentUpon>AutoComplete.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\Record.cs" />
+    <Compile Include="Model\Toast.cs" />
     <Compile Include="Model\Type\Player.cs" />
     <Compile Include="Model\Type\PlayerWithDB.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="ViewModel\MainViewModel\SubViewModel\FolderPathViewModel.cs" />
-    <Compile Include="ViewModel\MainViewModel\SubViewModel\MISCViewModel.cs" />
-    <Compile Include="ViewModel\MainViewModel\SubViewModel\ScoreViewModel.cs" />
-    <Compile Include="ViewModel\MainViewModel\SubViewModel\TimerViewModel.cs" />
-    <Compile Include="ViewModel\MainViewModel\SubViewModel\ToastViewModel.cs" />
-    <Compile Include="View\MainView\MainView.xaml.cs">
+    <Compile Include="ViewModel\TabViewModel\MatchViewModel\MatchViewModel.cs" />
+    <Compile Include="ViewModel\FolderPathViewModel\FolderPathViewModel.cs" />
+    <Compile Include="ViewModel\TabViewModel\MatchViewModel\SubViewModel\MISCViewModel.cs" />
+    <Compile Include="ViewModel\TabViewModel\MatchViewModel\SubViewModel\ScoreViewModel.cs" />
+    <Compile Include="ViewModel\TabViewModel\MatchViewModel\SubViewModel\TimerViewModel.cs" />
+    <Compile Include="ViewModel\TabViewModel\TabViewModel.cs" />
+    <Compile Include="ViewModel\ToastViewModel\ToastViewModel.cs" />
+    <Compile Include="View\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\MainView\SubView\FolderPathView.xaml.cs">
+    <Compile Include="View\TabView\MatchView\MatchView.xaml.cs">
+      <DependentUpon>MatchView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\FolderPathView\FolderPathView.xaml.cs">
       <DependentUpon>FolderPathView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\MainView\SubView\MISCView.xaml.cs">
+    <Compile Include="View\TabView\MatchView\SubView\MISCView.xaml.cs">
       <DependentUpon>MISCView.xaml</DependentUpon>
     </Compile>
     <Page Include="Control\AutoComplete.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\MainView\MainView.xaml">
+    <Page Include="View\MainView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\MainView\SubView\FolderPathView.xaml">
+    <Page Include="View\TabView\MatchView\MatchView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\MainView\SubView\MISCView.xaml">
+    <Page Include="View\FolderPathView\FolderPathView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\MainView\SubView\ScoreView.xaml">
+    <Page Include="View\TabView\MatchView\SubView\MISCView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\MainView\SubView\TimerView.xaml">
+    <Page Include="View\TabView\MatchView\SubView\ScoreView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\MainView\SubView\ToastView.xaml">
+    <Page Include="View\TabView\MatchView\SubView\TimerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TabView\TabView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ToastView\ToastView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -170,13 +184,16 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Model\Repository.cs" />
-    <Compile Include="View\MainView\SubView\ScoreView.xaml.cs">
+    <Compile Include="View\TabView\MatchView\SubView\ScoreView.xaml.cs">
       <DependentUpon>ScoreView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\MainView\SubView\TimerView.xaml.cs">
+    <Compile Include="View\TabView\MatchView\SubView\TimerView.xaml.cs">
       <DependentUpon>TimerView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\MainView\SubView\ToastView.xaml.cs">
+    <Compile Include="View\TabView\TabView.xaml.cs">
+      <DependentUpon>TabView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ToastView\ToastView.xaml.cs">
       <DependentUpon>ToastView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
@@ -224,6 +241,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

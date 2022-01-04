@@ -4,14 +4,14 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BananaScoreBoard.View.MainView.SubView;
+using BananaScoreBoard.View.ToastView;
 
 using BananaScoreBoard.Model;
 using System.Windows;
 using System.Threading;
 using System.Windows.Media;
 
-namespace BananaScoreBoard.ViewModel.MainViewModel.SubViewModel
+namespace BananaScoreBoard.ViewModel.ToastViewModel
 {
     class ToastViewModel : INotifyPropertyChanged
     {
@@ -24,10 +24,14 @@ namespace BananaScoreBoard.ViewModel.MainViewModel.SubViewModel
         }
 
         ToastView view;
-        public ToastViewModel(MainViewModel parent, ToastView view)
+        public ToastViewModel(ToastView view)
         {
             this.view = view;
-            view.DataContext = this;
+            
+            Toast.SendCallback sendCallback = (string value) => {
+                Toast = value;
+            };
+            Repository.Instance.toast.RegisterSendCallback(sendCallback);
         }
 
         private string toast;

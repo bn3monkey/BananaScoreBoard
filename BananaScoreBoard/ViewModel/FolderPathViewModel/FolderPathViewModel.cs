@@ -1,4 +1,4 @@
-﻿using BananaScoreBoard.View.MainView.SubView;
+﻿using BananaScoreBoard.View.FolderPathView;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,7 +11,7 @@ using System.Windows;
 using System.Windows.Input;
 using BananaScoreBoard.Auxiliary;
 
-namespace BananaScoreBoard.ViewModel.MainViewModel.SubViewModel
+namespace BananaScoreBoard.ViewModel.FolderPathViewModel
 {
     class FolderPathViewModel : INotifyPropertyChanged
     {
@@ -23,16 +23,11 @@ namespace BananaScoreBoard.ViewModel.MainViewModel.SubViewModel
             //    PropertyChanged(this, new PropertyChangedEventArgs(propertyname));
         }
 
-
-        private MainViewModel parent;
-        public FolderPathViewModel(MainViewModel parent, FolderPathView view)
+        public FolderPathViewModel(FolderPathView view)
         {
-            this.parent = parent;
-            view.DataContext = this;
-
-
             Repository.Instance.record.loadPath();
         }
+
 
         private ICommand findFolderPathCommand;
         public ICommand FindFolderPathCommand
@@ -61,21 +56,10 @@ namespace BananaScoreBoard.ViewModel.MainViewModel.SubViewModel
 
         void ReadFolderPath()
         {
-            Task task = new Task(() =>
-                {
-                    Repository.Instance.record.InitializePath();
-                    parent.scoreViewModel.Name1P = Repository.Instance.record.ReadString(Record.Name.Name1P);
-                    parent.scoreViewModel.Name2P = Repository.Instance.record.ReadString(Record.Name.Name2P);
-                    parent.scoreViewModel.Score1P = Repository.Instance.record.ReadInt(Record.Name.Score1P);
-                    parent.scoreViewModel.Score2P = Repository.Instance.record.ReadInt(Record.Name.Score2P);
-                    parent.miscViewModel.Label = Repository.Instance.record.ReadString(Record.Name.Label);
-                    parent.miscViewModel.MISC1 = Repository.Instance.record.ReadString(Record.Name.MISC1);
-                    parent.miscViewModel.MISC2 = Repository.Instance.record.ReadString(Record.Name.MISC2);
-                    parent.miscViewModel.MISC3 = Repository.Instance.record.ReadString(Record.Name.MISC3);
-                    parent.miscViewModel.MISC4 = Repository.Instance.record.ReadString(Record.Name.MISC4);
-                }
-            );
-            task.Start();
+            Repository.Instance.record.InitializePath();
+            Repository.Instance.load();
+            Repository.Instance.refresh();
+            
         }
 
         public string FolderPath

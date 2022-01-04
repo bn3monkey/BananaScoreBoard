@@ -12,34 +12,30 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using BananaScoreBoard.View.MainView.SubView;
-using BananaScoreBoard.ViewModel.MainViewModel;
+using BananaScoreBoard.View.TabView.MatchView.SubView;
+using BananaScoreBoard.ViewModel.TabViewModel.MatchViewModel;
 
-namespace BananaScoreBoard.View.MainView
+namespace BananaScoreBoard.View.TabView.MatchView
 {
     /// <summary>
     /// MainView.xaml에 대한 상호 작용 논리
     /// </summary>
-    public partial class MainView : Page
+    public partial class MatchView : Page
     {
-        private MainViewModel view_model;
+        private MatchViewModel viewModel;
 
-        public FolderPathView folderPathView;
         public ScoreView scoreView;
         public MISCView miscView;
         public TimerView timerView;
-        public ToastView toastView;
-
-        public MainView()
+     
+        public MatchView()
         {
             InitializeComponent();
-            this.FolderPathView.Content = folderPathView = new FolderPathView();
             this.ScoreView.Content = scoreView = new ScoreView();
             this.MISCView.Content = miscView=  new MISCView();
             this.TimerView.Content = timerView = new TimerView();
-            this.ToastView.Content = toastView = new ToastView();
 
-            view_model = new MainViewModel(this);
+            this.DataContext = viewModel = new MatchViewModel(this);
         }
     }
 }

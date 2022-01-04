@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BananaScoreBoard.View.MainView.SubView;
+using BananaScoreBoard.View.TabView.MatchView.SubView;
 
 using BananaScoreBoard.Model;
 using System.Windows;
@@ -12,7 +12,7 @@ using System.Collections.ObjectModel;
 using System.Windows.Input;
 using BananaScoreBoard.Auxiliary;
 
-namespace BananaScoreBoard.ViewModel.MainViewModel.SubViewModel
+namespace BananaScoreBoard.ViewModel.TabViewModel.MatchViewModel.SubViewModel
 {
     class ScoreViewModel : INotifyPropertyChanged
     {
@@ -24,11 +24,8 @@ namespace BananaScoreBoard.ViewModel.MainViewModel.SubViewModel
             //    PropertyChanged(this, new PropertyChangedEventArgs(propertyname));
         }
 
-        MainViewModel parent;
-        public ScoreViewModel(MainViewModel parent, ScoreView view)
+        public ScoreViewModel(ScoreView view)
         {
-            this.parent = parent;
-            view.DataContext = this;
 
             /*
             BananaScoreBoard.Control.AutoComplete.GetItemSource suggestion = (string value) => {
@@ -45,6 +42,15 @@ namespace BananaScoreBoard.ViewModel.MainViewModel.SubViewModel
             view.Name1P.GetSuggestion = suggestion;
             view.Name2P.GetSuggestion = suggestion;
             */
+            Repository.Instance.registerReferehser(refresh);
+        }
+
+        void refresh()
+        {
+            OnPropertyUpdate("Name1P");
+            OnPropertyUpdate("Name2P");
+            OnPropertyUpdate("Score1P");
+            OnPropertyUpdate("Score2P");
         }
 
         private ICommand swapCommand;
@@ -71,7 +77,7 @@ namespace BananaScoreBoard.ViewModel.MainViewModel.SubViewModel
                 Score2P = temp;
             }
 
-            parent.toastVIewModel.Toast = "Player 1 and Player 2 is changed";
+            Repository.Instance.toast.SendMessage("Player 1 and Player 2 is changed");
         }
 
         private ICommand updateCommand;
@@ -88,9 +94,9 @@ namespace BananaScoreBoard.ViewModel.MainViewModel.SubViewModel
                 () =>
                 {
                     Repository.Instance.update();
-                    
 
-                    parent.toastVIewModel.Toast = "Update Done";
+
+                    Repository.Instance.toast.SendMessage("Update Done");
                 }
                 );
             task.Start();
@@ -109,7 +115,7 @@ namespace BananaScoreBoard.ViewModel.MainViewModel.SubViewModel
         {
             Score1P = 0;
             Score2P = 0;
-            parent.toastVIewModel.Toast = "Reset Done";
+            Repository.Instance.toast.SendMessage("Reset Done");
         }
 
         private ICommand score1PUpCommand;

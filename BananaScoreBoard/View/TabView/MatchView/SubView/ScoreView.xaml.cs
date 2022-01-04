@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BananaScoreBoard.ViewModel.TabViewModel.MatchViewModel.SubViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,16 +14,19 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace BananaScoreBoard.View.MainView.SubView
+namespace BananaScoreBoard.View.TabView.MatchView.SubView
 {
     /// <summary>
-    /// TimerView.xaml에 대한 상호 작용 논리
+    /// ScoreView.xaml에 대한 상호 작용 논리
     /// </summary>
-    public partial class TimerView : Page
+    public partial class ScoreView : Page
     {
-        public TimerView()
+        private ScoreViewModel viewModel;
+        public ScoreView()
         {
             InitializeComponent();
+            this.DataContext = viewModel = new ScoreViewModel(this);
         }
+
     }
 }

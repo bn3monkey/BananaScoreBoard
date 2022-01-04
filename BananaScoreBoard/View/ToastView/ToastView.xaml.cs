@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BananaScoreBoard.ViewModel.ToastViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,16 +14,18 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace BananaScoreBoard.View.MainView.SubView
+namespace BananaScoreBoard.View.ToastView
 {
     /// <summary>
-    /// LabelView.xaml에 대한 상호 작용 논리
+    /// ToastView.xaml에 대한 상호 작용 논리
     /// </summary>
-    public partial class MISCView : Page
+    public partial class ToastView : Page
     {
-        public MISCView()
+        ToastViewModel viewModel;
+        public ToastView()
         {
             InitializeComponent();
+            this.DataContext = viewModel = new ToastViewModel(this);
         }
     }
 }
