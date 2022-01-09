@@ -115,6 +115,9 @@
     <Compile Include="Control\AutoComplete.xaml.cs">
       <DependentUpon>AutoComplete.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Control\MatchNode.xaml.cs">
+      <DependentUpon>MatchNode.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Model\Record.cs" />
     <Compile Include="Model\Toast.cs" />
     <Compile Include="Model\Type\Player.cs" />
@@ -126,6 +129,8 @@
     <Compile Include="ViewModel\TabViewModel\MatchViewModel\SubViewModel\ScoreViewModel.cs" />
     <Compile Include="ViewModel\TabViewModel\MatchViewModel\SubViewModel\TimerViewModel.cs" />
     <Compile Include="ViewModel\TabViewModel\TabViewModel.cs" />
+    <Compile Include="ViewModel\TabViewModel\TournamentViewModel\TournamentInnerViewModel.cs" />
+    <Compile Include="ViewModel\TabViewModel\TournamentViewModel\TournamentViewModel.cs" />
     <Compile Include="ViewModel\ToastViewModel\ToastViewModel.cs" />
     <Compile Include="View\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
@@ -140,6 +145,10 @@
       <DependentUpon>MISCView.xaml</DependentUpon>
     </Compile>
     <Page Include="Control\AutoComplete.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Control\MatchNode.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -171,6 +180,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\TabView\TournamentView\TournamentInnerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TabView\TournamentView\TournamentView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\ToastView\ToastView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -192,6 +209,12 @@
     </Compile>
     <Compile Include="View\TabView\TabView.xaml.cs">
       <DependentUpon>TabView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TabView\TournamentView\TournamentInnerView.xaml.cs">
+      <DependentUpon>TournamentInnerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TabView\TournamentView\TournamentView.xaml.cs">
+      <DependentUpon>TournamentView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ToastView\ToastView.xaml.cs">
       <DependentUpon>ToastView.xaml</DependentUpon>

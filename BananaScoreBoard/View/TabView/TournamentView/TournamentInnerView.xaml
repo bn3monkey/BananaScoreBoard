@@ -1,0 +1,75 @@
+﻿<Page x:Class="BananaScoreBoard.View.TabView.TournamentView.TournamentInnerView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:BananaScoreBoard.View.TabView.TournamentView" 
+      xmlns:control="clr-namespace:BananaScoreBoard.Control"
+      mc:Ignorable="d" 
+      d:DesignHeight="800" d:DesignWidth="800"
+      Title="Page1">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Grid.Column="0">
+            <StackPanel Margin="10">
+                <TextBlock Text="8강" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <control:MatchNode x:Name="w8_1" Title="8강 1차"/>
+                <control:MatchNode x:Name="w8_2" Title="8강 2차"/>
+                <control:MatchNode x:Name="w8_3" Title="8강 3차"/>
+                <control:MatchNode x:Name="w8_4" Title="8강 4차"/>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="0" Grid.Column="1">
+            <StackPanel Margin="10">
+                <TextBlock Text="승자 준결승" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <control:MatchNode x:Name="w4_1" Title="4강 1차" ReadOnly="True"/>
+                <control:MatchNode x:Name="w4_2" Title="4강 2차" ReadOnly="True"/>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="0" Grid.Column="2">
+            <StackPanel Margin="10">
+                <TextBlock Text="승자 결승" FontSize="20" HorizontalAlignment="Center"  VerticalAlignment="Center"/>
+                <control:MatchNode x:Name="w2_1" Title="결승" ReadOnly="True"/>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="0" Grid.Column="3">
+            <StackPanel Margin="10">
+                <TextBlock Text="최종 결승" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <control:MatchNode x:Name="f_1" Title="최종 결승" ReadOnly="True"/>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="0">
+            <StackPanel Margin="10">
+                <TextBlock Text="패자 1라운드" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <control:MatchNode x:Name="l1_1" Title="패자 1라운드 1차" ReadOnly="True"/>
+                <control:MatchNode x:Name="l1_2" Title="패자 1라운드 2차" ReadOnly="True"/>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="1">
+            <StackPanel Margin="10">
+                <TextBlock Text="패자 2라운드" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <control:MatchNode x:Name="l2_1" Title="패자 2라운드 1차" ReadOnly="True"/>
+                <control:MatchNode x:Name="l2_2" Title="패자 2라운드 2차" ReadOnly="True"/>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="2">
+            <StackPanel Margin="10">
+                <TextBlock Text="패자 결승" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <control:MatchNode x:Name="l3_1" Title="패자 결승" ReadOnly="True"/>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="3">
+
+        </Grid>
+    </Grid>
+</Page>

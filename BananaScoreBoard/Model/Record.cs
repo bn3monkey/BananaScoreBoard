@@ -22,6 +22,17 @@ namespace BananaScoreBoard.Model
             MISC3 = 7,
             MISC4 = 8,
             Timer = 9,
+
+            WinnerRound_1_1 = 101,
+            WinnerRound_1_2 = 101,
+
+            WinnerRound_2 = 102,
+            WinnerRound_3 = 103,
+            WinnerRound_4 = 104,
+            
+            LoserRound_1 = 201,
+            LoserRound_2 = 202,
+            LoserRound_3 = 203,
         }
 
         public void loadPath()

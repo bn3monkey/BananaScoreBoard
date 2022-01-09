@@ -20,6 +20,7 @@
                 <TabItem.Header>
                     <TextBlock Text="Tournament"/>
                 </TabItem.Header>
+                <Frame x:Name="TournamentView" Margin="5,5,5,5"/>
             </TabItem>
         </TabControl>
     </Grid>

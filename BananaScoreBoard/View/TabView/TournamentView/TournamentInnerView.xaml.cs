@@ -1,4 +1,4 @@
-﻿using BananaScoreBoard.ViewModel.TabViewModel;
+﻿using BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,20 +14,18 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace BananaScoreBoard.View.TabView
+namespace BananaScoreBoard.View.TabView.TournamentView
 {
     /// <summary>
-    /// TabView.xaml에 대한 상호 작용 논리
+    /// Page1.xaml에 대한 상호 작용 논리
     /// </summary>
-    public partial class TabView : Page
+    public partial class TournamentInnerView : Page
     {
-        private TabViewModel viewModel;
-        public TabView()
+        TournamentInnerViewModel viewModel;
+        public TournamentInnerView()
         {
             InitializeComponent();
-            this.DataContext = viewModel = new TabViewModel(this);
-            this.MatchView.Content = new MatchView.MatchView();
-            this.TournamentView.Content = new TournamentView.TournamentView();
+            DataContext = viewModel = new TournamentInnerViewModel();
         }
     }
 }
