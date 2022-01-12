@@ -23,49 +23,49 @@
         <Grid Grid.Row="0" Grid.Column="0">
             <StackPanel Margin="10">
                 <TextBlock Text="8강" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <control:MatchNode x:Name="w8_1" Title="8강 1차"/>
-                <control:MatchNode x:Name="w8_2" Title="8강 2차"/>
-                <control:MatchNode x:Name="w8_3" Title="8강 3차"/>
-                <control:MatchNode x:Name="w8_4" Title="8강 4차"/>
+                <control:MatchNode x:Name="w1_1" Title="8강 1차"  Player1="{Binding W1_1_P1}" Player2="{Binding W1_1_P2}" Winner="{Binding W1_1_Winner}"/>
+                <control:MatchNode x:Name="w1_2" Title="8강 2차"  Player1="{Binding W1_2_P1}" Player2="{Binding W1_2_P2}" Winner="{Binding W1_2_Winner}"/>
+                <control:MatchNode x:Name="w1_3" Title="8강 3차"  Player1="{Binding W1_3_P1}" Player2="{Binding W1_3_P2}" Winner="{Binding W1_3_Winner}"/>
+                <control:MatchNode x:Name="w1_4" Title="8강 4차"  Player1="{Binding W1_4_P1}" Player2="{Binding W1_4_P2}" Winner="{Binding W1_4_Winner}"/>
             </StackPanel>
         </Grid>
         <Grid Grid.Row="0" Grid.Column="1">
             <StackPanel Margin="10">
                 <TextBlock Text="승자 준결승" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <control:MatchNode x:Name="w4_1" Title="4강 1차" ReadOnly="True"/>
-                <control:MatchNode x:Name="w4_2" Title="4강 2차" ReadOnly="True"/>
+                <control:MatchNode x:Name="w2_1" Title="4강 1차" ReadOnly="True" Player1="{Binding W2_1_P1}" Player2="{Binding W2_1_P2}" Winner="{Binding W2_1_Winner}"/>
+                <control:MatchNode x:Name="w2_2" Title="4강 2차" ReadOnly="True" Player1="{Binding W2_2_P1}" Player2="{Binding W2_2_P2}" Winner="{Binding W2_2_Winner}"/>
             </StackPanel>
         </Grid>
         <Grid Grid.Row="0" Grid.Column="2">
             <StackPanel Margin="10">
                 <TextBlock Text="승자 결승" FontSize="20" HorizontalAlignment="Center"  VerticalAlignment="Center"/>
-                <control:MatchNode x:Name="w2_1" Title="결승" ReadOnly="True"/>
+                <control:MatchNode x:Name="w3_1" Title="결승" ReadOnly="True" Player1="{Binding W3_1_P1}" Player2="{Binding W3_1_P2}" Winner="{Binding W3_1_Winner}"/>
             </StackPanel>
         </Grid>
         <Grid Grid.Row="0" Grid.Column="3">
             <StackPanel Margin="10">
                 <TextBlock Text="최종 결승" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <control:MatchNode x:Name="f_1" Title="최종 결승" ReadOnly="True"/>
+                <control:MatchNode x:Name="w4_1" Title="최종 결승" ReadOnly="True" Player1="{Binding W4_1_P1}" Player2="{Binding W4_1_P2}" Winner="{Binding W4_1_Winner}"/>
             </StackPanel>
         </Grid>
         <Grid Grid.Row="1" Grid.Column="0">
             <StackPanel Margin="10">
                 <TextBlock Text="패자 1라운드" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <control:MatchNode x:Name="l1_1" Title="패자 1라운드 1차" ReadOnly="True"/>
-                <control:MatchNode x:Name="l1_2" Title="패자 1라운드 2차" ReadOnly="True"/>
+                <control:MatchNode x:Name="l1_1" Title="패자 1라운드 1차" ReadOnly="True" Player1="{Binding L1_1_P1}" Player2="{Binding L1_1_P2}" Winner="{Binding L1_1_Winner}"/>
+                <control:MatchNode x:Name="l1_2" Title="패자 1라운드 2차" ReadOnly="True" Player1="{Binding L1_2_P1}" Player2="{Binding L1_2_P2}" Winner="{Binding L1_2_Winner}"/>
             </StackPanel>
         </Grid>
         <Grid Grid.Row="1" Grid.Column="1">
             <StackPanel Margin="10">
                 <TextBlock Text="패자 2라운드" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <control:MatchNode x:Name="l2_1" Title="패자 2라운드 1차" ReadOnly="True"/>
-                <control:MatchNode x:Name="l2_2" Title="패자 2라운드 2차" ReadOnly="True"/>
+                <control:MatchNode x:Name="l2_1" Title="패자 2라운드 1차" ReadOnly="True" Player1="{Binding L2_1_P1}" Player2="{Binding L2_1_P2}" Winner="{Binding L2_1_Winner}"/>
+                <control:MatchNode x:Name="l2_2" Title="패자 2라운드 2차" ReadOnly="True" Player1="{Binding L2_2_P1}" Player2="{Binding L2_2_P2}" Winner="{Binding L2_2_Winner}"/>
             </StackPanel>
         </Grid>
         <Grid Grid.Row="1" Grid.Column="2">
             <StackPanel Margin="10">
                 <TextBlock Text="패자 결승" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <control:MatchNode x:Name="l3_1" Title="패자 결승" ReadOnly="True"/>
+                <control:MatchNode x:Name="l3_1" Title="패자 결승" ReadOnly="True" Player1="{Binding L3_1_P1}" Player2="{Binding L3_1_P2}" Winner="{Binding L3_1_Winner}"/>
             </StackPanel>
         </Grid>
         <Grid Grid.Row="1" Grid.Column="3">

@@ -33,7 +33,7 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.MatchViewModel
             Task task = new Task(() =>
             {
                 Repository.Instance.record.InitializePath();
-                Repository.Instance.load();
+                Repository.Instance.Load();
                 Repository.Instance.refresh();
             }
             );

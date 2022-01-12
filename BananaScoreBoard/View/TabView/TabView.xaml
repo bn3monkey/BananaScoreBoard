@@ -9,7 +9,7 @@
       Title="TabView">
 
     <Grid>
-        <TabControl>
+        <TabControl SelectedIndex="{Binding Selected}">
             <TabItem>
                 <TabItem.Header>
                     <TextBlock Text="Match"/>

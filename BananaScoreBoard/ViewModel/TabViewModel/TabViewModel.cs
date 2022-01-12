@@ -1,4 +1,5 @@
-﻿using BananaScoreBoard.View.TabView;
+﻿using BananaScoreBoard.Model;
+using BananaScoreBoard.View.TabView;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,6 +18,20 @@ namespace BananaScoreBoard.ViewModel.TabViewModel
             //if (PropertyChanged != null)
             //    PropertyChanged(this, new PropertyChangedEventArgs(propertyname));
         }
+
+        public int Selected
+        {
+            get
+            {
+                return Repository.Instance.current_tab;
+            }
+            set
+            {
+                Repository.Instance.current_tab = value;
+                OnPropertyUpdate("Selected");
+            }
+        }
+
 
         private TabView view;
         public TabViewModel(TabView view)

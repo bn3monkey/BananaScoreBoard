@@ -120,6 +120,7 @@
     </Compile>
     <Compile Include="Model\Record.cs" />
     <Compile Include="Model\Toast.cs" />
+    <Compile Include="Model\Type\Match.cs" />
     <Compile Include="Model\Type\Player.cs" />
     <Compile Include="Model\Type\PlayerWithDB.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />

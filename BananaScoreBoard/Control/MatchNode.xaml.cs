@@ -149,21 +149,14 @@ namespace BananaScoreBoard.Control
             self.Player2TextBox.IsReadOnly = temp ?? temp.Value;
         }
 
-        public enum PlayerNumber
-        {
-            None,
-            P1,
-            P2,
-        }
-
         private static readonly DependencyProperty WinnerProperty =
-            DependencyProperty.Register("Winner", typeof(PlayerNumber), typeof(MatchNode), new FrameworkPropertyMetadata(PlayerNumber.None, OnWinnerChanged));
+            DependencyProperty.Register("Winner", typeof(int), typeof(MatchNode), new FrameworkPropertyMetadata(0, OnWinnerChanged));
 
-        public PlayerNumber Winner
+        public int Winner
         {
             get
             {
-                return (PlayerNumber)GetValue(WinnerProperty);
+                return (int)GetValue(WinnerProperty);
             }
             set
             {
@@ -176,17 +169,17 @@ namespace BananaScoreBoard.Control
             MatchNode self = d as MatchNode;
             switch(e.NewValue)
             {
-                case PlayerNumber.None:
+                case 0:
                     self.Player1TextBox.Background = Brushes.White;
                     self.Player2TextBox.Background = Brushes.White;
                     break;
 
-                case PlayerNumber.P1:
+                case 1:
                     self.Player1TextBox.Background = new SolidColorBrush(Color.FromArgb(255, 73, 144, 226));
                     self.Player2TextBox.Background = Brushes.White;
                     break;
 
-                case PlayerNumber.P2:
+                case 2:
                     self.Player1TextBox.Background = Brushes.White; 
                     self.Player2TextBox.Background = new SolidColorBrush(Color.FromArgb(255, 73, 144, 226));
                     break;
@@ -194,6 +187,7 @@ namespace BananaScoreBoard.Control
         }
 
 
+        /*
         private MatchNode winnerMatch;
         private PlayerNumber winnermatch_winner_number = PlayerNumber.None;
 
@@ -306,5 +300,6 @@ namespace BananaScoreBoard.Control
             Player1WinCommand = null;
             Player2WinCommand = null;
         }
+        */
     }
 }

@@ -57,7 +57,7 @@ namespace BananaScoreBoard.ViewModel.FolderPathViewModel
         void ReadFolderPath()
         {
             Repository.Instance.record.InitializePath();
-            Repository.Instance.load();
+            Repository.Instance.Load();
             Repository.Instance.refresh();
             
         }

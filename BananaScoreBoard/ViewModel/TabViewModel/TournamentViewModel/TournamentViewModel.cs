@@ -31,7 +31,7 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             Task task = new Task(
                 () =>
                 {
-                    // Repository.Instance.updateTournament();
+                    Repository.Instance.updateTournament();
                     Repository.Instance.toast.SendMessage("Update Done");
                 }
             );

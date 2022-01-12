@@ -22,18 +22,21 @@ namespace BananaScoreBoard.Model
             MISC3 = 7,
             MISC4 = 8,
             Timer = 9,
-
-            WinnerRound_1_1 = 101,
-            WinnerRound_1_2 = 101,
-
-            WinnerRound_2 = 102,
-            WinnerRound_3 = 103,
-            WinnerRound_4 = 104,
-            
-            LoserRound_1 = 201,
-            LoserRound_2 = 202,
-            LoserRound_3 = 203,
         }
+
+        public static string GetTournamentFileName(bool isWinnerMatch, int round, int match_num, int player_num)
+        {
+            string ret = isWinnerMatch ? "W" : "L";
+            ret += round.ToString();
+            ret += "_";
+            ret += match_num.ToString();
+            ret += "_";
+            ret += "P";
+            ret += player_num.ToString();
+            ret += ".txt";
+            return ret;
+        }
+
 
         public void loadPath()
         {
@@ -88,6 +91,38 @@ namespace BananaScoreBoard.Model
 
             if (!Exists(Name.Timer))
                 writeClock(0, 0);
+
+            for (int round = 1; round <= 3; round++)
+            {
+                int max_match = 4 / (int)Math.Pow(2, round-1);
+                for (int match_num = 1; match_num <= max_match; match_num++)
+                    for (int player_num = 1; player_num <= 2; player_num++)
+                    {
+                        string filename = GetTournamentFileName(true, round, match_num, player_num);
+                        if (!Exists(filename))
+                            WriteString(filename, "");
+                    }
+
+            }
+            for (int player_num = 1; player_num <= 2; player_num++)
+            {
+                string filename = GetTournamentFileName(true, 4, 1, player_num);
+                if (!Exists(filename))
+                    WriteString(filename, "");
+            }
+
+            for (int round = 1; round <= 3; round++)
+            {
+                int max_match = 2 - (round - 1 / 2);
+                for (int match_num = 1; match_num <= max_match; match_num++)
+                    for (int player_num = 1; player_num <= 2; player_num++)
+                    {
+                        string filename = GetTournamentFileName(true, round, match_num, player_num);
+                        if (!Exists(filename))
+                            WriteString(filename, "");
+                    }
+            }
+            
         }
         public string FindPath()
         {
@@ -105,6 +140,14 @@ namespace BananaScoreBoard.Model
             string full_path = folder_path;
             full_path += "\\";
             full_path += name_path[name];
+            return File.Exists(full_path);
+        }
+
+        public bool Exists(string filename)
+        {
+            string full_path = folder_path;
+            full_path += "\\";
+            full_path += filename;
             return File.Exists(full_path);
         }
 
@@ -127,6 +170,20 @@ namespace BananaScoreBoard.Model
             return ret;
         }
 
+        public string ReadString(string filename)
+        {
+            string full_path = folder_path;
+            full_path += "\\";
+            full_path += filename;
+
+            string ret = "";
+            using (StreamReader reader = File.OpenText(full_path))
+            {
+                ret = reader.ReadLine();
+            }
+            return ret;
+        }
+
         public void WriteString(Name name, string value)
         {
             string full_path = folder_path;
@@ -142,6 +199,18 @@ namespace BananaScoreBoard.Model
             }
 
             local_name_lock.Release();
+        }
+
+        public void WriteString(string filename, string value)
+        {
+            string full_path = folder_path;
+            full_path += "\\";
+            full_path += filename;
+
+            using (StreamWriter writer = File.CreateText(full_path))
+            {
+                writer.WriteLine(value);
+            }
         }
 
         public int ReadInt(Name name)
@@ -272,6 +341,7 @@ namespace BananaScoreBoard.Model
             {Name.MISC3,  "misc3.txt"},
             {Name.MISC4,  "misc4.txt"},
             {Name.Timer,  "timer.txt"},
+
         };
 
         private string path_file_path = "folder_path.txt";
