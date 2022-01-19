@@ -27,7 +27,7 @@ namespace BananaScoreBoard.Control
         }
 
         private static readonly DependencyProperty TitleProperty =
-            DependencyProperty.Register("Title", typeof(string), typeof(MatchNode), new FrameworkPropertyMetadata(OnTitlePropertyChanged));
+            DependencyProperty.Register("Title", typeof(string), typeof(MatchNode), new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
         public string Title
         {
             get
@@ -39,14 +39,16 @@ namespace BananaScoreBoard.Control
                 SetValue(TitleProperty, value);
             }
         }
+        
         private static void OnTitlePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             MatchNode self = d as MatchNode;
             self.TitleTextBlock.Text = e.NewValue.ToString();
         }
+        
 
         private static readonly DependencyProperty Player1TextProperty = 
-            DependencyProperty.Register("Player1", typeof(string), typeof(MatchNode), new FrameworkPropertyMetadata(OnPlayer1TextPropertyChanged));
+            DependencyProperty.Register("Player1", typeof(string), typeof(MatchNode), new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
         public string Player1
         {
             get
@@ -58,15 +60,15 @@ namespace BananaScoreBoard.Control
                 SetValue(Player1TextProperty, value);
             }
         }
+       
         private static void OnPlayer1TextPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             MatchNode self = d as MatchNode;
             self.Player1TextBox.Text = e.NewValue.ToString();
         }
-
         
         private static readonly DependencyProperty Player2TextProperty =
-                   DependencyProperty.Register("Player2", typeof(string), typeof(MatchNode), new FrameworkPropertyMetadata(OnPlayer2TextPropertyChanged));
+                   DependencyProperty.Register("Player2", typeof(string), typeof(MatchNode), new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
         public string Player2
         {
             get
@@ -78,15 +80,16 @@ namespace BananaScoreBoard.Control
                 SetValue(Player2TextProperty, value);
             }
         }
+        
         private static void OnPlayer2TextPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             MatchNode self = d as MatchNode;
             self.Player2TextBox.Text = e.NewValue.ToString();
         }
-
+        
 
         private static readonly DependencyProperty Player1WinCommandProperty =
-                   DependencyProperty.Register("Player1WinCommand", typeof(ICommand), typeof(MatchNode), new FrameworkPropertyMetadata(OnPlayer1WinCommandPropertyChanged));
+                   DependencyProperty.Register("Player1WinCommand", typeof(ICommand), typeof(MatchNode));
 
         public ICommand Player1WinCommand
         {
@@ -94,20 +97,24 @@ namespace BananaScoreBoard.Control
             {
                 return (ICommand)GetValue(Player1WinCommandProperty);
             }
+            
             set
             {
                 SetValue(Player1WinCommandProperty, value);
             }
+            
         }
+
+        
         private static void OnPlayer1WinCommandPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             MatchNode self = d as MatchNode;
             self.Player1Button.Command = e.NewValue as ICommand;
         }
-
+        
 
         private static readonly DependencyProperty Player2WinCommandProperty =
-                    DependencyProperty.Register("Player2WinCommand", typeof(ICommand), typeof(MatchNode), new FrameworkPropertyMetadata(OnPlayer2WinCommandPropertyChanged));
+                    DependencyProperty.Register("Player2WinCommand", typeof(ICommand), typeof(MatchNode));
 
         public ICommand Player2WinCommand
         {
@@ -115,19 +122,24 @@ namespace BananaScoreBoard.Control
             {
                 return (ICommand)GetValue(Player2WinCommandProperty);
             }
+            
             set
             {
                 SetValue(Player2WinCommandProperty, value);
             }
+            
         }
+
+        
         private static void OnPlayer2WinCommandPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             MatchNode self = d as MatchNode;
             self.Player2Button.Command = e.NewValue as ICommand;
         }
+        
 
         private static readonly DependencyProperty ReadOnlyProperty =
-            DependencyProperty.Register("ReadOnly", typeof(bool), typeof(MatchNode), new FrameworkPropertyMetadata(OnReadOnlyPrpoertyChanged));
+            DependencyProperty.Register("ReadOnly", typeof(bool), typeof(MatchNode), new FrameworkPropertyMetadata(false, new PropertyChangedCallback(OnReadOnlyPrpoertyChanged)));
 
         public bool ReadOnly
         {
@@ -141,6 +153,7 @@ namespace BananaScoreBoard.Control
             }
         }
 
+        
         private static void OnReadOnlyPrpoertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             MatchNode self = d as MatchNode;
@@ -149,8 +162,30 @@ namespace BananaScoreBoard.Control
             self.Player2TextBox.IsReadOnly = temp ?? temp.Value;
         }
 
+        private static readonly DependencyProperty IsOnePlayerProperty =
+            DependencyProperty.Register("IsOnePlayer", typeof(bool), typeof(MatchNode), new FrameworkPropertyMetadata(false, new PropertyChangedCallback(OnIsOnePlayerPropertyChanged)));
+        public bool IsOnePlayer
+        {
+            get
+            {
+                return (bool)GetValue(IsOnePlayerProperty);
+            }
+            set
+            {
+                SetValue(IsOnePlayerProperty, value);
+            }
+        }
+
+        private static void OnIsOnePlayerPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            MatchNode self = d as MatchNode;
+            bool? temp = e.NewValue as bool?;
+            self.Player2TextBox.Visibility = temp ?? temp.Value ? Visibility.Collapsed : Visibility.Visible;
+            self.Player2Button.Visibility = temp ?? temp.Value ? Visibility.Collapsed : Visibility.Visible;
+        }
+
         private static readonly DependencyProperty WinnerProperty =
-            DependencyProperty.Register("Winner", typeof(int), typeof(MatchNode), new FrameworkPropertyMetadata(0, OnWinnerChanged));
+            DependencyProperty.Register("Winner", typeof(int), typeof(MatchNode), new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, new PropertyChangedCallback(OnWinnerChanged)));
 
         public int Winner
         {

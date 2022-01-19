@@ -5,7 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:BananaScoreBoard.Control"
              mc:Ignorable="d" 
-             d:DesignHeight="100" d:DesignWidth="250">
+             d:DesignHeight="100" d:DesignWidth="250"
+             
+             x:Name="Main">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="4*"/>
@@ -17,14 +19,15 @@
             <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock x:Name="TitleTextBlock" Grid.Row="0" 
-                   Text="{Binding Title, ElementName=Main}" FontSize="15"/>
+        <TextBlock x:Name="TitleTextBlock" 
+                    Text="{Binding Title, ElementName=Main}"
+                   Grid.Row="0" FontSize="15"/>
         <TextBox Grid.Row="1" Grid.Column="0" 
             x:Name="Player1TextBox" Text="{Binding Player1, ElementName=Main}"
             VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="15" 
             Margin="3,3,3,3"/>
         <TextBox Grid.Row="2" Grid.Column="0" 
-            x:Name="Player2TextBox" Text="{Binding Player2, ElementName=Main}"
+            x:Name="Player2TextBox" Text="{Binding Player2, ElementName=Main}" 
             VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="15"
             Margin="3,3,3,3"/>
         <Button Grid.Row="1" Grid.Column="1"

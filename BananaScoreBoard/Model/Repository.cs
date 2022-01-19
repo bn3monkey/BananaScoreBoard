@@ -33,6 +33,8 @@ namespace BananaScoreBoard.Model
         public Match loserMatch2_1;
         public Match loserMatch2_2;
         public Match loserMatch3_1;
+        public Match loserMatch3_2;
+        public Match loserMatch4_1;
 
         public int current_tab = 0;
         
@@ -63,6 +65,8 @@ namespace BananaScoreBoard.Model
             loserMatch2_1 = new Match("", "");
             loserMatch2_2 = new Match("", "");
             loserMatch3_1 = new Match("", "");
+            loserMatch3_2 = new Match("", "");
+            loserMatch4_1 = new Match("", "");
 
             // PlayerWithDB.openPlayerList();
         }
