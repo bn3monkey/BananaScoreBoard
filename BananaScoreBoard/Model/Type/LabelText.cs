@@ -6,15 +6,13 @@ using System.Threading.Tasks;
 
 namespace BananaScoreBoard.Model.Type
 {
-    class Player : Refreshable
+    class LabelText : Refreshable
     {
-        public string name;
-        public int score;
-
-        public Player(string name, int score)
+        public string value;
+        public LabelText(string value = "")
         {
-            this.name = name;
-            this.score = score;
+            this.value = value;
         }
+
     }
 }

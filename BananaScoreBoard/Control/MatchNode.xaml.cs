@@ -139,7 +139,7 @@ namespace BananaScoreBoard.Control
         
 
         private static readonly DependencyProperty ReadOnlyProperty =
-            DependencyProperty.Register("ReadOnly", typeof(bool), typeof(MatchNode), new FrameworkPropertyMetadata(false, new PropertyChangedCallback(OnReadOnlyPrpoertyChanged)));
+            DependencyProperty.Register("ReadOnly", typeof(bool), typeof(MatchNode), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, new PropertyChangedCallback(OnReadOnlyPrpoertyChanged)));
 
         public bool ReadOnly
         {

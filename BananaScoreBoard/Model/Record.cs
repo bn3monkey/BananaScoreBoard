@@ -24,6 +24,16 @@ namespace BananaScoreBoard.Model
             Timer = 9,
         }
 
+        public static string GetTournamentWinnerFileName(bool isWinnerMatch, int round, int match_num)
+        {
+            string ret = isWinnerMatch ? "W" : "L";
+            ret += round.ToString();
+            ret += "_";
+            ret += match_num.ToString();
+            ret += "_";
+            ret += "Winner.txt";
+            return ret;
+        }
         public static string GetTournamentFileName(bool isWinnerMatch, int round, int match_num, int player_num)
         {
             string ret = isWinnerMatch ? "W" : "L";
@@ -213,6 +223,29 @@ namespace BananaScoreBoard.Model
             }
         }
 
+        public int ReadInt(string filename)
+        {
+            string full_path = folder_path;
+            full_path += "\\";
+            full_path += filename;
+
+            int ret = 0;
+            using (StreamReader reader = File.OpenText(full_path))
+            {
+                string result = reader.ReadLine();
+                try
+                {
+                    ret = Int32.Parse(result);
+                }
+                catch
+                {
+                }
+            }
+            return ret;
+        }
+
+        
+
         public int ReadInt(Name name)
         {
             string full_path = folder_path;
@@ -239,6 +272,19 @@ namespace BananaScoreBoard.Model
             return ret;
         }
 
+        public void WriteInt(string filename, int value)
+        {
+            string full_path = folder_path;
+            full_path += "\\";
+            full_path += filename;
+
+            using (StreamWriter writer = File.CreateText(full_path))
+            {
+                string result = value.ToString();
+                writer.WriteLine(result);
+            }
+
+        }
         public void WriteInt(Name name, int value)
         {
             string full_path = folder_path;

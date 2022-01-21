@@ -8,9 +8,8 @@ using System.IO;
 
 namespace BananaScoreBoard.Model.Type
 {
-    class Clock
+    class Clock : Refreshable
     {
-
         public int minute = 0, second = 0;
         public Clock(Tuple<int, int> tuple)
         {

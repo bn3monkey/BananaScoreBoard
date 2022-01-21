@@ -31,12 +31,50 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             Task task = new Task(
                 () =>
                 {
-                    Repository.Instance.updateTournament();
+                    Repository.Instance.UpdateTournament();
                     Repository.Instance.toast.SendMessage("Update Done");
                 }
             );
             task.Start();
+        }
 
+        private ICommand resetCommand;
+        public ICommand ResetCommand
+        {
+            get
+            {
+                return resetCommand ?? (resetCommand = new DelegateCommand(Reset));
+            }
+        }
+        void Reset()
+        {
+            Task task = new Task(
+                () =>
+                {
+                    Repository.Instance.ResetTournament();
+                    Repository.Instance.Refresh();
+                    Repository.Instance.toast.SendMessage("Reset Done");
+                }
+            );
+            task.Start();
+        }
+
+        private ICommand rosterCommand;
+        public ICommand RosterCommand
+        {
+            get
+            {
+                return rosterCommand ?? (rosterCommand = new DelegateCommand(Roster));
+            }
+        }
+        void Roster()
+        {
+            Task task = new Task(
+                () =>
+                {
+                    Repository.Instance.toast.SendMessage("Roster Done");
+                });
+            task.Start();
         }
     }
 }

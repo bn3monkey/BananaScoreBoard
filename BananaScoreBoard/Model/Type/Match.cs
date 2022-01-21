@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BananaScoreBoard.Model.Type
 {
-    class Match
+    class Match : Refreshable
     {
         public string player1;
         public string player2;
@@ -26,23 +26,19 @@ namespace BananaScoreBoard.Model.Type
             this.winner = 0;
         }
 
-        public delegate void Refresher();
-        private Refresher refresher;
-        public void registerRefresher(Refresher refresher)
-        {
-            this.refresher = refresher;
-        }
-        private void Refresh()
-        {
-            refresher();
-        }
-
         public void SetNextMatch(Match winnerMatch, Match loserMatch)
         {
             this.winnerMatch = winnerMatch;
             winnermatch_player_number = 0;
             this.loserMatch = loserMatch;
             losermatch_player_number = 0;
+        }
+
+        public void Reset()
+        {
+            this.player1 = "";
+            this.player2 = "";
+            this.winner = 0;
         }
 
         public void WinPlayer1()

@@ -42,15 +42,19 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.MatchViewModel.SubViewModel
             view.Name1P.GetSuggestion = suggestion;
             view.Name2P.GetSuggestion = suggestion;
             */
-            Repository.Instance.registerReferehser(refresh);
-        }
+            
+            Repository.Instance.player1.registerRefresher(() =>
+            {
+                OnPropertyUpdate("Name1P");
+                OnPropertyUpdate("Score1P");
 
-        void refresh()
-        {
-            OnPropertyUpdate("Name1P");
-            OnPropertyUpdate("Name2P");
-            OnPropertyUpdate("Score1P");
-            OnPropertyUpdate("Score2P");
+            });
+            Repository.Instance.player2.registerRefresher(() =>
+            {
+                OnPropertyUpdate("Name2P");
+                OnPropertyUpdate("Score2P");
+
+            });
         }
 
         private ICommand swapCommand;

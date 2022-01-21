@@ -10,10 +10,25 @@
 
     <Grid>
         <StackPanel>
-            <Button  x:Name="Update" Content="Update" 
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button  Grid.Column="0" x:Name="Update" Content="Update" 
                         HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="25"
                         HorizontalAlignment="Stretch" Margin="20,5,20,5" VerticalAlignment="Stretch"
                         Command="{Binding UpdateCommand}"/>
+                <Button Grid.Column="1"  x:Name="Reset" Content="Reset" 
+                        HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="25"
+                        HorizontalAlignment="Stretch" Margin="20,5,20,5" VerticalAlignment="Stretch"
+                        Command="{Binding ResetCommand}"/>
+                <Button Grid.Column="2"  x:Name="Roster" Content="Roster" 
+                        HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="25"
+                        HorizontalAlignment="Stretch" Margin="20,5,20,5" VerticalAlignment="Stretch"
+                        Command="{Binding RosterCommand}"/>
+            </Grid>
             <Frame x:Name="InnerView"/>
         </StackPanel>
     </Grid>

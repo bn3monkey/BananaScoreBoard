@@ -69,14 +69,13 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.MatchViewModel.SubViewModel
                 task.Start();
             });
 
-            Repository.Instance.registerReferehser(refresh);
+            Repository.Instance.clock.registerRefresher(()=>
+            {
+                OnPropertyUpdate("Minute");
+                OnPropertyUpdate("Second");
+            });
         }
 
-        void refresh()
-        {
-            OnPropertyUpdate("Minute");
-            OnPropertyUpdate("Second");
-        }
 
         private ICommand timerResetCommand;
         public ICommand TimerResetCommand

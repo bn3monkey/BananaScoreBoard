@@ -23,27 +23,38 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.MatchViewModel.SubViewModel
 
         public MISCViewModel(MISCView view)
         {
-            Repository.Instance.registerReferehser(refresh);
-        }
-
-        void refresh()
-        {
-            OnPropertyUpdate("Label");
-            OnPropertyUpdate("MISC1");
-            OnPropertyUpdate("MISC2");
-            OnPropertyUpdate("MISC3");
-            OnPropertyUpdate("MISC4");
+            
+            Repository.Instance.label.registerRefresher(() =>
+            {
+                OnPropertyUpdate("Label");
+            });
+            Repository.Instance.misc1.registerRefresher(() =>
+            {
+                OnPropertyUpdate("MISC1");
+            });
+            Repository.Instance.misc2.registerRefresher(() =>
+            {
+                OnPropertyUpdate("MISC2");
+            });
+            Repository.Instance.misc3.registerRefresher(() =>
+            {
+                OnPropertyUpdate("MISC3");
+            });
+            Repository.Instance.misc4.registerRefresher(() =>
+            {
+                OnPropertyUpdate("MISC4");
+            });
         }
 
         public string Label
         {
             get
             {
-                return Repository.Instance.label;
+                return Repository.Instance.label.value;
             }
             set
             {
-                Repository.Instance.label = value;
+                Repository.Instance.label.value = value;
                 OnPropertyUpdate("Label");
             }
         }
@@ -52,11 +63,11 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.MatchViewModel.SubViewModel
         {
             get
             {
-                return Repository.Instance.misc1;
+                return Repository.Instance.misc1.value;
             }
             set
             {
-                Repository.Instance.misc1 = value;
+                Repository.Instance.misc1.value = value;
                 OnPropertyUpdate("MISC1");
             }
         }
@@ -65,11 +76,11 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.MatchViewModel.SubViewModel
         {
             get
             {
-                return Repository.Instance.misc2;
+                return Repository.Instance.misc2.value;
             }
             set
             {
-                Repository.Instance.misc2 = value;
+                Repository.Instance.misc2.value = value;
                 OnPropertyUpdate("MISC2");
             }
         }
@@ -78,11 +89,11 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.MatchViewModel.SubViewModel
         {
             get
             {
-                return Repository.Instance.misc3;
+                return Repository.Instance.misc3.value;
             }
             set
             {
-                Repository.Instance.misc3 = value;
+                Repository.Instance.misc3.value = value;
                 OnPropertyUpdate("MISC3");
             }
         }
@@ -91,11 +102,11 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.MatchViewModel.SubViewModel
         {
             get
             {
-                return Repository.Instance.misc4;
+                return Repository.Instance.misc4.value;
             }
             set
             {
-                Repository.Instance.misc4 = value;
+                Repository.Instance.misc4.value = value;
                 OnPropertyUpdate("MISC4");
             }
         }

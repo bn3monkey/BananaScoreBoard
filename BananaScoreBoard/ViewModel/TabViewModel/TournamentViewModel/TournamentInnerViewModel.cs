@@ -185,7 +185,27 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             {
                 return w1_1_player1WinCommand ?? (w1_1_player1WinCommand = new DelegateCommand(() =>
                 {
+                    if (W1_1_P1 == "")
+                    {
+                        if (W1_1_P2 == "")
+                        {
+                            Repository.Instance.toast.SendMessage("Please Enter Player1 and Player2");
+                        }
+                        else
+                        {
+                            Repository.Instance.toast.SendMessage("Please Enter Player1");
+                        }
+                        return;
+                    }
+
+                    if (W1_1_P2 == "")
+                    {
+                        Repository.Instance.toast.SendMessage("Please Enter Player2");
+                        return;
+                    }
+
                     Repository.Instance.winnerMatch1_1.WinPlayer1();
+
                 }));
             }
         }
@@ -196,6 +216,24 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             {
                 return w1_1_player2WinCommand ?? (w1_1_player2WinCommand = new DelegateCommand(() =>
                 {
+                    if (W1_1_P1 == "")
+                    {
+                        if (W1_1_P2 == "")
+                        {
+                            Repository.Instance.toast.SendMessage("Please Enter Player1 and Player2");
+                        }
+                        else
+                        {
+                            Repository.Instance.toast.SendMessage("Please Enter Player1");
+                        }
+                        return;
+                    }
+                    if (W1_1_P2 == "")
+                    {
+                        Repository.Instance.toast.SendMessage("Please Enter Player2");
+                        return;
+                    }
+
                     Repository.Instance.winnerMatch1_1.WinPlayer2();
                 }));
             }
@@ -248,6 +286,23 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             {
                 return w1_2_player1WinCommand ?? (w1_2_player1WinCommand = new DelegateCommand(() =>
                 {
+                    if (W1_2_P1 == "")
+                    {
+                        if (W1_2_P2 == "")
+                        {
+                            Repository.Instance.toast.SendMessage("Please Enter Player1 and Player2");
+                        }
+                        else
+                        {
+                            Repository.Instance.toast.SendMessage("Please Enter Player1");
+                        }
+                        return;
+                    }
+                    if (W1_2_P2 == "")
+                    {
+                        Repository.Instance.toast.SendMessage("Please Enter Player2");
+                        return;
+                    }
                     Repository.Instance.winnerMatch1_2.WinPlayer1();
                 }));
             }
@@ -259,6 +314,23 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             {
                 return w1_2_player2WinCommand ?? (w1_2_player2WinCommand = new DelegateCommand(() =>
                 {
+                    if (W1_2_P1 == "")
+                    {
+                        if (W1_2_P2 == "")
+                        {
+                            Repository.Instance.toast.SendMessage("Please Enter Player1 and Player2");
+                        }
+                        else
+                        {
+                            Repository.Instance.toast.SendMessage("Please Enter Player1");
+                        }
+                        return;
+                    }
+                    if (W1_2_P2 == "")
+                    {
+                        Repository.Instance.toast.SendMessage("Please Enter Player2");
+                        return;
+                    }
                     Repository.Instance.winnerMatch1_2.WinPlayer2();
                 }));
             }
@@ -311,6 +383,23 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             {
                 return w1_3_player1WinCommand ?? (w1_3_player1WinCommand = new DelegateCommand(() =>
                 {
+                    if (W1_3_P1 == "")
+                    {
+                        if (W1_3_P2 == "")
+                        {
+                            Repository.Instance.toast.SendMessage("Please Enter Player1 and Player2");
+                        }
+                        else
+                        {
+                            Repository.Instance.toast.SendMessage("Please Enter Player1");
+                        }
+                        return;
+                    }
+                    if (W1_3_P2 == "")
+                    {
+                        Repository.Instance.toast.SendMessage("Please Enter Player2");
+                        return;
+                    }
                     Repository.Instance.winnerMatch1_3.WinPlayer1();
                 }));
             }
@@ -322,6 +411,23 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             {
                 return w1_3_player2WinCommand ?? (w1_3_player2WinCommand = new DelegateCommand(() =>
                 {
+                    if (W1_3_P1 == "")
+                    {
+                        if (W1_3_P2 == "")
+                        {
+                            Repository.Instance.toast.SendMessage("Please Enter Player1 and Player2");
+                        }
+                        else
+                        {
+                            Repository.Instance.toast.SendMessage("Please Enter Player1");
+                        }
+                        return;
+                    }
+                    if (W1_3_P2 == "")
+                    {
+                        Repository.Instance.toast.SendMessage("Please Enter Player2");
+                        return;
+                    }
                     Repository.Instance.winnerMatch1_3.WinPlayer2();
                 }));
             }
@@ -374,6 +480,23 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             {
                 return w1_4_player1WinCommand ?? (w1_4_player1WinCommand = new DelegateCommand(() =>
                 {
+                    if (W1_4_P1 == "")
+                    {
+                        if (W1_4_P2 == "")
+                        {
+                            Repository.Instance.toast.SendMessage("Please Enter Player1 and Player2");
+                        }
+                        else
+                        {
+                            Repository.Instance.toast.SendMessage("Please Enter Player1");
+                        }
+                        return;
+                    }
+                    if (W1_4_P2 == "")
+                    {
+                        Repository.Instance.toast.SendMessage("Please Enter Player2");
+                        return;
+                    }
                     Repository.Instance.winnerMatch1_4.WinPlayer1();
                 }));
             }
@@ -385,6 +508,23 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             {
                 return w1_4_player2WinCommand ?? (w1_4_player2WinCommand = new DelegateCommand(() =>
                 {
+                    if (W1_4_P1 == "")
+                    {
+                        if (W1_4_P2 == "")
+                        {
+                            Repository.Instance.toast.SendMessage("Please Enter Player1 and Player2");
+                        }
+                        else
+                        {
+                            Repository.Instance.toast.SendMessage("Please Enter Player1");
+                        }
+                        return;
+                    }
+                    if (W1_4_P2 == "")
+                    {
+                        Repository.Instance.toast.SendMessage("Please Enter Player2");
+                        return;
+                    }
                     Repository.Instance.winnerMatch1_4.WinPlayer2();
                 }));
             }
@@ -417,7 +557,6 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             }
         }
 
-        private int w2_1_winner = 0;
         public int W2_1_Winner
         {
             get
@@ -438,6 +577,23 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             {
                 return w2_1_player1WinCommand ?? (w2_1_player1WinCommand = new DelegateCommand(() =>
                 {
+                    if (W2_1_P1 == "")
+                    {
+                        if (W2_1_P2 == "")
+                        {
+                            Repository.Instance.toast.SendMessage("Please Enter Player1 and Player2");
+                        }
+                        else
+                        {
+                            Repository.Instance.toast.SendMessage("Please Enter Player1");
+                        }
+                        return;
+                    }
+                    if (W2_1_P2 == "")
+                    {
+                        Repository.Instance.toast.SendMessage("Please Enter Player2");
+                        return;
+                    }
                     Repository.Instance.winnerMatch2_1.WinPlayer1();
                 }));
             }
@@ -449,6 +605,23 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             {
                 return w2_1_player2WinCommand ?? (w2_1_player2WinCommand = new DelegateCommand(() =>
                 {
+                    if (W2_1_P1 == "")
+                    {
+                        if (W2_1_P2 == "")
+                        {
+                            Repository.Instance.toast.SendMessage("Please Enter Player1 and Player2");
+                        }
+                        else
+                        {
+                            Repository.Instance.toast.SendMessage("Please Enter Player1");
+                        }
+                        return;
+                    }
+                    if (W2_1_P2 == "")
+                    {
+                        Repository.Instance.toast.SendMessage("Please Enter Player2");
+                        return;
+                    }
                     Repository.Instance.winnerMatch2_1.WinPlayer2();
                 }));
             }
@@ -501,6 +674,23 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             {
                 return w2_2_player1WinCommand ?? (w2_2_player1WinCommand = new DelegateCommand(() =>
                 {
+                    if (W2_2_P1 == "")
+                    {
+                        if (W2_2_P2 == "")
+                        {
+                            Repository.Instance.toast.SendMessage("Please Enter Player1 and Player2");
+                        }
+                        else
+                        {
+                            Repository.Instance.toast.SendMessage("Please Enter Player1");
+                        }
+                        return;
+                    }
+                    if (W2_2_P2 == "")
+                    {
+                        Repository.Instance.toast.SendMessage("Please Enter Player2");
+                        return;
+                    }
                     Repository.Instance.winnerMatch2_2.WinPlayer1();
                 }));
             }
@@ -512,6 +702,23 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             {
                 return w2_2_player2WinCommand ?? (w2_2_player2WinCommand = new DelegateCommand(() =>
                 {
+                    if (W2_2_P1 == "")
+                    {
+                        if (W2_2_P2 == "")
+                        {
+                            Repository.Instance.toast.SendMessage("Please Enter Player1 and Player2");
+                        }
+                        else
+                        {
+                            Repository.Instance.toast.SendMessage("Please Enter Player1");
+                        }
+                        return;
+                    }
+                    if (W2_2_P2 == "")
+                    {
+                        Repository.Instance.toast.SendMessage("Please Enter Player2");
+                        return;
+                    }
                     Repository.Instance.winnerMatch2_2.WinPlayer2();
                 }));
             }
@@ -564,6 +771,23 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             {
                 return w3_1_player1WinCommand ?? (w3_1_player1WinCommand = new DelegateCommand(() =>
                 {
+                    if (W3_1_P1 == "")
+                    {
+                        if (W3_1_P2 == "")
+                        {
+                            Repository.Instance.toast.SendMessage("Please Enter Player1 and Player2");
+                        }
+                        else
+                        {
+                            Repository.Instance.toast.SendMessage("Please Enter Player1");
+                        }
+                        return;
+                    }
+                    if (W3_1_P2 == "")
+                    {
+                        Repository.Instance.toast.SendMessage("Please Enter Player2");
+                        return;
+                    }
                     Repository.Instance.winnerMatch3_1.WinPlayer1();
                 }));
             }
@@ -575,6 +799,23 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             {
                 return w3_1_player2WinCommand ?? (w3_1_player2WinCommand = new DelegateCommand(() =>
                 {
+                    if (W3_1_P1 == "")
+                    {
+                        if (W3_1_P2 == "")
+                        {
+                            Repository.Instance.toast.SendMessage("Please Enter Player1 and Player2");
+                        }
+                        else
+                        {
+                            Repository.Instance.toast.SendMessage("Please Enter Player1");
+                        }
+                        return;
+                    }
+                    if (W3_1_P2 == "")
+                    {
+                        Repository.Instance.toast.SendMessage("Please Enter Player2");
+                        return;
+                    }
                     Repository.Instance.winnerMatch3_1.WinPlayer2();
                 }));
             }
@@ -627,6 +868,25 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             {
                 return w4_1_player1WinCommand ?? (w4_1_player1WinCommand = new DelegateCommand(() =>
                 {
+                    if (W4_1_P1 == "")
+                    {
+                        if (W4_1_P2 == "")
+                        {
+                            Repository.Instance.toast.SendMessage("Please Enter Player1 and Player2");
+                        }
+                        else
+                        {
+                            Repository.Instance.toast.SendMessage("Please Enter Player1");
+                        }
+                        return;
+                    }
+                    if (W4_1_P2 == "")
+                    {
+                        Repository.Instance.toast.SendMessage("Please Enter Player2");
+                        return;
+                    }
+
+                    
                     Repository.Instance.winnerMatch4_1.WinPlayer1();
                 }));
             }
@@ -638,6 +898,23 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             {
                 return w4_1_player2WinCommand ?? (w4_1_player2WinCommand = new DelegateCommand(() =>
                 {
+                    if (W4_1_P1 == "")
+                    {
+                        if (W4_1_P2 == "")
+                        {
+                            Repository.Instance.toast.SendMessage("Please Enter Player1 and Player2");
+                        }
+                        else
+                        {
+                            Repository.Instance.toast.SendMessage("Please Enter Player1");
+                        }
+                        return;
+                    }
+                    if (W4_1_P2 == "")
+                    {
+                        Repository.Instance.toast.SendMessage("Please Enter Player2");
+                        return;
+                    }
                     Repository.Instance.winnerMatch4_1.WinPlayer2();
                 }));
             }
@@ -692,6 +969,23 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             {
                 return l1_1_player1WinCommand ?? (l1_1_player1WinCommand = new DelegateCommand(() =>
                 {
+                    if (L1_1_P1 == "")
+                    {
+                        if (L1_1_P2 == "")
+                        {
+                            Repository.Instance.toast.SendMessage("Please Enter Player1 and Player2");
+                        }
+                        else
+                        {
+                            Repository.Instance.toast.SendMessage("Please Enter Player1");
+                        }
+                        return;
+                    }
+                    if (L1_1_P2 == "")
+                    {
+                        Repository.Instance.toast.SendMessage("Please Enter Player2");
+                        return;
+                    }
                     Repository.Instance.loserMatch1_1.WinPlayer1();
                 }));
             }
@@ -703,6 +997,23 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             {
                 return l1_1_player2WinCommand ?? (l1_1_player2WinCommand = new DelegateCommand(() =>
                 {
+                    if (L1_1_P1 == "")
+                    {
+                        if (L1_1_P2 == "")
+                        {
+                            Repository.Instance.toast.SendMessage("Please Enter Player1 and Player2");
+                        }
+                        else
+                        {
+                            Repository.Instance.toast.SendMessage("Please Enter Player1");
+                        }
+                        return;
+                    }
+                    if (L1_1_P2 == "")
+                    {
+                        Repository.Instance.toast.SendMessage("Please Enter Player2");
+                        return;
+                    }
                     Repository.Instance.loserMatch1_1.WinPlayer2();
                 }));
             }
@@ -755,6 +1066,23 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             {
                 return l1_2_player1WinCommand ?? (l1_2_player1WinCommand = new DelegateCommand(() =>
                 {
+                    if (L1_2_P1 == "")
+                    {
+                        if (L1_2_P2 == "")
+                        {
+                            Repository.Instance.toast.SendMessage("Please Enter Player1 and Player2");
+                        }
+                        else
+                        {
+                            Repository.Instance.toast.SendMessage("Please Enter Player1");
+                        }
+                        return;
+                    }
+                    if (L1_2_P2 == "")
+                    {
+                        Repository.Instance.toast.SendMessage("Please Enter Player2");
+                        return;
+                    }
                     Repository.Instance.loserMatch1_2.WinPlayer1();
                 }));
             }
@@ -766,6 +1094,23 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             {
                 return l1_2_player2WinCommand ?? (l1_2_player2WinCommand = new DelegateCommand(() =>
                 {
+                    if (L1_2_P1 == "")
+                    {
+                        if (L1_2_P2 == "")
+                        {
+                            Repository.Instance.toast.SendMessage("Please Enter Player1 and Player2");
+                        }
+                        else
+                        {
+                            Repository.Instance.toast.SendMessage("Please Enter Player1");
+                        }
+                        return;
+                    }
+                    if (L1_2_P2 == "")
+                    {
+                        Repository.Instance.toast.SendMessage("Please Enter Player2");
+                        return;
+                    }
                     Repository.Instance.loserMatch1_2.WinPlayer2();
                 }));
             }
@@ -818,6 +1163,23 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             {
                 return l2_1_player1WinCommand ?? (l2_1_player1WinCommand = new DelegateCommand(() =>
                 {
+                    if (L2_1_P1 == "")
+                    {
+                        if (L2_1_P2 == "")
+                        {
+                            Repository.Instance.toast.SendMessage("Please Enter Player1 and Player2");
+                        }
+                        else
+                        {
+                            Repository.Instance.toast.SendMessage("Please Enter Player1");
+                        }
+                        return;
+                    }
+                    if (L2_1_P2 == "")
+                    {
+                        Repository.Instance.toast.SendMessage("Please Enter Player2");
+                        return;
+                    }
                     Repository.Instance.loserMatch2_1.WinPlayer1();
                 }));
             }
@@ -829,6 +1191,23 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             {
                 return l2_1_player2WinCommand ?? (l2_1_player2WinCommand = new DelegateCommand(() =>
                 {
+                    if (L2_1_P1 == "")
+                    {
+                        if (L2_1_P2 == "")
+                        {
+                            Repository.Instance.toast.SendMessage("Please Enter Player1 and Player2");
+                        }
+                        else
+                        {
+                            Repository.Instance.toast.SendMessage("Please Enter Player1");
+                        }
+                        return;
+                    }
+                    if (L2_1_P2 == "")
+                    {
+                        Repository.Instance.toast.SendMessage("Please Enter Player2");
+                        return;
+                    }
                     Repository.Instance.loserMatch2_1.WinPlayer2();
                 }));
             }
@@ -881,6 +1260,23 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             {
                 return l2_2_player1WinCommand ?? (l2_2_player1WinCommand = new DelegateCommand(() =>
                 {
+                    if (L2_2_P1 == "")
+                    {
+                        if (L2_2_P2 == "")
+                        {
+                            Repository.Instance.toast.SendMessage("Please Enter Player1 and Player2");
+                        }
+                        else
+                        {
+                            Repository.Instance.toast.SendMessage("Please Enter Player1");
+                        }
+                        return;
+                    }
+                    if (L2_2_P2 == "")
+                    {
+                        Repository.Instance.toast.SendMessage("Please Enter Player2");
+                        return;
+                    }
                     Repository.Instance.loserMatch2_2.WinPlayer1();
                 }));
             }
@@ -892,6 +1288,23 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             {
                 return l2_2_player2WinCommand ?? (l2_2_player2WinCommand = new DelegateCommand(() =>
                 {
+                    if (L2_2_P1 == "")
+                    {
+                        if (L2_2_P2 == "")
+                        {
+                            Repository.Instance.toast.SendMessage("Please Enter Player1 and Player2");
+                        }
+                        else
+                        {
+                            Repository.Instance.toast.SendMessage("Please Enter Player1");
+                        }
+                        return;
+                    }
+                    if (L2_2_P2 == "")
+                    {
+                        Repository.Instance.toast.SendMessage("Please Enter Player2");
+                        return;
+                    }
                     Repository.Instance.loserMatch2_2.WinPlayer2();
                 }));
             }
@@ -945,6 +1358,23 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             {
                 return l3_1_player1WinCommand ?? (l3_1_player1WinCommand = new DelegateCommand(() =>
                 {
+                    if (L3_1_P1 == "")
+                    {
+                        if (L3_1_P2 == "")
+                        {
+                            Repository.Instance.toast.SendMessage("Please Enter Player1 and Player2");
+                        }
+                        else
+                        {
+                            Repository.Instance.toast.SendMessage("Please Enter Player1");
+                        }
+                        return;
+                    }
+                    if (L3_1_P2 == "")
+                    {
+                        Repository.Instance.toast.SendMessage("Please Enter Player2");
+                        return;
+                    }
                     Repository.Instance.loserMatch3_1.WinPlayer1();
                 }));
             }
@@ -956,6 +1386,23 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             {
                 return l3_1_player2WinCommand ?? (l3_1_player2WinCommand = new DelegateCommand(() =>
                 {
+                    if (L3_1_P1 == "")
+                    {
+                        if (L3_1_P2 == "")
+                        {
+                            Repository.Instance.toast.SendMessage("Please Enter Player1 and Player2");
+                        }
+                        else
+                        {
+                            Repository.Instance.toast.SendMessage("Please Enter Player1");
+                        }
+                        return;
+                    }
+                    if (L3_1_P2 == "")
+                    {
+                        Repository.Instance.toast.SendMessage("Please Enter Player2");
+                        return;
+                    }
                     Repository.Instance.loserMatch3_1.WinPlayer2();
                 }));
             }
@@ -995,6 +1442,11 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             {
                 return l3_2_player1WinCommand ?? (l3_2_player1WinCommand = new DelegateCommand(() =>
                 {
+                    if (L3_2_P1 == "")
+                    {
+                        Repository.Instance.toast.SendMessage("Please Enter Player1");
+                        return;
+                    }
                     Repository.Instance.loserMatch3_2.WinPlayer1();
                 }));
             }
@@ -1048,6 +1500,23 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             {
                 return l4_1_player1WinCommand ?? (l4_1_player1WinCommand = new DelegateCommand(() =>
                 {
+                    if (L4_1_P1 == "")
+                    {
+                        if(L4_1_P2 == "")
+                        {
+                            Repository.Instance.toast.SendMessage("Please Enter Player1 and Player2");
+                        }
+                        else
+                        {
+                            Repository.Instance.toast.SendMessage("Please Enter Player1");
+                        }
+                        return;
+                    }
+                    if (L4_1_P2 == "")
+                    {
+                        Repository.Instance.toast.SendMessage("Please Enter Player2");
+                        return;
+                    }
                     Repository.Instance.loserMatch4_1.WinPlayer1();
                 }));
             }
@@ -1059,6 +1528,23 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             {
                 return l4_1_player2WinCommand ?? (l4_1_player2WinCommand = new DelegateCommand(() =>
                 {
+                    if (L4_1_P1 == "")
+                    {
+                        if (L4_1_P2 == "")
+                        {
+                            Repository.Instance.toast.SendMessage("Please Enter Player1 and Player2");
+                        }
+                        else
+                        {
+                            Repository.Instance.toast.SendMessage("Please Enter Player1");
+                        }
+                        return;
+                    }
+                    if (L4_1_P2 == "")
+                    {
+                        Repository.Instance.toast.SendMessage("Please Enter Player2");
+                        return;
+                    }
                     Repository.Instance.loserMatch4_1.WinPlayer2();
                 }));
             }

@@ -34,7 +34,7 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.MatchViewModel
             {
                 Repository.Instance.record.InitializePath();
                 Repository.Instance.Load();
-                Repository.Instance.refresh();
+                Repository.Instance.Refresh();
             }
             );
             task.Start();
