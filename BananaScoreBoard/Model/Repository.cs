@@ -113,6 +113,8 @@ namespace BananaScoreBoard.Model
             record.WriteString(Record.GetTournamentFileName(false, 2, 1, 1), loserMatch2_1.player1);
             record.WriteString(Record.GetTournamentFileName(false, 2, 2, 1), loserMatch2_2.player1);
             record.WriteString(Record.GetTournamentFileName(false, 3, 1, 1), loserMatch3_1.player1);
+            record.WriteString(Record.GetTournamentFileName(false, 3, 2, 1), loserMatch3_2.player1);
+            record.WriteString(Record.GetTournamentFileName(false, 4, 1, 1), loserMatch4_1.player1);
 
             record.WriteString(Record.GetTournamentFileName(true, 1, 1,  2), winnerMatch1_1.player2);
             record.WriteString(Record.GetTournamentFileName(true, 1, 2,  2), winnerMatch1_2.player2);
@@ -127,6 +129,8 @@ namespace BananaScoreBoard.Model
             record.WriteString(Record.GetTournamentFileName(false, 2, 1, 2), loserMatch2_1.player2);
             record.WriteString(Record.GetTournamentFileName(false, 2, 2, 2), loserMatch2_2.player2);
             record.WriteString(Record.GetTournamentFileName(false, 3, 1, 2), loserMatch3_1.player2);
+            record.WriteString(Record.GetTournamentFileName(false, 3, 2, 2), loserMatch3_2.player2);
+            record.WriteString(Record.GetTournamentFileName(false, 4, 1, 2), loserMatch3_1.player2);
 
             record.WriteInt(Record.GetTournamentWinnerFileName(true, 1, 1), winnerMatch1_1.winner);
             record.WriteInt(Record.GetTournamentWinnerFileName(true, 1, 2), winnerMatch1_2.winner);
@@ -141,6 +145,8 @@ namespace BananaScoreBoard.Model
             record.WriteInt(Record.GetTournamentWinnerFileName(false, 2, 1), loserMatch2_1.winner);
             record.WriteInt(Record.GetTournamentWinnerFileName(false, 2, 2), loserMatch2_2.winner);
             record.WriteInt(Record.GetTournamentWinnerFileName(false, 3, 1), loserMatch3_1.winner);
+            record.WriteInt(Record.GetTournamentWinnerFileName(false, 3, 2), loserMatch3_2.winner);
+            record.WriteInt(Record.GetTournamentWinnerFileName(false, 4, 1), loserMatch4_1.winner);
         }
 
 
@@ -239,6 +245,8 @@ namespace BananaScoreBoard.Model
                 loserMatch2_1.player1 = record.ReadString(Record.GetTournamentFileName(false, 2, 1, 1));
                 loserMatch2_2.player1 = record.ReadString(Record.GetTournamentFileName(false, 2, 2, 1));
                 loserMatch3_1.player1 = record.ReadString(Record.GetTournamentFileName(false, 3, 1, 1));
+                loserMatch3_2.player1 = record.ReadString(Record.GetTournamentFileName(false, 3, 2, 1));
+                loserMatch4_1.player1 = record.ReadString(Record.GetTournamentFileName(false, 4, 1, 1));
 
                 winnerMatch1_1.player2 = record.ReadString(Record.GetTournamentFileName(true, 1, 1, 2));
                 winnerMatch1_2.player2 = record.ReadString(Record.GetTournamentFileName(true, 1, 2, 2));
@@ -253,6 +261,7 @@ namespace BananaScoreBoard.Model
                 loserMatch2_1.player2 = record.ReadString(Record.GetTournamentFileName(false, 2, 1, 2));
                 loserMatch2_2.player2 = record.ReadString(Record.GetTournamentFileName(false, 2, 2, 2));
                 loserMatch3_1.player2 = record.ReadString(Record.GetTournamentFileName(false, 3, 1, 2));
+                loserMatch4_1.player2 = record.ReadString(Record.GetTournamentFileName(false, 4, 1, 2));
 
                 winnerMatch1_1.winner = record.ReadInt(Record.GetTournamentWinnerFileName(true, 1, 1));
                 winnerMatch1_2.winner = record.ReadInt(Record.GetTournamentWinnerFileName(true, 1, 2));
@@ -267,6 +276,8 @@ namespace BananaScoreBoard.Model
                 loserMatch2_1.winner = record.ReadInt(Record.GetTournamentWinnerFileName(false, 2, 1));
                 loserMatch2_2.winner = record.ReadInt(Record.GetTournamentWinnerFileName(false, 2, 2));
                 loserMatch3_1.winner = record.ReadInt(Record.GetTournamentWinnerFileName(false, 3, 1));
+                loserMatch3_2.winner = record.ReadInt(Record.GetTournamentWinnerFileName(false, 3, 2));
+                loserMatch4_1.winner = record.ReadInt(Record.GetTournamentWinnerFileName(false, 4, 1));
             }
             
         }

@@ -124,8 +124,10 @@ namespace BananaScoreBoard.Model.Type
         }
         private void DetermineNextMatch(string winner, string loser)
         {
+            /*
             if (player1.Length == 0 || player2.Length == 0)
                 return;
+            */
 
             if (winnerMatch != null)
             {

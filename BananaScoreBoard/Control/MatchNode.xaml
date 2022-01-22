@@ -23,11 +23,11 @@
                     Text="{Binding Title, ElementName=Main}"
                    Grid.Row="0" FontSize="15"/>
         <TextBox Grid.Row="1" Grid.Column="0" 
-            x:Name="Player1TextBox" Text="{Binding Player1, ElementName=Main}"
+            x:Name="Player1TextBox" Text="{Binding Player1, ElementName=Main, UpdateSourceTrigger=PropertyChanged}"
             VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="15" 
             Margin="3,3,3,3"/>
         <TextBox Grid.Row="2" Grid.Column="0" 
-            x:Name="Player2TextBox" Text="{Binding Player2, ElementName=Main}" 
+            x:Name="Player2TextBox" Text="{Binding Player2, ElementName=Main, UpdateSourceTrigger=PropertyChanged}" 
             VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="15"
             Margin="3,3,3,3"/>
         <Button Grid.Row="1" Grid.Column="1"
