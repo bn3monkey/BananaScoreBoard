@@ -125,7 +125,9 @@
     <Compile Include="Model\Type\Player.cs" />
     <Compile Include="Model\Type\PlayerWithDB.cs" />
     <Compile Include="Model\Type\Refreshable.cs" />
+    <Compile Include="Version.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\TabViewModel\InfoViewModel\InfoViewModel.cs" />
     <Compile Include="ViewModel\TabViewModel\MatchViewModel\MatchViewModel.cs" />
     <Compile Include="ViewModel\FolderPathViewModel\FolderPathViewModel.cs" />
     <Compile Include="ViewModel\TabViewModel\MatchViewModel\SubViewModel\MISCViewModel.cs" />
@@ -137,6 +139,9 @@
     <Compile Include="ViewModel\ToastViewModel\ToastViewModel.cs" />
     <Compile Include="View\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TabView\InfoView\InfoView.xaml.cs">
+      <DependentUpon>InfoView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\TabView\MatchView\MatchView.xaml.cs">
       <DependentUpon>MatchView.xaml</DependentUpon>
@@ -156,6 +161,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\MainView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TabView\InfoView\InfoView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -28,6 +28,7 @@ namespace BananaScoreBoard.View.TabView
             this.DataContext = viewModel = new TabViewModel(this);
             this.MatchView.Content = new MatchView.MatchView();
             this.TournamentView.Content = new TournamentView.TournamentView();
+            this.InfoView.Content = new InfoView.InfoView();
         }
     }
 }
