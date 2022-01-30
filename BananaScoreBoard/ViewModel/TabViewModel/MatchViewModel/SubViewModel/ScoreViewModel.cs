@@ -62,49 +62,49 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.MatchViewModel.SubViewModel
         {
             get
             {
-                return swapCommand ?? (swapCommand = new DelegateCommand(Swap));
+                return swapCommand ?? (swapCommand = new DelegateCommand(() => {
+
+                    Log.Log.V(string.Format("Swap button is pressed | Name : {0} <-> {1}  Score {2} <-> {3}", Name1P, Name2P, Score1P, Score2P));
+
+                    {
+                        string temp;
+                        temp = Name1P;
+                        Name1P = Name2P;
+                        Name2P = temp;
+                    }
+                    {
+                        int temp;
+                        temp = Score1P;
+                        Score1P = Score2P;
+                        Score2P = temp;
+                    }
+
+                    Repository.Instance.toast.SendMessage("Player 1 and Player 2 is changed");
+                }));
             }
         }
 
-        void Swap()
-        {
-            {
-                string temp;
-                temp = Name1P;
-                Name1P = Name2P;
-                Name2P = temp;
-            }
-            {
-                int temp;
-                temp = Score1P;
-                Score1P = Score2P;
-                Score2P = temp;
-            }
-
-            Repository.Instance.toast.SendMessage("Player 1 and Player 2 is changed");
-        }
 
         private ICommand updateCommand;
         public ICommand UpdateCommand
         {
             get
             {
-                return updateCommand ?? (updateCommand = new DelegateCommand(Update));
-            }
-        }
-        void Update()
-        {
-            Task task = new Task(
-                () =>
+                return updateCommand ?? (updateCommand = new DelegateCommand(()=>
                 {
-                    Repository.Instance.update();
+                    Log.Log.V(string.Format("Update button in Match Tap is pressed"));
 
+                    Task task = new Task(
+                   () =>
+                   {
+                       Repository.Instance.update();
+                       Repository.Instance.toast.SendMessage("Update Done");
+                   }
+                   );
+                    task.Start();
 
-                    Repository.Instance.toast.SendMessage("Update Done");
-                }
-                );
-            task.Start();
-
+                }));
+            }
         }
 
         private ICommand resetCommand;
@@ -112,14 +112,13 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.MatchViewModel.SubViewModel
         {
             get
             {
-                return resetCommand ?? (resetCommand = new DelegateCommand(Reset));
+                return resetCommand ?? (resetCommand = new DelegateCommand(() => {
+                    Log.Log.V(string.Format("Reset Button in Match Tap is pressed"));
+                    Score1P = 0;
+                    Score2P = 0;
+                    Repository.Instance.toast.SendMessage("Reset Done");
+                }));
             }
-        }
-        void Reset()
-        {
-            Score1P = 0;
-            Score2P = 0;
-            Repository.Instance.toast.SendMessage("Reset Done");
         }
 
         private ICommand score1PUpCommand;
@@ -127,12 +126,11 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.MatchViewModel.SubViewModel
         {
             get
             {
-                return score1PUpCommand ?? (score1PUpCommand = new DelegateCommand(Score1PUp));
+                return score1PUpCommand ?? (score1PUpCommand = new DelegateCommand(() => {
+                    Log.Log.V(string.Format("Score 1P UP Button in Match Tap is pressed"));
+                    Score1P += 1;
+                }));
             }
-        }
-        void Score1PUp()
-        {
-            Score1P += 1;
         }
 
         private ICommand score1PDownCommand;
@@ -140,25 +138,24 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.MatchViewModel.SubViewModel
         {
             get
             {
-                return score1PDownCommand ?? (score1PDownCommand = new DelegateCommand(Score1PDown));
+                return score1PDownCommand ?? (score1PDownCommand = new DelegateCommand(() => {
+                    Log.Log.V(string.Format("Score 1P DOWN Button in Match Tap is pressed"));
+                    Score1P -= 1;
+                }));
             }
         }
-        void Score1PDown()
-        {
-            Score1P -= 1;
-        }
+
 
         private ICommand score1PResetCommand;
         public ICommand Score1PResetCommand
         {
             get
             {
-                return score1PResetCommand ?? (score1PResetCommand = new DelegateCommand(Score1PReset));
+                return score1PResetCommand ?? (score1PResetCommand = new DelegateCommand(() => {
+                    Log.Log.V(string.Format("Score 1P RESET Button in Match Tap is pressed"));
+                    Score1P = 0;
+                }));
             }
-        }
-        void Score1PReset()
-        {
-            Score1P = 0;
         }
 
         private ICommand score2PUpCommand;
@@ -166,12 +163,11 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.MatchViewModel.SubViewModel
         {
             get
             {
-                return score2PUpCommand ?? (score2PUpCommand = new DelegateCommand(Score2PUp));
+                return score2PUpCommand ?? (score2PUpCommand = new DelegateCommand(() => {
+                    Log.Log.V(string.Format("Score 2P UP Button in Match Tap is pressed"));
+                    Score2P += 1;
+                }));
             }
-        }
-        void Score2PUp()
-        {
-            Score2P += 1;
         }
 
         private ICommand score2PDownCommand;
@@ -179,12 +175,12 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.MatchViewModel.SubViewModel
         {
             get
             {
-                return score2PDownCommand ?? (score2PDownCommand = new DelegateCommand(Score2PDown));
+                return score2PDownCommand ?? (score2PDownCommand = new DelegateCommand(() =>
+                {
+                    Log.Log.V(string.Format("Score 2P DOWN Button in Match Tap is pressed"));
+                    Score2P -= 1;
+                }));
             }
-        }
-        void Score2PDown()
-        {
-            Score2P -= 1;
         }
 
         private ICommand score2PResetCommand;
@@ -192,12 +188,12 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.MatchViewModel.SubViewModel
         {
             get
             {
-                return score2PResetCommand ?? (score2PResetCommand = new DelegateCommand(Score2PReset));
+                return score2PResetCommand ?? (score2PResetCommand = new DelegateCommand(() =>
+                {
+                    Log.Log.V(string.Format("Score 2P RESET Button in Match Tap is pressed"));
+                    Score2P = 0;
+                }));
             }
-        }
-        void Score2PReset()
-        {
-            Score2P = 0;
         }
 
         public string Name1P
@@ -208,6 +204,7 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.MatchViewModel.SubViewModel
             }
             set
             {
+                Log.Log.V(string.Format("Change Name1P : {0} -> {1}", Repository.Instance.player1.name, value));
                 Repository.Instance.player1.name = value;
                 OnPropertyUpdate("Name1P");
             }
@@ -221,6 +218,7 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.MatchViewModel.SubViewModel
             }
             set
             {
+                Log.Log.V(string.Format("Change Name2P : {0} -> {1}", Repository.Instance.player2.name, value));
                 Repository.Instance.player2.name = value;
                 OnPropertyUpdate("Name2P");
             }
@@ -234,6 +232,7 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.MatchViewModel.SubViewModel
             }
             set
             {
+                Log.Log.V(string.Format("Change Score1P : {0} -> {1}", Repository.Instance.player1.score, value));
                 Repository.Instance.player1.score = value;
                 OnPropertyUpdate("Score1P");
             }
@@ -247,6 +246,7 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.MatchViewModel.SubViewModel
             }
             set
             {
+                Log.Log.V(string.Format("Change Score2P : {0} -> {1}", Repository.Instance.player2.score, value));
                 Repository.Instance.player2.score = value;
                 OnPropertyUpdate("Score2P");
             }

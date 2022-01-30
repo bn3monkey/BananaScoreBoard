@@ -82,14 +82,13 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.MatchViewModel.SubViewModel
         {
             get
             {
-                return timerResetCommand ?? (timerResetCommand = new DelegateCommand(TimerReset));
+                return timerResetCommand ?? (timerResetCommand = new DelegateCommand(() => {
+                    Log.Log.V("Timer Reset Button is pressed");
+                    IsTimerStarted = false;
+                    Minute = 0;
+                    Second = 0;
+                }));
             }
-        }
-        private void TimerReset()
-        {
-            IsTimerStarted = false;
-            Minute = 0;
-            Second = 0;
         }
 
         private ICommand timerStartCommand;
@@ -97,13 +96,12 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.MatchViewModel.SubViewModel
         {
             get
             {
-                return timerStartCommand ?? (timerStartCommand = new DelegateCommand(TimerStart));
+                return timerStartCommand ?? (timerStartCommand = new DelegateCommand(() =>
+                {
+                    Log.Log.V("Timer Start Button is pressed");
+                    IsTimerStarted = !IsTimerStarted;
+                }));
             }
-        }
-        private void TimerStart()
-        {
-            IsTimerStarted = !IsTimerStarted;
-            
         }
 
         public delegate void TimerStartedUI(bool value);
@@ -124,10 +122,12 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.MatchViewModel.SubViewModel
                     isTimerStarted = value;
                     if (isTimerStarted)
                     {
+                        Log.Log.V("Timer is started");
                         Repository.Instance.clock.Start();
                     }
                     else
                     {
+                        Log.Log.V("Timer is paused");
                         Repository.Instance.clock.Pause();
                     }
                     timerStartedUI(value);

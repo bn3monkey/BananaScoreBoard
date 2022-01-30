@@ -54,6 +54,7 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.MatchViewModel.SubViewModel
             }
             set
             {
+                Log.Log.V(string.Format("Change Label : {0} -> {1}", Repository.Instance.label.value, value));
                 Repository.Instance.label.value = value;
                 OnPropertyUpdate("Label");
             }
@@ -67,6 +68,7 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.MatchViewModel.SubViewModel
             }
             set
             {
+                Log.Log.V(string.Format("Change MISC1 : {0} -> {1}", Repository.Instance.misc1.value, value));
                 Repository.Instance.misc1.value = value;
                 OnPropertyUpdate("MISC1");
             }
@@ -80,6 +82,7 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.MatchViewModel.SubViewModel
             }
             set
             {
+                Log.Log.V(string.Format("Change MISC2 : {0} -> {1}", Repository.Instance.misc2.value, value));
                 Repository.Instance.misc2.value = value;
                 OnPropertyUpdate("MISC2");
             }
@@ -93,6 +96,7 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.MatchViewModel.SubViewModel
             }
             set
             {
+                Log.Log.V(string.Format("Change MISC3 : {0} -> {1}", Repository.Instance.misc3.value, value));
                 Repository.Instance.misc3.value = value;
                 OnPropertyUpdate("MISC3");
             }
@@ -106,6 +110,7 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.MatchViewModel.SubViewModel
             }
             set
             {
+                Log.Log.V(string.Format("Change MISC4 : {0} -> {1}", Repository.Instance.misc4.value, value));
                 Repository.Instance.misc4.value = value;
                 OnPropertyUpdate("MISC4");
             }

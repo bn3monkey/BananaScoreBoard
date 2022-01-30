@@ -118,6 +118,7 @@
     <Compile Include="Control\MatchNode.xaml.cs">
       <DependentUpon>MatchNode.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Log\Log.cs" />
     <Compile Include="Model\Record.cs" />
     <Compile Include="Model\Toast.cs" />
     <Compile Include="Model\Type\LabelText.cs" />

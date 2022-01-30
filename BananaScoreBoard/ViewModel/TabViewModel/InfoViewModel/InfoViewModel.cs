@@ -42,7 +42,17 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.InfoViewModel
             {
                 return logCommand = logCommand ?? (logCommand = new DelegateCommand(() =>
                 {
-                    Repository.Instance.toast.SendMessage(String.Format("Log file is exported : {0}","SANS.txt"));
+                    string dateTime = System.DateTime.Now.ToString("yyyyMMdd HH-mm-ss");
+                    string logfile = string.Format("LOG_{0}.txt", dateTime);
+
+                    if (Log.Log.ExportLog(logfile))
+                    {
+                        Repository.Instance.toast.SendMessage(String.Format("Log file is exported : {0}", logfile));
+                    }
+                    else
+                    {
+                        Repository.Instance.toast.SendMessage("Log file cannot be exported");
+                    }
                 }));
             }
         }

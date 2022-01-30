@@ -34,7 +34,11 @@ namespace BananaScoreBoard.ViewModel.FolderPathViewModel
         {
             get
             {
-                return this.findFolderPathCommand ?? (this.findFolderPathCommand = new DelegateCommand(FindFolderPath));
+                return this.findFolderPathCommand ?? (this.findFolderPathCommand = new DelegateCommand(() => {
+                    Log.Log.V("Find Folder Path button is pressed");
+                    FolderPath = Repository.Instance.record.FindPath();
+                    Repository.Instance.record.savePath();
+                }));
             }
         }
 
@@ -43,24 +47,16 @@ namespace BananaScoreBoard.ViewModel.FolderPathViewModel
         {
             get
             {
-                return this.readFolderPathCommand ?? (this.readFolderPathCommand = new DelegateCommand(ReadFolderPath));
+                return this.readFolderPathCommand ?? (this.readFolderPathCommand = new DelegateCommand(() => {
+                    Log.Log.V("Read Folder Path button is pressed");
+                    Repository.Instance.record.InitializePath();
+                    Repository.Instance.Load();
+                    Repository.Instance.Refresh();
+                }));
             }
         }
 
 
-        void FindFolderPath()
-        {
-            FolderPath = Repository.Instance.record.FindPath();
-            Repository.Instance.record.savePath();
-        }
-
-        void ReadFolderPath()
-        {
-            Repository.Instance.record.InitializePath();
-            Repository.Instance.Load();
-            Repository.Instance.Refresh();
-            
-        }
 
         public string FolderPath
         {
@@ -70,6 +66,7 @@ namespace BananaScoreBoard.ViewModel.FolderPathViewModel
             }
             set
             {
+                Log.Log.V(string.Format("Change FolderPath : {0} -> {1}", Repository.Instance.record.folder_path, value));
                 Repository.Instance.record.folder_path = value;
                 OnPropertyUpdate("FolderPath");
             }

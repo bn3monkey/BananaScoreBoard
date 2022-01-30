@@ -28,16 +28,5 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.MatchViewModel
             //    PropertyChanged(this, new PropertyChangedEventArgs(propertyname));
         }
 
-        public void ReadFolderPath()
-        {
-            Task task = new Task(() =>
-            {
-                Repository.Instance.record.InitializePath();
-                Repository.Instance.Load();
-                Repository.Instance.Refresh();
-            }
-            );
-            task.Start();
-        }
     }
 }
