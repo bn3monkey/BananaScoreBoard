@@ -22,11 +22,38 @@ namespace BananaScoreBoard.View.TabView.TournamentView
     public partial class TournamentView : Page
     {
         TournamentViewModel viewModel;
+
+        private TournamentInnerView tournamentInnerView = new TournamentInnerView();
+        private RosterView rosterView = new RosterView();
+
         public TournamentView()
         {
             InitializeComponent();
-            InnerView.Content = new TournamentInnerView();
-            DataContext = viewModel = new TournamentViewModel();
+            InnerView.Content = tournamentInnerView;
+            RosterView.Content = rosterView;
+            InnerView.Visibility = Visibility.Visible;
+            RosterView.Visibility = Visibility.Collapsed;
+            DataContext = viewModel = new TournamentViewModel(this);
+        }
+
+        public enum FrameName
+        {
+            Tournament,
+            Roster
+        }
+        public void SwitchFrame(FrameName framename)
+        {
+            switch(framename)
+            {
+                case FrameName.Tournament:
+                    InnerView.Visibility = Visibility.Visible;
+                    RosterView.Visibility = Visibility.Collapsed;
+                    break;
+                case FrameName.Roster:
+                    InnerView.Visibility = Visibility.Collapsed;
+                    RosterView.Visibility = Visibility.Visible;
+                    break;
+            }
         }
     }
 }

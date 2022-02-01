@@ -1,0 +1,167 @@
+﻿<Page x:Class="BananaScoreBoard.View.TabView.TournamentView.RosterView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:BananaScoreBoard.View.TabView.TournamentView"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="RosterView">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+
+            <TextBox Grid.Row="1" Grid.Column="0" 
+                    x:Name="Player1NameTextBox"
+                     Margin="5, 5, 5, 5"
+                     Text="{Binding Player0Name}"
+                />
+            <TextBox Grid.Row="1" Grid.Column="1" 
+                    x:Name="Player1MMRTextBox"
+                     Margin="5, 5, 5, 5"
+                     Text="{Binding Player0MMR}"
+                />
+
+            <TextBox Grid.Row="2" Grid.Column="0" 
+                    x:Name="Player2NameTextBox"
+                     Margin="5, 5, 5, 5"
+                     Text="{Binding Player1Name}"
+                />
+            <TextBox Grid.Row="2" Grid.Column="1" 
+                    x:Name="Player2MMRTextBox"
+                     Margin="5, 5, 5, 5"
+                     Text="{Binding Player1MMR}"
+                />
+            
+            <TextBox Grid.Row="3" Grid.Column="0" 
+                    x:Name="Player3NameTextBox"
+                     Margin="5, 5, 5, 5"
+                     Text="{Binding Player2Name}"
+                />
+            <TextBox Grid.Row="3" Grid.Column="1" 
+                    x:Name="Player3MMRTextBox"
+                     Margin="5, 5, 5, 5"
+                     Text="{Binding Player2MMR}"
+                />
+
+            <TextBox Grid.Row="4" Grid.Column="0" 
+                    x:Name="Player4NameTextBox"
+                     Margin="5, 5, 5, 5"
+                     Text="{Binding Player3Name}"
+                />
+            <TextBox Grid.Row="4" Grid.Column="1" 
+                    x:Name="Player4MMRTextBox"
+                     Margin="5, 5, 5, 5"
+                     Text="{Binding Player3MMR}"
+                />
+
+            <TextBox Grid.Row="5" Grid.Column="0" 
+                    x:Name="Player5NameTextBox"
+                     Margin="5, 5, 5, 5"
+                     Text="{Binding Player4Name}"
+                />
+            <TextBox Grid.Row="5" Grid.Column="1" 
+                    x:Name="Player5MMRTextBox"
+                     Margin="5, 5, 5, 5"
+                     Text="{Binding Player4MMR}"
+                />
+
+            <TextBox Grid.Row="6" Grid.Column="0" 
+                    x:Name="Player6NameTextBox"
+                     Margin="5, 5, 5, 5"
+                     Text="{Binding Player5Name}"
+                />
+            <TextBox Grid.Row="6" Grid.Column="1" 
+                    x:Name="Player6MMRTextBox"
+                     Margin="5, 5, 5, 5"
+                     Text="{Binding Player5MMR}"
+                />
+
+            <TextBox Grid.Row="7" Grid.Column="0" 
+                    x:Name="Player7NameTextBox"
+                     Margin="5, 5, 5, 5"
+                     Text="{Binding Player6Name}"
+                />
+            <TextBox Grid.Row="7" Grid.Column="1" 
+                    x:Name="Player7MMRTextBox"
+                     Margin="5, 5, 5, 5"
+                     Text="{Binding Player6MMR}"
+                />
+
+            <TextBox Grid.Row="8" Grid.Column="0" 
+                    x:Name="Player8NameTextBox"
+                     Margin="5, 5, 5, 5"
+                     Text="{Binding Player7Name}"
+                />
+            <TextBox Grid.Row="8" Grid.Column="1" 
+                    x:Name="Player8MMRTextBox"
+                     Margin="5, 5, 5, 5"
+                     Text="{Binding Player7MMR}"
+                />
+        </Grid>
+
+        <Grid Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="4*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" 
+                       x:Name="NoticeTextBlock"
+                       Margin="10,10,10,10"
+                       Text="{Binding Notice}"
+                       />
+
+            <Button Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"
+                    x:Name="ReadButton"
+                    Margin="5,5,5,5"
+                    Content="Read"
+                    Command="{Binding ReadCommand}"/>
+
+            <Button Grid.Row="2" Grid.Column="0"
+                    x:Name="RandomOrderButton"
+                    Margin="5,5,5,5"
+                    Content="Random Order"
+                    Command="{Binding RandomOrderCommand}"/>
+
+            <Button Grid.Row="2" Grid.Column="1"
+                    x:Name="MMROrderButton"
+                    Margin="5,5,5,5"
+                    Content="MMR Order"
+                    Command="{Binding MMROrderCommand}"/>
+
+            <Button Grid.Row="2" Grid.Column="2"
+                    x:Name="CommitButton"
+                    Margin="5,5,5,5"
+                    Content="Commit"
+                    Command="{Binding CommitCommand}"/>
+        </Grid>
+    </Grid>
+</Page>

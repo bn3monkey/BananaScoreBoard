@@ -29,6 +29,7 @@
                         HorizontalAlignment="Stretch" Margin="20,5,20,5" VerticalAlignment="Stretch"
                         Command="{Binding RosterCommand}"/>
             </Grid>
+            <Frame x:Name="RosterView"/>
             <Frame x:Name="InnerView"/>
         </StackPanel>
     </Grid>

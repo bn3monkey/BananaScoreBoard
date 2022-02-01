@@ -194,6 +194,20 @@ namespace BananaScoreBoard.Model
             return ret;
         }
 
+        public string ReadText(string filename)
+        {
+            string full_path = folder_path;
+            full_path += "\\";
+            full_path += filename;
+
+            string ret = "";
+            using (StreamReader reader = File.OpenText(full_path))
+            {
+                ret = reader.ReadToEnd();
+            }
+            return ret;
+        }
+
         public void WriteString(Name name, string value)
         {
             string full_path = folder_path;

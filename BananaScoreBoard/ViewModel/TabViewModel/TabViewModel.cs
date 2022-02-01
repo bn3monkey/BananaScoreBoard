@@ -23,11 +23,32 @@ namespace BananaScoreBoard.ViewModel.TabViewModel
         {
             get
             {
-                return Repository.Instance.current_tab;
+                switch(Repository.Instance.current_tab)
+                {
+                    case Repository.TabName.Match:
+                        return 0;
+                    case Repository.TabName.Tournament:
+                        return 1;
+                    case Repository.TabName.Info:
+                        return 2;
+                }
+                return 0;
             }
             set
             {
-                Repository.Instance.current_tab = value;
+                Log.Log.V(string.Format("Change Current Tab : {0} -> {1}", Repository.Instance.current_tab, (Repository.TabName)value));
+                switch (value)
+                {
+                    case 0:
+                        Repository.Instance.current_tab = Repository.TabName.Match;
+                        break;
+                    case 1:
+                        Repository.Instance.current_tab = Repository.TabName.Tournament;
+                        break;
+                    case 2:
+                        Repository.Instance.current_tab = Repository.TabName.Info;
+                        break;
+                }
                 OnPropertyUpdate("Selected");
             }
         }

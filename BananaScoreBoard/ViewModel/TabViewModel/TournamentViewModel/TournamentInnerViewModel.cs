@@ -148,6 +148,9 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             }
             set
             {
+                Log.Log.V(string.Format("Change WinnerMatch({0}) {1}Round Player{2} : {3} -> {4}",
+                    1, 1, 1, 
+                    Repository.Instance.winnerMatch1_1.player1, value));
                 Repository.Instance.winnerMatch1_1.player1 = value;
                 OnPropertyUpdate("W1_1_P1");
             }
@@ -160,6 +163,9 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             }
             set
             {
+                Log.Log.V(string.Format("Change WinnerMatch({0}) {1}Round Player{2} : {3} -> {4}",
+                    1, 1, 2,
+                    Repository.Instance.winnerMatch1_1.player2, value));
                 Repository.Instance.winnerMatch1_1.player2 = value;
                 OnPropertyUpdate("W1_1_P2");
             }
@@ -173,6 +179,9 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             }
             set
             {
+                Log.Log.V(string.Format("Change WinnerMatch({0}) {1}Round Winner : Player{2} -> Player{3}",
+                    1, 1, 
+                    Repository.Instance.winnerMatch1_1.winner, value));
                 Repository.Instance.winnerMatch1_1.winner = value;
                 OnPropertyUpdate("W1_1_Winner");
             }
@@ -185,6 +194,8 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             {
                 return w1_1_player1WinCommand ?? (w1_1_player1WinCommand = new DelegateCommand(() =>
                 {
+                    Log.Log.V(string.Format("WinnerMatch{0}_{1}Round {2}Player Win button is pressed", 1, 1, 1));
+
                     if (W1_1_P1 == "")
                     {
                         if (W1_1_P2 == "")
@@ -216,6 +227,8 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             {
                 return w1_1_player2WinCommand ?? (w1_1_player2WinCommand = new DelegateCommand(() =>
                 {
+                    Log.Log.V(string.Format("WinnerMatch{0}_{1}Round {2}Player Win button is pressed", 1, 1, 2));
+
                     if (W1_1_P1 == "")
                     {
                         if (W1_1_P2 == "")
@@ -249,6 +262,9 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             }
             set
             {
+                Log.Log.V(string.Format("Change WinnerMatch({0}) {1}Round Player{2} : {3} -> {4}",
+                   1, 2, 1,
+                   Repository.Instance.winnerMatch1_2.player1, value));
                 Repository.Instance.winnerMatch1_2.player1 = value;
                 OnPropertyUpdate("W1_2_P1");
             }
@@ -261,6 +277,9 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             }
             set
             {
+                Log.Log.V(string.Format("Change WinnerMatch({0}) {1}Round Player{2} : {3} -> {4}",
+                   1, 2, 2,
+                   Repository.Instance.winnerMatch1_2.player2, value));
                 Repository.Instance.winnerMatch1_2.player2 = value;
                 OnPropertyUpdate("W1_2_P2");
             }
@@ -274,6 +293,9 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             }
             set
             {
+                Log.Log.V(string.Format("Change WinnerMatch({0}) {1}Round Winner : Player{2} -> Player{3}",
+                   1, 2,
+                   Repository.Instance.winnerMatch1_2.winner, value));
                 Repository.Instance.winnerMatch1_2.winner = value;
                 OnPropertyUpdate("W1_2_Winner");
             }
@@ -286,6 +308,8 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             {
                 return w1_2_player1WinCommand ?? (w1_2_player1WinCommand = new DelegateCommand(() =>
                 {
+                    Log.Log.V(string.Format("WinnerMatch{0}_{1}Round {2}Player Win button is pressed", 1, 2, 1));
+
                     if (W1_2_P1 == "")
                     {
                         if (W1_2_P2 == "")
@@ -314,6 +338,8 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             {
                 return w1_2_player2WinCommand ?? (w1_2_player2WinCommand = new DelegateCommand(() =>
                 {
+                    Log.Log.V(string.Format("WinnerMatch{0}_{1}Round {2}Player Win button is pressed", 1, 2, 2));
+
                     if (W1_2_P1 == "")
                     {
                         if (W1_2_P2 == "")
@@ -346,6 +372,9 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             }
             set
             {
+                Log.Log.V(string.Format("Change WinnerMatch({0}) {1}Round Player{2} : {3} -> {4}",
+                   1, 3, 1,
+                   Repository.Instance.winnerMatch1_3.player1, value));
                 Repository.Instance.winnerMatch1_3.player1 = value;
                 OnPropertyUpdate("W1_3_P1");
             }
@@ -358,6 +387,9 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             }
             set
             {
+                Log.Log.V(string.Format("Change WinnerMatch({0}) {1}Round Player{2} : {3} -> {4}",
+                   1, 3, 2,
+                   Repository.Instance.winnerMatch1_3.player2, value));
                 Repository.Instance.winnerMatch1_3.player2 = value;
                 OnPropertyUpdate("W1_3_P2");
             }
@@ -371,6 +403,9 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             }
             set
             {
+                Log.Log.V(string.Format("Change WinnerMatch({0}) {1}Round Winner : Player{2} -> Player{3}",
+                   1, 3,
+                   Repository.Instance.winnerMatch1_3.winner, value));
                 Repository.Instance.winnerMatch1_3.winner = value;
                 OnPropertyUpdate("W1_3_Winner");
             }
@@ -383,6 +418,8 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             {
                 return w1_3_player1WinCommand ?? (w1_3_player1WinCommand = new DelegateCommand(() =>
                 {
+                    Log.Log.V(string.Format("WinnerMatch{0}_{1}Round {2}Player Win button is pressed", 1, 3, 1));
+
                     if (W1_3_P1 == "")
                     {
                         if (W1_3_P2 == "")
@@ -411,6 +448,8 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             {
                 return w1_3_player2WinCommand ?? (w1_3_player2WinCommand = new DelegateCommand(() =>
                 {
+                    Log.Log.V(string.Format("WinnerMatch{0}_{1}Round {2}Player Win button is pressed", 1, 3, 2));
+
                     if (W1_3_P1 == "")
                     {
                         if (W1_3_P2 == "")
@@ -443,6 +482,10 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             }
             set
             {
+                Log.Log.V(string.Format("Change WinnerMatch({0}) {1}Round Player{2} : {3} -> {4}",
+                   1, 4, 1,
+                   Repository.Instance.winnerMatch1_4.player1, value));
+
                 Repository.Instance.winnerMatch1_4.player1 = value;
                 OnPropertyUpdate("W1_4_P1");
             }
@@ -455,6 +498,9 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             }
             set
             {
+                Log.Log.V(string.Format("Change WinnerMatch({0}) {1}Round Player{2} : {3} -> {4}",
+                   1, 4, 2,
+                   Repository.Instance.winnerMatch1_4.player2, value));
                 Repository.Instance.winnerMatch1_4.player2 = value;
                 OnPropertyUpdate("W1_4_P2");
             }
@@ -468,6 +514,9 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             }
             set
             {
+                Log.Log.V(string.Format("Change WinnerMatch({0}) {1}Round Winner : Player{2} -> Player{3}",
+                   1, 4,
+                   Repository.Instance.winnerMatch1_4.winner, value));
                 Repository.Instance.winnerMatch1_4.winner = value;
                 OnPropertyUpdate("W1_4_Winner");
             }
@@ -480,6 +529,8 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             {
                 return w1_4_player1WinCommand ?? (w1_4_player1WinCommand = new DelegateCommand(() =>
                 {
+                    Log.Log.V(string.Format("WinnerMatch{0}_{1}Round {2}Player Win button is pressed", 1, 4, 1));
+
                     if (W1_4_P1 == "")
                     {
                         if (W1_4_P2 == "")
@@ -508,6 +559,7 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             {
                 return w1_4_player2WinCommand ?? (w1_4_player2WinCommand = new DelegateCommand(() =>
                 {
+                    Log.Log.V(string.Format("WinnerMatch{0}_{1}Round {2}Player Win button is pressed", 1, 4, 2));
                     if (W1_4_P1 == "")
                     {
                         if (W1_4_P2 == "")
@@ -540,6 +592,9 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             }
             set
             {
+                Log.Log.V(string.Format("Change WinnerMatch({0}) {1}Round Player{2} : {3} -> {4}",
+                   2, 1, 1,
+                   Repository.Instance.winnerMatch2_1.player1, value));
                 Repository.Instance.winnerMatch2_1.player1 = value;
                 OnPropertyUpdate("W2_1_P1");
             }
@@ -552,6 +607,9 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             }
             set
             {
+                Log.Log.V(string.Format("Change WinnerMatch({0}) {1}Round Player{2} : {3} -> {4}",
+                   2, 1, 2,
+                   Repository.Instance.winnerMatch2_1.player2, value));
                 Repository.Instance.winnerMatch2_1.player2 = value;
                 OnPropertyUpdate("W2_1_P2");
             }
@@ -565,6 +623,9 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             }
             set
             {
+                Log.Log.V(string.Format("Change WinnerMatch({0}) {1}Round Winner : Player{2} -> Player{3}",
+                   2, 1,
+                   Repository.Instance.winnerMatch2_1.winner, value));
                 Repository.Instance.winnerMatch2_1.winner = value;
                 OnPropertyUpdate("W2_1_Winner");
             }
@@ -577,6 +638,7 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             {
                 return w2_1_player1WinCommand ?? (w2_1_player1WinCommand = new DelegateCommand(() =>
                 {
+                    Log.Log.V(string.Format("WinnerMatch{0}_{1}Round {2}Player Win button is pressed", 2, 1, 1));
                     if (W2_1_P1 == "")
                     {
                         if (W2_1_P2 == "")
@@ -605,6 +667,7 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             {
                 return w2_1_player2WinCommand ?? (w2_1_player2WinCommand = new DelegateCommand(() =>
                 {
+                    Log.Log.V(string.Format("WinnerMatch{0}_{1}Round {2}Player Win button is pressed", 2, 1, 2));
                     if (W2_1_P1 == "")
                     {
                         if (W2_1_P2 == "")
@@ -637,6 +700,10 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             }
             set
             {
+                Log.Log.V(string.Format("Change WinnerMatch({0}) {1}Round Player{2} : {3} -> {4}",
+                   2, 2, 1,
+                   Repository.Instance.winnerMatch2_2.player1, value));
+
                 Repository.Instance.winnerMatch2_2.player1 = value;
                 OnPropertyUpdate("W2_2_P1");
             }
@@ -649,6 +716,9 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             }
             set
             {
+                Log.Log.V(string.Format("Change WinnerMatch({0}) {1}Round Player{2} : {3} -> {4}",
+                   2, 2, 2,
+                   Repository.Instance.winnerMatch2_2.player2, value));
                 Repository.Instance.winnerMatch2_2.player2 = value;
                 OnPropertyUpdate("W2_2_P2");
             }
@@ -662,6 +732,10 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             }
             set
             {
+                Log.Log.V(string.Format("Change WinnerMatch({0}) {1}Round Winner : Player{2} -> Player{3}",
+                   2, 2,
+                   Repository.Instance.winnerMatch2_2.winner, value));
+
                 Repository.Instance.winnerMatch2_2.winner = value;
                 OnPropertyUpdate("W2_2_Winner");
             }
@@ -674,6 +748,7 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             {
                 return w2_2_player1WinCommand ?? (w2_2_player1WinCommand = new DelegateCommand(() =>
                 {
+                    Log.Log.V(string.Format("WinnerMatch{0}_{1}Round {2}Player Win button is pressed", 2, 2, 1));
                     if (W2_2_P1 == "")
                     {
                         if (W2_2_P2 == "")
@@ -702,6 +777,8 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             {
                 return w2_2_player2WinCommand ?? (w2_2_player2WinCommand = new DelegateCommand(() =>
                 {
+                    Log.Log.V(string.Format("WinnerMatch{0}_{1}Round {2}Player Win button is pressed", 2, 2, 2));
+
                     if (W2_2_P1 == "")
                     {
                         if (W2_2_P2 == "")
@@ -734,6 +811,10 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             }
             set
             {
+                Log.Log.V(string.Format("Change WinnerMatch({0}) {1}Round Player{2} : {3} -> {4}",
+                   3, 1, 1,
+                   Repository.Instance.winnerMatch3_1.player1, value));
+
                 Repository.Instance.winnerMatch3_1.player1 = value;
                 OnPropertyUpdate("W3_1_P1");
             }
@@ -746,6 +827,10 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             }
             set
             {
+
+                Log.Log.V(string.Format("Change WinnerMatch({0}) {1}Round Player{2} : {3} -> {4}",
+                                   3, 1, 2,
+                                   Repository.Instance.winnerMatch3_1.player2, value));
                 Repository.Instance.winnerMatch3_1.player2 = value;
                 OnPropertyUpdate("W3_1_P2");
             }
@@ -759,6 +844,9 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             }
             set
             {
+                Log.Log.V(string.Format("Change WinnerMatch({0}) {1}Round Winner : Player{2} -> Player{3}",
+                   3, 1,
+                   Repository.Instance.winnerMatch3_1.winner, value));
                 Repository.Instance.winnerMatch3_1.winner = value;
                 OnPropertyUpdate("W3_1_Winner");
             }
@@ -771,6 +859,8 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             {
                 return w3_1_player1WinCommand ?? (w3_1_player1WinCommand = new DelegateCommand(() =>
                 {
+                    Log.Log.V(string.Format("WinnerMatch{0}_{1}Round {2}Player Win button is pressed", 3, 1, 1));
+
                     if (W3_1_P1 == "")
                     {
                         if (W3_1_P2 == "")
@@ -799,6 +889,7 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             {
                 return w3_1_player2WinCommand ?? (w3_1_player2WinCommand = new DelegateCommand(() =>
                 {
+                    Log.Log.V(string.Format("WinnerMatch{0}_{1}Round {2}Player Win button is pressed", 3, 1, 2));
                     if (W3_1_P1 == "")
                     {
                         if (W3_1_P2 == "")
@@ -831,6 +922,9 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             }
             set
             {
+                Log.Log.V(string.Format("Change WinnerMatch({0}) {1}Round Player{2} : {3} -> {4}",
+                   4, 1, 1,
+                   Repository.Instance.winnerMatch4_1.player1, value));
                 Repository.Instance.winnerMatch4_1.player1 = value;
                 OnPropertyUpdate("W4_1_P1");
             }
@@ -843,6 +937,9 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             }
             set
             {
+                Log.Log.V(string.Format("Change WinnerMatch({0}) {1}Round Player{2} : {3} -> {4}",
+                   4, 1, 2,
+                   Repository.Instance.winnerMatch4_1.player2, value));
                 Repository.Instance.winnerMatch4_1.player2 = value;
                 OnPropertyUpdate("W4_1_P2");
             }
@@ -856,6 +953,9 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             }
             set
             {
+                Log.Log.V(string.Format("Change WinnerMatch({0}) {1}Round Winner : Player{2} -> Player{3}",
+                   4, 1,
+                   Repository.Instance.winnerMatch4_1.winner, value));
                 Repository.Instance.winnerMatch4_1.winner = value;
                 OnPropertyUpdate("W4_1_Winner");
             }
@@ -868,6 +968,8 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             {
                 return w4_1_player1WinCommand ?? (w4_1_player1WinCommand = new DelegateCommand(() =>
                 {
+                    Log.Log.V(string.Format("WinnerMatch{0}_{1}Round {2}Player Win button is pressed", 4, 1, 1));
+
                     if (W4_1_P1 == "")
                     {
                         if (W4_1_P2 == "")
@@ -898,6 +1000,8 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             {
                 return w4_1_player2WinCommand ?? (w4_1_player2WinCommand = new DelegateCommand(() =>
                 {
+                    Log.Log.V(string.Format("WinnerMatch{0}_{1}Round {2}Player Win button is pressed", 4, 1, 2));
+
                     if (W4_1_P1 == "")
                     {
                         if (W4_1_P2 == "")
@@ -932,6 +1036,9 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             }
             set
             {
+                Log.Log.V(string.Format("Change LoserMatch({0}) {1}Round Player{2} : {3} -> {4}",
+                   1, 1, 1,
+                   Repository.Instance.loserMatch1_1.player1, value));
                 Repository.Instance.loserMatch1_1.player1 = value;
                 OnPropertyUpdate("L1_1_P1");
             }
@@ -944,6 +1051,10 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             }
             set
             {
+
+                Log.Log.V(string.Format("Change LoserMatch({0}) {1}Round Player{2} : {3} -> {4}",
+                                   1, 1, 2,
+                                   Repository.Instance.loserMatch1_1.player2, value));
                 Repository.Instance.loserMatch1_1.player2 = value;
                 OnPropertyUpdate("L1_1_P2");
             }
@@ -957,6 +1068,9 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             }
             set
             {
+                Log.Log.V(string.Format("Change LoserMatch({0}) {1}Round Winner : Player{2} -> Player{3}",
+                   1, 1,
+                   Repository.Instance.loserMatch1_1.winner, value));
                 Repository.Instance.loserMatch1_1.winner = value;
                 OnPropertyUpdate("L1_1_Winner");
             }
@@ -969,6 +1083,8 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             {
                 return l1_1_player1WinCommand ?? (l1_1_player1WinCommand = new DelegateCommand(() =>
                 {
+                    Log.Log.V(string.Format("LoserMatch{0}_{1}Round {2}Player Win button is pressed", 1, 1, 1));
+
                     if (L1_1_P1 == "")
                     {
                         if (L1_1_P2 == "")
@@ -997,6 +1113,8 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             {
                 return l1_1_player2WinCommand ?? (l1_1_player2WinCommand = new DelegateCommand(() =>
                 {
+                    Log.Log.V(string.Format("LoserMatch{0}_{1}Round {2}Player Win button is pressed", 1, 1, 2));
+
                     if (L1_1_P1 == "")
                     {
                         if (L1_1_P2 == "")
@@ -1029,6 +1147,10 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             }
             set
             {
+                Log.Log.V(string.Format("Change LoserMatch({0}) {1}Round Player{2} : {3} -> {4}",
+                   1, 2, 1,
+                   Repository.Instance.loserMatch1_2.player1, value));
+
                 Repository.Instance.loserMatch1_2.player1 = value;
                 OnPropertyUpdate("W1_2_P1");
             }
@@ -1041,6 +1163,11 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             }
             set
             {
+                Log.Log.V(string.Format("Change LoserMatch({0}) {1}Round Player{2} : {3} -> {4}",
+                   1, 2, 2,
+                   Repository.Instance.loserMatch1_2.player2, value));
+
+
                 Repository.Instance.loserMatch1_2.player2 = value;
                 OnPropertyUpdate("L1_2_P2");
             }
@@ -1054,6 +1181,10 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             }
             set
             {
+                Log.Log.V(string.Format("Change LoserMatch({0}) {1}Round Winner : Player{2} -> Player{3}",
+                   1, 2,
+                   Repository.Instance.loserMatch1_2.winner, value));
+
                 Repository.Instance.loserMatch1_2.winner = value;
                 OnPropertyUpdate("L1_2_Winner");
             }
@@ -1066,6 +1197,8 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             {
                 return l1_2_player1WinCommand ?? (l1_2_player1WinCommand = new DelegateCommand(() =>
                 {
+                    Log.Log.V(string.Format("LoserMatch{0}_{1}Round {2}Player Win button is pressed", 1, 2, 1));
+
                     if (L1_2_P1 == "")
                     {
                         if (L1_2_P2 == "")
@@ -1094,6 +1227,8 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             {
                 return l1_2_player2WinCommand ?? (l1_2_player2WinCommand = new DelegateCommand(() =>
                 {
+                    Log.Log.V(string.Format("LoserMatch{0}_{1}Round {2}Player Win button is pressed", 1, 2, 2));
+
                     if (L1_2_P1 == "")
                     {
                         if (L1_2_P2 == "")
@@ -1126,6 +1261,10 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             }
             set
             {
+                Log.Log.V(string.Format("Change LoserMatch({0}) {1}Round Player{2} : {3} -> {4}",
+                   2, 1, 1,
+                   Repository.Instance.loserMatch2_1.player1, value));
+
                 Repository.Instance.loserMatch2_1.player1 = value;
                 OnPropertyUpdate("L2_1_P1");
             }
@@ -1138,6 +1277,10 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             }
             set
             {
+                Log.Log.V(string.Format("Change LoserMatch({0}) {1}Round Player{2} : {3} -> {4}",
+                   2, 1, 2,
+                   Repository.Instance.loserMatch2_1.player2, value));
+
                 Repository.Instance.loserMatch2_1.player2 = value;
                 OnPropertyUpdate("L2_1_P2");
             }
@@ -1151,6 +1294,10 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             }
             set
             {
+                Log.Log.V(string.Format("Change LoserMatch({0}) {1}Round Winner : Player{2} -> Player{3}",
+                   2, 1,
+                   Repository.Instance.loserMatch2_1.winner, value));
+
                 Repository.Instance.loserMatch2_1.winner = value;
                 OnPropertyUpdate("L2_1_Winner");
             }
@@ -1163,6 +1310,8 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             {
                 return l2_1_player1WinCommand ?? (l2_1_player1WinCommand = new DelegateCommand(() =>
                 {
+                    Log.Log.V(string.Format("LoserMatch{0}_{1}Round {2}Player Win button is pressed", 2, 1, 1));
+
                     if (L2_1_P1 == "")
                     {
                         if (L2_1_P2 == "")
@@ -1191,6 +1340,8 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             {
                 return l2_1_player2WinCommand ?? (l2_1_player2WinCommand = new DelegateCommand(() =>
                 {
+                    Log.Log.V(string.Format("LoserMatch{0}_{1}Round {2}Player Win button is pressed", 2, 1, 2));
+
                     if (L2_1_P1 == "")
                     {
                         if (L2_1_P2 == "")
@@ -1223,6 +1374,10 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             }
             set
             {
+                Log.Log.V(string.Format("Change LoserMatch({0}) {1}Round Player{2} : {3} -> {4}",
+                   2, 2, 1,
+                   Repository.Instance.loserMatch2_2.player1, value));
+
                 Repository.Instance.loserMatch2_2.player1 = value;
                 OnPropertyUpdate("L2_2_P1");
             }
@@ -1235,6 +1390,11 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             }
             set
             {
+                Log.Log.V(string.Format("Change LoserMatch({0}) {1}Round Player{2} : {3} -> {4}",
+                   2, 2, 2,
+                   Repository.Instance.loserMatch2_2.player2, value));
+
+
                 Repository.Instance.loserMatch2_2.player2 = value;
                 OnPropertyUpdate("L2_2_P2");
             }
@@ -1248,6 +1408,10 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             }
             set
             {
+                Log.Log.V(string.Format("Change LoserMatch({0}) {1}Round Winner : Player{2} -> Player{3}",
+                   2, 2,
+                   Repository.Instance.loserMatch2_2.winner, value));
+
                 Repository.Instance.loserMatch2_2.winner = value;
                 OnPropertyUpdate("L2_2_Winner");
             }
@@ -1260,6 +1424,8 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             {
                 return l2_2_player1WinCommand ?? (l2_2_player1WinCommand = new DelegateCommand(() =>
                 {
+                    Log.Log.V(string.Format("LoserMatch{0}_{1}Round {2}Player Win button is pressed", 2, 2, 1));
+
                     if (L2_2_P1 == "")
                     {
                         if (L2_2_P2 == "")
@@ -1288,6 +1454,8 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             {
                 return l2_2_player2WinCommand ?? (l2_2_player2WinCommand = new DelegateCommand(() =>
                 {
+                    Log.Log.V(string.Format("LoserMatch{0}_{1}Round {2}Player Win button is pressed", 2, 2, 2));
+
                     if (L2_2_P1 == "")
                     {
                         if (L2_2_P2 == "")
@@ -1320,6 +1488,10 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             }
             set
             {
+                Log.Log.V(string.Format("Change LoserMatch({0}) {1}Round Player{2} : {3} -> {4}",
+                   3, 1, 1,
+                   Repository.Instance.loserMatch3_1.player1, value));
+
                 Repository.Instance.loserMatch3_1.player1 = value;
                 OnPropertyUpdate("L3_1_P1");
             }
@@ -1332,6 +1504,9 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             }
             set
             {
+                Log.Log.V(string.Format("Change LoserMatch({0}) {1}Round Player{2} : {3} -> {4}",
+                   3, 1, 2,
+                   Repository.Instance.loserMatch3_1.player2, value));
                 Repository.Instance.loserMatch3_1.player2 = value;
                 OnPropertyUpdate("L3_1_P2");
             }
@@ -1346,6 +1521,9 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             }
             set
             {
+                Log.Log.V(string.Format("Change LoserMatch({0}) {1}Round Winner : Player{2} -> Player{3}",
+                   3, 1,
+                   Repository.Instance.loserMatch3_1.winner, value));
                 Repository.Instance.loserMatch3_1.winner = value;
                 OnPropertyUpdate("L3_1_Winner");
             }
@@ -1358,6 +1536,7 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             {
                 return l3_1_player1WinCommand ?? (l3_1_player1WinCommand = new DelegateCommand(() =>
                 {
+                    Log.Log.V(string.Format("LoserMatch{0}_{1}Round {2}Player Win button is pressed", 3, 1, 1));
                     if (L3_1_P1 == "")
                     {
                         if (L3_1_P2 == "")
@@ -1386,6 +1565,7 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             {
                 return l3_1_player2WinCommand ?? (l3_1_player2WinCommand = new DelegateCommand(() =>
                 {
+                    Log.Log.V(string.Format("LoserMatch{0}_{1}Round {2}Player Win button is pressed", 3, 1, 2));
                     if (L3_1_P1 == "")
                     {
                         if (L3_1_P2 == "")
@@ -1418,6 +1598,9 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             }
             set
             {
+                Log.Log.V(string.Format("Change LoserMatch({0}) {1}Round Player{2} : {3} -> {4}",
+                   3, 2, 1,
+                   Repository.Instance.loserMatch3_2.player1, value));
                 Repository.Instance.loserMatch3_2.player1 = value;
                 OnPropertyUpdate("L3_2_P1");
             }
@@ -1430,6 +1613,9 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             }
             set
             {
+                Log.Log.V(string.Format("Change LoserMatch({0}) {1}Round Winner : Player{2} -> Player{3}",
+                                   3, 2,
+                                   Repository.Instance.loserMatch3_2.winner, value));
                 Repository.Instance.loserMatch3_2.winner = value;
                 OnPropertyUpdate("L3_2_Winner");
             }
@@ -1442,6 +1628,8 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             {
                 return l3_2_player1WinCommand ?? (l3_2_player1WinCommand = new DelegateCommand(() =>
                 {
+
+                    Log.Log.V(string.Format("LoserMatch{0}_{1}Round {2}Player Win button is pressed", 3, 2, 1));
                     if (L3_2_P1 == "")
                     {
                         Repository.Instance.toast.SendMessage("Please Enter Player1");
@@ -1463,6 +1651,9 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             }
             set
             {
+                Log.Log.V(string.Format("Change LoserMatch({0}) {1}Round Player{2} : {3} -> {4}",
+                   4, 1, 1,
+                   Repository.Instance.loserMatch4_1.player1, value));
                 Repository.Instance.loserMatch4_1.player1 = value;
                 OnPropertyUpdate("L4_1_P1");
             }
@@ -1475,6 +1666,9 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             }
             set
             {
+                Log.Log.V(string.Format("Change LoserMatch({0}) {1}Round Player{2} : {3} -> {4}",
+                    4, 1, 2,
+                    Repository.Instance.loserMatch4_1.player2, value));
                 Repository.Instance.loserMatch4_1.player2 = value;
                 OnPropertyUpdate("L4_1_P2");
             }
@@ -1488,6 +1682,9 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             }
             set
             {
+                Log.Log.V(string.Format("Change LoserMatch({0}) {1}Round Winner : Player{2} -> Player{3}",
+                    4, 1,
+                    Repository.Instance.loserMatch4_1.winner, value));
                 Repository.Instance.loserMatch4_1.winner = value;
                 OnPropertyUpdate("L4_1_Winner");
             }
@@ -1500,6 +1697,7 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             {
                 return l4_1_player1WinCommand ?? (l4_1_player1WinCommand = new DelegateCommand(() =>
                 {
+                    Log.Log.V(string.Format("LoserMatch{0}_{1}Round {2}Player Win button is pressed", 4, 1, 1));
                     if (L4_1_P1 == "")
                     {
                         if(L4_1_P2 == "")
@@ -1528,6 +1726,7 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             {
                 return l4_1_player2WinCommand ?? (l4_1_player2WinCommand = new DelegateCommand(() =>
                 {
+                    Log.Log.V(string.Format("LoserMatch{0}_{1}Round {2}Player Win button is pressed", 4, 1, 2));
                     if (L4_1_P1 == "")
                     {
                         if (L4_1_P2 == "")
