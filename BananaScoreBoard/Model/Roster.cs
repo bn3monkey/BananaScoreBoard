@@ -62,6 +62,7 @@ namespace BananaScoreBoard.Model
                 Array.Sort(players, CompareByMMR);
             else
                 Array.Sort(players, CompareByMMRReverse);
+
             isAsec = !isAsec;
         }
     }

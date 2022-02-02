@@ -1,5 +1,6 @@
 ﻿using BananaScoreBoard.Auxiliary;
 using BananaScoreBoard.Model;
+using BananaScoreBoard.Model.Type;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,28 +21,28 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
 
         public TournamentInnerViewModel()
         {
-            Repository.Instance.winnerMatch1_1.SetNextMatch(Repository.Instance.winnerMatch2_1, Repository.Instance.loserMatch1_1);
-            Repository.Instance.winnerMatch1_2.SetNextMatch(Repository.Instance.winnerMatch2_1, Repository.Instance.loserMatch1_1);
-            Repository.Instance.winnerMatch1_3.SetNextMatch(Repository.Instance.winnerMatch2_2, Repository.Instance.loserMatch1_2);
-            Repository.Instance.winnerMatch1_4.SetNextMatch(Repository.Instance.winnerMatch2_2, Repository.Instance.loserMatch1_2);
+            Repository.Instance.winnerMatch1_1.SetNextMatch(Repository.Instance.winnerMatch2_1, 1, Repository.Instance.loserMatch1_1, 1);
+            Repository.Instance.winnerMatch1_2.SetNextMatch(Repository.Instance.winnerMatch2_1, 2, Repository.Instance.loserMatch1_1, 2);
+            Repository.Instance.winnerMatch1_3.SetNextMatch(Repository.Instance.winnerMatch2_2, 1, Repository.Instance.loserMatch1_2, 1);
+            Repository.Instance.winnerMatch1_4.SetNextMatch(Repository.Instance.winnerMatch2_2, 2, Repository.Instance.loserMatch1_2, 2);
 
-            Repository.Instance.winnerMatch2_1.SetNextMatch(Repository.Instance.winnerMatch3_1, Repository.Instance.loserMatch2_1);
-            Repository.Instance.winnerMatch2_2.SetNextMatch(Repository.Instance.winnerMatch3_1, Repository.Instance.loserMatch2_2);
+            Repository.Instance.winnerMatch2_1.SetNextMatch(Repository.Instance.winnerMatch3_1, 1, Repository.Instance.loserMatch2_1, 1);
+            Repository.Instance.winnerMatch2_2.SetNextMatch(Repository.Instance.winnerMatch3_1, 2, Repository.Instance.loserMatch2_2, 1);
 
-            Repository.Instance.winnerMatch3_1.SetNextMatch(Repository.Instance.winnerMatch4_1, Repository.Instance.loserMatch3_2);
-            Repository.Instance.winnerMatch4_1.SetNextMatch(null, null);
+            Repository.Instance.winnerMatch3_1.SetNextMatch(Repository.Instance.winnerMatch4_1, 1, Repository.Instance.loserMatch3_2, 1);
+            Repository.Instance.winnerMatch4_1.SetNextMatch(null, 0, null, 0);
 
 
-            Repository.Instance.loserMatch1_1.SetNextMatch(Repository.Instance.loserMatch2_1, null);
-            Repository.Instance.loserMatch1_2.SetNextMatch(Repository.Instance.loserMatch2_2, null);
+            Repository.Instance.loserMatch1_1.SetNextMatch(Repository.Instance.loserMatch2_1, 2, null, 0);
+            Repository.Instance.loserMatch1_2.SetNextMatch(Repository.Instance.loserMatch2_2, 2, null, 0);
 
-            Repository.Instance.loserMatch2_1.SetNextMatch(Repository.Instance.loserMatch3_1, null);
-            Repository.Instance.loserMatch2_2.SetNextMatch(Repository.Instance.loserMatch3_1, null);
+            Repository.Instance.loserMatch2_1.SetNextMatch(Repository.Instance.loserMatch3_1, 1, null, 0);
+            Repository.Instance.loserMatch2_2.SetNextMatch(Repository.Instance.loserMatch3_1, 2, null, 0);
 
-            Repository.Instance.loserMatch3_1.SetNextMatch(Repository.Instance.loserMatch4_1, null);
-            Repository.Instance.loserMatch3_2.SetNextMatch(Repository.Instance.loserMatch4_1, null);
+            Repository.Instance.loserMatch3_1.SetNextMatch(Repository.Instance.loserMatch4_1, 1, null, 0);
+            Repository.Instance.loserMatch3_2.SetNextMatch(Repository.Instance.loserMatch4_1, 2, null, 0);
 
-            Repository.Instance.loserMatch4_1.SetNextMatch(Repository.Instance.winnerMatch4_1, null);
+            Repository.Instance.loserMatch4_1.SetNextMatch(Repository.Instance.winnerMatch4_1, 2, null, 0);
 
             Repository.Instance.winnerMatch1_1.registerRefresher(() =>
             {
@@ -138,6 +139,114 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             });
         }
 
+        private void DetermineWinnerToPlayer1(Match match)
+        {
+            Match.WinnerCode code = match.WinPlayer1();
+            SendToast(match, code);
+        }
+        private void DetermineWinnerToPlayer2(Match match)
+        {
+            Match.WinnerCode code = match.WinPlayer2();
+            SendToast(match, code);
+        }
+        private void SendToast(Match match, Match.WinnerCode code)
+        {
+            switch (code)
+            {
+                case Model.Type.Match.WinnerCode.PLAYER1_EMPTY:
+                    Repository.Instance.toast.SendMessage("Please Enter Player1");
+                    break;
+                case Model.Type.Match.WinnerCode.PLAYER2_EMPTY:
+                    Repository.Instance.toast.SendMessage("Please Enter Player2");
+                    break;
+                case Model.Type.Match.WinnerCode.ALL_EMPTY:
+                    Repository.Instance.toast.SendMessage("Please Enter Player1 and Player2");
+                    break;
+                case Model.Type.Match.WinnerCode.WINNER_MATCH_NEEDS_NO_WINNER:
+                    Repository.Instance.toast.SendMessage("De-activate Winner in {0}", match.WinnerMatchName);
+                    break;
+                case Model.Type.Match.WinnerCode.LOSER_MATCH_NEEDS_NO_WINNER:
+                    Repository.Instance.toast.SendMessage("De-activate Winner in {0}", match.LoserMatchName);
+                    break;
+                case Model.Type.Match.WinnerCode.ALL_MATCH_NEEDS_NO_WINNER:
+                    Repository.Instance.toast.SendMessage("De-activate Winner in {0} and {1}", match.WinnerMatchName, match.LoserMatchName);
+                    break;
+                case Model.Type.Match.WinnerCode.SUCCESS:
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        int isExchangedWithWhatPlayer = 0;
+
+        private ICommand exchangePlayer1Command;
+        public ICommand ExchangePlayer1Command
+        {
+            get
+            {
+                return exchangePlayer1Command ?? (exchangePlayer1Command = new DelegateCommand(() =>
+                {
+                    Log.Log.V("Exchange WalkOver With Player1 button is pressed");
+                    if (L3_1_Winner != 0 || L3_2_Winner != 0)
+                    {
+                        Repository.Instance.toast.SendMessage("Please de-activate Winner of All Loser Match 3Round");
+                    }
+                    else
+                    {
+                        switch(isExchangedWithWhatPlayer)
+                        {
+                            case 0:
+                                isExchangedWithWhatPlayer = 1;
+                                break;
+                            case 1:
+                                isExchangedWithWhatPlayer = 0;
+                                break;
+                            case 2:
+                                Repository.Instance.toast.SendMessage("Please Press 부전승 <-> Player2  One more time");
+                                return;
+                        }
+                        Repository.Instance.ChangeWalkOverWithPlayer1();
+                        Repository.Instance.Refresh();
+                    }
+                }));
+            }
+        }
+
+        private ICommand exchangePlayer2Command;
+        public ICommand ExchangePlayer2Command
+        {
+            get
+            {
+                return exchangePlayer2Command ?? (exchangePlayer2Command = new DelegateCommand(() =>
+                {
+                    Log.Log.V("Exchange WalkOver With Player2 button is pressed");
+                    if (L3_1_Winner != 0 || L3_2_Winner != 0)
+                    {
+                        Repository.Instance.toast.SendMessage("Please de-activate Winner of All Loser Match 3Round");
+                    }
+                    else
+                    {
+                        switch (isExchangedWithWhatPlayer)
+                        {
+                            case 0:
+                                isExchangedWithWhatPlayer = 2;
+                                break;
+                            case 1:
+                                Repository.Instance.toast.SendMessage("Please Press 부전승 <-> Player1  One more time");
+                                return;
+                            case 2:
+                                isExchangedWithWhatPlayer = 0;
+                                break;
+                        }
+                        Repository.Instance.ChangeWalkOverWithPlayer2();
+                        Repository.Instance.Refresh();
+                    }
+
+                }));
+            }
+        }
+
         #region Winner
         #region W1_1
         public string W1_1_P1
@@ -196,27 +305,7 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
                 {
                     Log.Log.V(string.Format("WinnerMatch{0}_{1}Round {2}Player Win button is pressed", 1, 1, 1));
 
-                    if (W1_1_P1 == "")
-                    {
-                        if (W1_1_P2 == "")
-                        {
-                            Repository.Instance.toast.SendMessage("Please Enter Player1 and Player2");
-                        }
-                        else
-                        {
-                            Repository.Instance.toast.SendMessage("Please Enter Player1");
-                        }
-                        return;
-                    }
-
-                    if (W1_1_P2 == "")
-                    {
-                        Repository.Instance.toast.SendMessage("Please Enter Player2");
-                        return;
-                    }
-
-                    Repository.Instance.winnerMatch1_1.WinPlayer1();
-
+                    DetermineWinnerToPlayer1(Repository.Instance.winnerMatch1_1);
                 }));
             }
         }
@@ -229,25 +318,7 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
                 {
                     Log.Log.V(string.Format("WinnerMatch{0}_{1}Round {2}Player Win button is pressed", 1, 1, 2));
 
-                    if (W1_1_P1 == "")
-                    {
-                        if (W1_1_P2 == "")
-                        {
-                            Repository.Instance.toast.SendMessage("Please Enter Player1 and Player2");
-                        }
-                        else
-                        {
-                            Repository.Instance.toast.SendMessage("Please Enter Player1");
-                        }
-                        return;
-                    }
-                    if (W1_1_P2 == "")
-                    {
-                        Repository.Instance.toast.SendMessage("Please Enter Player2");
-                        return;
-                    }
-
-                    Repository.Instance.winnerMatch1_1.WinPlayer2();
+                    DetermineWinnerToPlayer2(Repository.Instance.winnerMatch1_1);
                 }));
             }
         }
@@ -310,24 +381,8 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
                 {
                     Log.Log.V(string.Format("WinnerMatch{0}_{1}Round {2}Player Win button is pressed", 1, 2, 1));
 
-                    if (W1_2_P1 == "")
-                    {
-                        if (W1_2_P2 == "")
-                        {
-                            Repository.Instance.toast.SendMessage("Please Enter Player1 and Player2");
-                        }
-                        else
-                        {
-                            Repository.Instance.toast.SendMessage("Please Enter Player1");
-                        }
-                        return;
-                    }
-                    if (W1_2_P2 == "")
-                    {
-                        Repository.Instance.toast.SendMessage("Please Enter Player2");
-                        return;
-                    }
-                    Repository.Instance.winnerMatch1_2.WinPlayer1();
+                    DetermineWinnerToPlayer1(Repository.Instance.winnerMatch1_2);
+
                 }));
             }
         }
@@ -340,24 +395,7 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
                 {
                     Log.Log.V(string.Format("WinnerMatch{0}_{1}Round {2}Player Win button is pressed", 1, 2, 2));
 
-                    if (W1_2_P1 == "")
-                    {
-                        if (W1_2_P2 == "")
-                        {
-                            Repository.Instance.toast.SendMessage("Please Enter Player1 and Player2");
-                        }
-                        else
-                        {
-                            Repository.Instance.toast.SendMessage("Please Enter Player1");
-                        }
-                        return;
-                    }
-                    if (W1_2_P2 == "")
-                    {
-                        Repository.Instance.toast.SendMessage("Please Enter Player2");
-                        return;
-                    }
-                    Repository.Instance.winnerMatch1_2.WinPlayer2();
+                    DetermineWinnerToPlayer2(Repository.Instance.winnerMatch1_2);
                 }));
             }
         }
@@ -420,24 +458,7 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
                 {
                     Log.Log.V(string.Format("WinnerMatch{0}_{1}Round {2}Player Win button is pressed", 1, 3, 1));
 
-                    if (W1_3_P1 == "")
-                    {
-                        if (W1_3_P2 == "")
-                        {
-                            Repository.Instance.toast.SendMessage("Please Enter Player1 and Player2");
-                        }
-                        else
-                        {
-                            Repository.Instance.toast.SendMessage("Please Enter Player1");
-                        }
-                        return;
-                    }
-                    if (W1_3_P2 == "")
-                    {
-                        Repository.Instance.toast.SendMessage("Please Enter Player2");
-                        return;
-                    }
-                    Repository.Instance.winnerMatch1_3.WinPlayer1();
+                    DetermineWinnerToPlayer1(Repository.Instance.winnerMatch1_3);
                 }));
             }
         }
@@ -450,24 +471,7 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
                 {
                     Log.Log.V(string.Format("WinnerMatch{0}_{1}Round {2}Player Win button is pressed", 1, 3, 2));
 
-                    if (W1_3_P1 == "")
-                    {
-                        if (W1_3_P2 == "")
-                        {
-                            Repository.Instance.toast.SendMessage("Please Enter Player1 and Player2");
-                        }
-                        else
-                        {
-                            Repository.Instance.toast.SendMessage("Please Enter Player1");
-                        }
-                        return;
-                    }
-                    if (W1_3_P2 == "")
-                    {
-                        Repository.Instance.toast.SendMessage("Please Enter Player2");
-                        return;
-                    }
-                    Repository.Instance.winnerMatch1_3.WinPlayer2();
+                    DetermineWinnerToPlayer2(Repository.Instance.winnerMatch1_3);
                 }));
             }
         }
@@ -531,24 +535,7 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
                 {
                     Log.Log.V(string.Format("WinnerMatch{0}_{1}Round {2}Player Win button is pressed", 1, 4, 1));
 
-                    if (W1_4_P1 == "")
-                    {
-                        if (W1_4_P2 == "")
-                        {
-                            Repository.Instance.toast.SendMessage("Please Enter Player1 and Player2");
-                        }
-                        else
-                        {
-                            Repository.Instance.toast.SendMessage("Please Enter Player1");
-                        }
-                        return;
-                    }
-                    if (W1_4_P2 == "")
-                    {
-                        Repository.Instance.toast.SendMessage("Please Enter Player2");
-                        return;
-                    }
-                    Repository.Instance.winnerMatch1_4.WinPlayer1();
+                    DetermineWinnerToPlayer1(Repository.Instance.winnerMatch1_4);
                 }));
             }
         }
@@ -560,24 +547,8 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
                 return w1_4_player2WinCommand ?? (w1_4_player2WinCommand = new DelegateCommand(() =>
                 {
                     Log.Log.V(string.Format("WinnerMatch{0}_{1}Round {2}Player Win button is pressed", 1, 4, 2));
-                    if (W1_4_P1 == "")
-                    {
-                        if (W1_4_P2 == "")
-                        {
-                            Repository.Instance.toast.SendMessage("Please Enter Player1 and Player2");
-                        }
-                        else
-                        {
-                            Repository.Instance.toast.SendMessage("Please Enter Player1");
-                        }
-                        return;
-                    }
-                    if (W1_4_P2 == "")
-                    {
-                        Repository.Instance.toast.SendMessage("Please Enter Player2");
-                        return;
-                    }
-                    Repository.Instance.winnerMatch1_4.WinPlayer2();
+
+                    DetermineWinnerToPlayer2(Repository.Instance.winnerMatch1_4);
                 }));
             }
         }
@@ -639,24 +610,8 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
                 return w2_1_player1WinCommand ?? (w2_1_player1WinCommand = new DelegateCommand(() =>
                 {
                     Log.Log.V(string.Format("WinnerMatch{0}_{1}Round {2}Player Win button is pressed", 2, 1, 1));
-                    if (W2_1_P1 == "")
-                    {
-                        if (W2_1_P2 == "")
-                        {
-                            Repository.Instance.toast.SendMessage("Please Enter Player1 and Player2");
-                        }
-                        else
-                        {
-                            Repository.Instance.toast.SendMessage("Please Enter Player1");
-                        }
-                        return;
-                    }
-                    if (W2_1_P2 == "")
-                    {
-                        Repository.Instance.toast.SendMessage("Please Enter Player2");
-                        return;
-                    }
-                    Repository.Instance.winnerMatch2_1.WinPlayer1();
+
+                    DetermineWinnerToPlayer1(Repository.Instance.winnerMatch2_1);
                 }));
             }
         }
@@ -668,24 +623,8 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
                 return w2_1_player2WinCommand ?? (w2_1_player2WinCommand = new DelegateCommand(() =>
                 {
                     Log.Log.V(string.Format("WinnerMatch{0}_{1}Round {2}Player Win button is pressed", 2, 1, 2));
-                    if (W2_1_P1 == "")
-                    {
-                        if (W2_1_P2 == "")
-                        {
-                            Repository.Instance.toast.SendMessage("Please Enter Player1 and Player2");
-                        }
-                        else
-                        {
-                            Repository.Instance.toast.SendMessage("Please Enter Player1");
-                        }
-                        return;
-                    }
-                    if (W2_1_P2 == "")
-                    {
-                        Repository.Instance.toast.SendMessage("Please Enter Player2");
-                        return;
-                    }
-                    Repository.Instance.winnerMatch2_1.WinPlayer2();
+
+                    DetermineWinnerToPlayer2(Repository.Instance.winnerMatch2_1);
                 }));
             }
         }
@@ -749,24 +688,8 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
                 return w2_2_player1WinCommand ?? (w2_2_player1WinCommand = new DelegateCommand(() =>
                 {
                     Log.Log.V(string.Format("WinnerMatch{0}_{1}Round {2}Player Win button is pressed", 2, 2, 1));
-                    if (W2_2_P1 == "")
-                    {
-                        if (W2_2_P2 == "")
-                        {
-                            Repository.Instance.toast.SendMessage("Please Enter Player1 and Player2");
-                        }
-                        else
-                        {
-                            Repository.Instance.toast.SendMessage("Please Enter Player1");
-                        }
-                        return;
-                    }
-                    if (W2_2_P2 == "")
-                    {
-                        Repository.Instance.toast.SendMessage("Please Enter Player2");
-                        return;
-                    }
-                    Repository.Instance.winnerMatch2_2.WinPlayer1();
+
+                    DetermineWinnerToPlayer1(Repository.Instance.winnerMatch2_2);
                 }));
             }
         }
@@ -779,24 +702,7 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
                 {
                     Log.Log.V(string.Format("WinnerMatch{0}_{1}Round {2}Player Win button is pressed", 2, 2, 2));
 
-                    if (W2_2_P1 == "")
-                    {
-                        if (W2_2_P2 == "")
-                        {
-                            Repository.Instance.toast.SendMessage("Please Enter Player1 and Player2");
-                        }
-                        else
-                        {
-                            Repository.Instance.toast.SendMessage("Please Enter Player1");
-                        }
-                        return;
-                    }
-                    if (W2_2_P2 == "")
-                    {
-                        Repository.Instance.toast.SendMessage("Please Enter Player2");
-                        return;
-                    }
-                    Repository.Instance.winnerMatch2_2.WinPlayer2();
+                    DetermineWinnerToPlayer2(Repository.Instance.winnerMatch2_2);
                 }));
             }
         }
@@ -861,24 +767,7 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
                 {
                     Log.Log.V(string.Format("WinnerMatch{0}_{1}Round {2}Player Win button is pressed", 3, 1, 1));
 
-                    if (W3_1_P1 == "")
-                    {
-                        if (W3_1_P2 == "")
-                        {
-                            Repository.Instance.toast.SendMessage("Please Enter Player1 and Player2");
-                        }
-                        else
-                        {
-                            Repository.Instance.toast.SendMessage("Please Enter Player1");
-                        }
-                        return;
-                    }
-                    if (W3_1_P2 == "")
-                    {
-                        Repository.Instance.toast.SendMessage("Please Enter Player2");
-                        return;
-                    }
-                    Repository.Instance.winnerMatch3_1.WinPlayer1();
+                    DetermineWinnerToPlayer1(Repository.Instance.winnerMatch3_1);
                 }));
             }
         }
@@ -890,24 +779,8 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
                 return w3_1_player2WinCommand ?? (w3_1_player2WinCommand = new DelegateCommand(() =>
                 {
                     Log.Log.V(string.Format("WinnerMatch{0}_{1}Round {2}Player Win button is pressed", 3, 1, 2));
-                    if (W3_1_P1 == "")
-                    {
-                        if (W3_1_P2 == "")
-                        {
-                            Repository.Instance.toast.SendMessage("Please Enter Player1 and Player2");
-                        }
-                        else
-                        {
-                            Repository.Instance.toast.SendMessage("Please Enter Player1");
-                        }
-                        return;
-                    }
-                    if (W3_1_P2 == "")
-                    {
-                        Repository.Instance.toast.SendMessage("Please Enter Player2");
-                        return;
-                    }
-                    Repository.Instance.winnerMatch3_1.WinPlayer2();
+
+                    DetermineWinnerToPlayer2(Repository.Instance.winnerMatch3_1);
                 }));
             }
         }
@@ -970,26 +843,7 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
                 {
                     Log.Log.V(string.Format("WinnerMatch{0}_{1}Round {2}Player Win button is pressed", 4, 1, 1));
 
-                    if (W4_1_P1 == "")
-                    {
-                        if (W4_1_P2 == "")
-                        {
-                            Repository.Instance.toast.SendMessage("Please Enter Player1 and Player2");
-                        }
-                        else
-                        {
-                            Repository.Instance.toast.SendMessage("Please Enter Player1");
-                        }
-                        return;
-                    }
-                    if (W4_1_P2 == "")
-                    {
-                        Repository.Instance.toast.SendMessage("Please Enter Player2");
-                        return;
-                    }
-
-                    
-                    Repository.Instance.winnerMatch4_1.WinPlayer1();
+                    DetermineWinnerToPlayer1(Repository.Instance.winnerMatch4_1);
                 }));
             }
         }
@@ -1002,24 +856,7 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
                 {
                     Log.Log.V(string.Format("WinnerMatch{0}_{1}Round {2}Player Win button is pressed", 4, 1, 2));
 
-                    if (W4_1_P1 == "")
-                    {
-                        if (W4_1_P2 == "")
-                        {
-                            Repository.Instance.toast.SendMessage("Please Enter Player1 and Player2");
-                        }
-                        else
-                        {
-                            Repository.Instance.toast.SendMessage("Please Enter Player1");
-                        }
-                        return;
-                    }
-                    if (W4_1_P2 == "")
-                    {
-                        Repository.Instance.toast.SendMessage("Please Enter Player2");
-                        return;
-                    }
-                    Repository.Instance.winnerMatch4_1.WinPlayer2();
+                    DetermineWinnerToPlayer2(Repository.Instance.winnerMatch4_1);
                 }));
             }
         }
@@ -1085,24 +922,7 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
                 {
                     Log.Log.V(string.Format("LoserMatch{0}_{1}Round {2}Player Win button is pressed", 1, 1, 1));
 
-                    if (L1_1_P1 == "")
-                    {
-                        if (L1_1_P2 == "")
-                        {
-                            Repository.Instance.toast.SendMessage("Please Enter Player1 and Player2");
-                        }
-                        else
-                        {
-                            Repository.Instance.toast.SendMessage("Please Enter Player1");
-                        }
-                        return;
-                    }
-                    if (L1_1_P2 == "")
-                    {
-                        Repository.Instance.toast.SendMessage("Please Enter Player2");
-                        return;
-                    }
-                    Repository.Instance.loserMatch1_1.WinPlayer1();
+                    DetermineWinnerToPlayer1(Repository.Instance.loserMatch1_1);
                 }));
             }
         }
@@ -1115,24 +935,7 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
                 {
                     Log.Log.V(string.Format("LoserMatch{0}_{1}Round {2}Player Win button is pressed", 1, 1, 2));
 
-                    if (L1_1_P1 == "")
-                    {
-                        if (L1_1_P2 == "")
-                        {
-                            Repository.Instance.toast.SendMessage("Please Enter Player1 and Player2");
-                        }
-                        else
-                        {
-                            Repository.Instance.toast.SendMessage("Please Enter Player1");
-                        }
-                        return;
-                    }
-                    if (L1_1_P2 == "")
-                    {
-                        Repository.Instance.toast.SendMessage("Please Enter Player2");
-                        return;
-                    }
-                    Repository.Instance.loserMatch1_1.WinPlayer2();
+                    DetermineWinnerToPlayer2(Repository.Instance.loserMatch1_1);
                 }));
             }
         }
@@ -1199,24 +1002,7 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
                 {
                     Log.Log.V(string.Format("LoserMatch{0}_{1}Round {2}Player Win button is pressed", 1, 2, 1));
 
-                    if (L1_2_P1 == "")
-                    {
-                        if (L1_2_P2 == "")
-                        {
-                            Repository.Instance.toast.SendMessage("Please Enter Player1 and Player2");
-                        }
-                        else
-                        {
-                            Repository.Instance.toast.SendMessage("Please Enter Player1");
-                        }
-                        return;
-                    }
-                    if (L1_2_P2 == "")
-                    {
-                        Repository.Instance.toast.SendMessage("Please Enter Player2");
-                        return;
-                    }
-                    Repository.Instance.loserMatch1_2.WinPlayer1();
+                    DetermineWinnerToPlayer1(Repository.Instance.loserMatch1_2);
                 }));
             }
         }
@@ -1229,24 +1015,7 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
                 {
                     Log.Log.V(string.Format("LoserMatch{0}_{1}Round {2}Player Win button is pressed", 1, 2, 2));
 
-                    if (L1_2_P1 == "")
-                    {
-                        if (L1_2_P2 == "")
-                        {
-                            Repository.Instance.toast.SendMessage("Please Enter Player1 and Player2");
-                        }
-                        else
-                        {
-                            Repository.Instance.toast.SendMessage("Please Enter Player1");
-                        }
-                        return;
-                    }
-                    if (L1_2_P2 == "")
-                    {
-                        Repository.Instance.toast.SendMessage("Please Enter Player2");
-                        return;
-                    }
-                    Repository.Instance.loserMatch1_2.WinPlayer2();
+                    DetermineWinnerToPlayer2(Repository.Instance.loserMatch1_2);
                 }));
             }
         }
@@ -1312,24 +1081,7 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
                 {
                     Log.Log.V(string.Format("LoserMatch{0}_{1}Round {2}Player Win button is pressed", 2, 1, 1));
 
-                    if (L2_1_P1 == "")
-                    {
-                        if (L2_1_P2 == "")
-                        {
-                            Repository.Instance.toast.SendMessage("Please Enter Player1 and Player2");
-                        }
-                        else
-                        {
-                            Repository.Instance.toast.SendMessage("Please Enter Player1");
-                        }
-                        return;
-                    }
-                    if (L2_1_P2 == "")
-                    {
-                        Repository.Instance.toast.SendMessage("Please Enter Player2");
-                        return;
-                    }
-                    Repository.Instance.loserMatch2_1.WinPlayer1();
+                    DetermineWinnerToPlayer1(Repository.Instance.loserMatch2_1);
                 }));
             }
         }
@@ -1342,24 +1094,7 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
                 {
                     Log.Log.V(string.Format("LoserMatch{0}_{1}Round {2}Player Win button is pressed", 2, 1, 2));
 
-                    if (L2_1_P1 == "")
-                    {
-                        if (L2_1_P2 == "")
-                        {
-                            Repository.Instance.toast.SendMessage("Please Enter Player1 and Player2");
-                        }
-                        else
-                        {
-                            Repository.Instance.toast.SendMessage("Please Enter Player1");
-                        }
-                        return;
-                    }
-                    if (L2_1_P2 == "")
-                    {
-                        Repository.Instance.toast.SendMessage("Please Enter Player2");
-                        return;
-                    }
-                    Repository.Instance.loserMatch2_1.WinPlayer2();
+                    DetermineWinnerToPlayer2(Repository.Instance.loserMatch2_1);
                 }));
             }
         }
@@ -1426,24 +1161,7 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
                 {
                     Log.Log.V(string.Format("LoserMatch{0}_{1}Round {2}Player Win button is pressed", 2, 2, 1));
 
-                    if (L2_2_P1 == "")
-                    {
-                        if (L2_2_P2 == "")
-                        {
-                            Repository.Instance.toast.SendMessage("Please Enter Player1 and Player2");
-                        }
-                        else
-                        {
-                            Repository.Instance.toast.SendMessage("Please Enter Player1");
-                        }
-                        return;
-                    }
-                    if (L2_2_P2 == "")
-                    {
-                        Repository.Instance.toast.SendMessage("Please Enter Player2");
-                        return;
-                    }
-                    Repository.Instance.loserMatch2_2.WinPlayer1();
+                    DetermineWinnerToPlayer1(Repository.Instance.loserMatch2_2);
                 }));
             }
         }
@@ -1456,24 +1174,7 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
                 {
                     Log.Log.V(string.Format("LoserMatch{0}_{1}Round {2}Player Win button is pressed", 2, 2, 2));
 
-                    if (L2_2_P1 == "")
-                    {
-                        if (L2_2_P2 == "")
-                        {
-                            Repository.Instance.toast.SendMessage("Please Enter Player1 and Player2");
-                        }
-                        else
-                        {
-                            Repository.Instance.toast.SendMessage("Please Enter Player1");
-                        }
-                        return;
-                    }
-                    if (L2_2_P2 == "")
-                    {
-                        Repository.Instance.toast.SendMessage("Please Enter Player2");
-                        return;
-                    }
-                    Repository.Instance.loserMatch2_2.WinPlayer2();
+                    DetermineWinnerToPlayer2(Repository.Instance.loserMatch2_2);
                 }));
             }
         }
@@ -1537,24 +1238,8 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
                 return l3_1_player1WinCommand ?? (l3_1_player1WinCommand = new DelegateCommand(() =>
                 {
                     Log.Log.V(string.Format("LoserMatch{0}_{1}Round {2}Player Win button is pressed", 3, 1, 1));
-                    if (L3_1_P1 == "")
-                    {
-                        if (L3_1_P2 == "")
-                        {
-                            Repository.Instance.toast.SendMessage("Please Enter Player1 and Player2");
-                        }
-                        else
-                        {
-                            Repository.Instance.toast.SendMessage("Please Enter Player1");
-                        }
-                        return;
-                    }
-                    if (L3_1_P2 == "")
-                    {
-                        Repository.Instance.toast.SendMessage("Please Enter Player2");
-                        return;
-                    }
-                    Repository.Instance.loserMatch3_1.WinPlayer1();
+
+                    DetermineWinnerToPlayer1(Repository.Instance.loserMatch3_1);
                 }));
             }
         }
@@ -1566,24 +1251,8 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
                 return l3_1_player2WinCommand ?? (l3_1_player2WinCommand = new DelegateCommand(() =>
                 {
                     Log.Log.V(string.Format("LoserMatch{0}_{1}Round {2}Player Win button is pressed", 3, 1, 2));
-                    if (L3_1_P1 == "")
-                    {
-                        if (L3_1_P2 == "")
-                        {
-                            Repository.Instance.toast.SendMessage("Please Enter Player1 and Player2");
-                        }
-                        else
-                        {
-                            Repository.Instance.toast.SendMessage("Please Enter Player1");
-                        }
-                        return;
-                    }
-                    if (L3_1_P2 == "")
-                    {
-                        Repository.Instance.toast.SendMessage("Please Enter Player2");
-                        return;
-                    }
-                    Repository.Instance.loserMatch3_1.WinPlayer2();
+
+                    DetermineWinnerToPlayer2(Repository.Instance.loserMatch3_1);
                 }));
             }
         }
@@ -1630,12 +1299,8 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
                 {
 
                     Log.Log.V(string.Format("LoserMatch{0}_{1}Round {2}Player Win button is pressed", 3, 2, 1));
-                    if (L3_2_P1 == "")
-                    {
-                        Repository.Instance.toast.SendMessage("Please Enter Player1");
-                        return;
-                    }
-                    Repository.Instance.loserMatch3_2.WinPlayer1();
+           
+                    DetermineWinnerToPlayer1(Repository.Instance.loserMatch3_2);
                 }));
             }
         }
@@ -1698,24 +1363,7 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
                 return l4_1_player1WinCommand ?? (l4_1_player1WinCommand = new DelegateCommand(() =>
                 {
                     Log.Log.V(string.Format("LoserMatch{0}_{1}Round {2}Player Win button is pressed", 4, 1, 1));
-                    if (L4_1_P1 == "")
-                    {
-                        if(L4_1_P2 == "")
-                        {
-                            Repository.Instance.toast.SendMessage("Please Enter Player1 and Player2");
-                        }
-                        else
-                        {
-                            Repository.Instance.toast.SendMessage("Please Enter Player1");
-                        }
-                        return;
-                    }
-                    if (L4_1_P2 == "")
-                    {
-                        Repository.Instance.toast.SendMessage("Please Enter Player2");
-                        return;
-                    }
-                    Repository.Instance.loserMatch4_1.WinPlayer1();
+                    DetermineWinnerToPlayer1(Repository.Instance.loserMatch4_1);
                 }));
             }
         }
@@ -1727,24 +1375,7 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
                 return l4_1_player2WinCommand ?? (l4_1_player2WinCommand = new DelegateCommand(() =>
                 {
                     Log.Log.V(string.Format("LoserMatch{0}_{1}Round {2}Player Win button is pressed", 4, 1, 2));
-                    if (L4_1_P1 == "")
-                    {
-                        if (L4_1_P2 == "")
-                        {
-                            Repository.Instance.toast.SendMessage("Please Enter Player1 and Player2");
-                        }
-                        else
-                        {
-                            Repository.Instance.toast.SendMessage("Please Enter Player1");
-                        }
-                        return;
-                    }
-                    if (L4_1_P2 == "")
-                    {
-                        Repository.Instance.toast.SendMessage("Please Enter Player2");
-                        return;
-                    }
-                    Repository.Instance.loserMatch4_1.WinPlayer2();
+                    DetermineWinnerToPlayer2(Repository.Instance.loserMatch4_1);
                 }));
             }
         }

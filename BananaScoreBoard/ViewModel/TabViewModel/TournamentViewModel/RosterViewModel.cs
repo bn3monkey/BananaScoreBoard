@@ -113,6 +113,22 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             }
         }
 
+
+        public string Notice
+        {
+            get
+            {
+                return "Please make 'roaster.txt' in above folder path.\n" +
+                       "Enter player name and MMR on multiple lines\n" +
+                       "as in the example below.\n\n" +
+                       "Ex)\n" +
+                       "SANS 1230\nPAPYRUS 320\nUNDYNE 400\nMETATON 380\nALPHYS 220\nASGORE 1080\nTORIEL 970\nPPAP 330\n\n" +
+                       "And Press 'Read' Button\n";
+            }
+        }
+
+
+
         public string Player0Name
         {
             get

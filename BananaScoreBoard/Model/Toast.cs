@@ -23,5 +23,11 @@ namespace BananaScoreBoard.Model
                 callback.Invoke(value);
             }
         }
+
+        public void SendMessage(string value, params object[] args)
+        {
+            string new_value = string.Format(value, args);
+            SendMessage(new_value);
+        }
     }
 }

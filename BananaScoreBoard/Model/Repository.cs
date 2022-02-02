@@ -60,22 +60,23 @@ namespace BananaScoreBoard.Model
             record = new Record();
             toast = new Toast();
 
-            winnerMatch1_1 = new Match("", "");
-            winnerMatch1_2 = new Match("", "");
-            winnerMatch1_3 = new Match("", "");
-            winnerMatch1_4 = new Match("", "");
-            winnerMatch2_1 = new Match("", "");
-            winnerMatch2_2 = new Match("", "");
-            winnerMatch3_1 = new Match("", "");
-            winnerMatch4_1 = new Match("", "");
+            winnerMatch1_1 = new Match("Qualifier 1st", "", "");
+            winnerMatch1_2 = new Match("Qualifier 2nd", "", "");
+            winnerMatch1_3 = new Match("Qualifier 3rd", "", "");
+            winnerMatch1_4 = new Match("Qualifier 4th", "", "");
+            winnerMatch2_1 = new Match("Semi-Final 1st", "", "");
+            winnerMatch2_2 = new Match("Semi-Final 2nd", "", "");
+            winnerMatch3_1 = new Match("Winner Final", "", "");
+            winnerMatch4_1 = new Match("Final", "", "");
 
-            loserMatch1_1 = new Match("", "");
-            loserMatch1_2 = new Match("", "");
-            loserMatch2_1 = new Match("", "");
-            loserMatch2_2 = new Match("", "");
-            loserMatch3_1 = new Match("", "");
-            loserMatch3_2 = new Match("", "");
-            loserMatch4_1 = new Match("", "");
+            loserMatch1_1 = new Match("Loser Match 1Round 1st", "", "");
+            loserMatch1_2 = new Match("Loser Match 1Round 2nd", "", "");
+            loserMatch2_1 = new Match("Loser Match 2Round 1st", "", "");
+            loserMatch2_2 = new Match("Loser Match 2Round 2nd", "", "");
+            loserMatch3_1 = new Match("Loser Match 3Round 1st", "", "");
+            loserMatch3_2 = new Match("Loser Match 3Round 2nd", "", "");
+            loserMatch3_2.IsOnePlayer = true;
+            loserMatch4_1 = new Match("Loser Match Final", "", "");
 
             roster = new Roster();
             tournamentFrame = new TournamentFrame();
@@ -329,6 +330,17 @@ namespace BananaScoreBoard.Model
             winnerMatch1_4.player2 = roster.players[7].name;
 
         }
+
+
+        public void ChangeWalkOverWithPlayer1()
+        {
+            winnerMatch3_1.SwitchLoserMatchToOtherWinnerMatch(loserMatch2_1);
+        }
+        public void ChangeWalkOverWithPlayer2()
+        {
+            winnerMatch3_1.SwitchLoserMatchToOtherWinnerMatch(loserMatch2_2);
+        }
+
         
 
         private static readonly Lazy<Repository> _instance = new Lazy<Repository>(() => new Repository());
