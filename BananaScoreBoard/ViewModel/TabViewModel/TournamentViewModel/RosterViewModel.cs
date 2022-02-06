@@ -118,7 +118,7 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
         {
             get
             {
-                return "Please make 'roaster.txt' in above folder path.\n" +
+                return "Please make 'roster.txt' in above folder path.\n" +
                        "Enter player name and MMR on multiple lines\n" +
                        "as in the example below.\n\n" +
                        "Ex)\n" +

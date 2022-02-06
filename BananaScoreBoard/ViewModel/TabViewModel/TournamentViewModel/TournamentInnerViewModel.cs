@@ -29,7 +29,7 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             Repository.Instance.winnerMatch2_1.SetNextMatch(Repository.Instance.winnerMatch3_1, 1, Repository.Instance.loserMatch2_1, 1);
             Repository.Instance.winnerMatch2_2.SetNextMatch(Repository.Instance.winnerMatch3_1, 2, Repository.Instance.loserMatch2_2, 1);
 
-            Repository.Instance.winnerMatch3_1.SetNextMatch(Repository.Instance.winnerMatch4_1, 1, Repository.Instance.loserMatch3_2, 1);
+            Repository.Instance.winnerMatch3_1.SetNextMatch(Repository.Instance.winnerMatch4_1, 1, Repository.Instance.loserMatch4_1, 2);
             Repository.Instance.winnerMatch4_1.SetNextMatch(null, 0, null, 0);
 
 
@@ -40,8 +40,7 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             Repository.Instance.loserMatch2_2.SetNextMatch(Repository.Instance.loserMatch3_1, 2, null, 0);
 
             Repository.Instance.loserMatch3_1.SetNextMatch(Repository.Instance.loserMatch4_1, 1, null, 0);
-            Repository.Instance.loserMatch3_2.SetNextMatch(Repository.Instance.loserMatch4_1, 2, null, 0);
-
+           
             Repository.Instance.loserMatch4_1.SetNextMatch(Repository.Instance.winnerMatch4_1, 2, null, 0);
 
             Repository.Instance.winnerMatch1_1.registerRefresher(() =>
@@ -125,11 +124,7 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
                 OnPropertyUpdate("L3_1_P2");
                 OnPropertyUpdate("L3_1_Winner");
             });
-            Repository.Instance.loserMatch3_2.registerRefresher(() =>
-            {
-                OnPropertyUpdate("L3_2_P1");
-                OnPropertyUpdate("L3_2_Winner");
-            });
+
 
             Repository.Instance.loserMatch4_1.registerRefresher(() =>
             {
@@ -178,71 +173,30 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             }
         }
 
-        int isExchangedWithWhatPlayer = 0;
-
-        private ICommand exchangePlayer1Command;
-        public ICommand ExchangePlayer1Command
+        bool isExchanged = false;
+        private ICommand exchangeCommand;
+        public ICommand ExchangeCommand
         {
             get
             {
-                return exchangePlayer1Command ?? (exchangePlayer1Command = new DelegateCommand(() =>
+                return exchangeCommand ?? (exchangeCommand = new DelegateCommand(() =>
                 {
-                    Log.Log.V("Exchange WalkOver With Player1 button is pressed");
-                    if (L3_1_Winner != 0 || L3_2_Winner != 0)
+                    Log.Log.V("Exchange Button is pressed");
+
+                    if (isExchanged)
                     {
-                        Repository.Instance.toast.SendMessage("Please de-activate Winner of All Loser Match 3Round");
+                        Repository.Instance.winnerMatch2_1.SetNextLoserMatch(Repository.Instance.loserMatch2_1, 1);
+                        Repository.Instance.winnerMatch2_2.SetNextLoserMatch(Repository.Instance.loserMatch2_2, 1);
                     }
                     else
                     {
-                        switch(isExchangedWithWhatPlayer)
-                        {
-                            case 0:
-                                isExchangedWithWhatPlayer = 1;
-                                break;
-                            case 1:
-                                isExchangedWithWhatPlayer = 0;
-                                break;
-                            case 2:
-                                Repository.Instance.toast.SendMessage("Please Press 부전승 <-> Player2  One more time");
-                                return;
-                        }
-                        Repository.Instance.ChangeWalkOverWithPlayer1();
-                        Repository.Instance.Refresh();
+                        Repository.Instance.winnerMatch2_1.SetNextLoserMatch(Repository.Instance.loserMatch2_2, 1);
+                        Repository.Instance.winnerMatch2_2.SetNextLoserMatch(Repository.Instance.loserMatch2_1, 1);
                     }
-                }));
-            }
-        }
+                    isExchanged = !isExchanged;
 
-        private ICommand exchangePlayer2Command;
-        public ICommand ExchangePlayer2Command
-        {
-            get
-            {
-                return exchangePlayer2Command ?? (exchangePlayer2Command = new DelegateCommand(() =>
-                {
-                    Log.Log.V("Exchange WalkOver With Player2 button is pressed");
-                    if (L3_1_Winner != 0 || L3_2_Winner != 0)
-                    {
-                        Repository.Instance.toast.SendMessage("Please de-activate Winner of All Loser Match 3Round");
-                    }
-                    else
-                    {
-                        switch (isExchangedWithWhatPlayer)
-                        {
-                            case 0:
-                                isExchangedWithWhatPlayer = 2;
-                                break;
-                            case 1:
-                                Repository.Instance.toast.SendMessage("Please Press 부전승 <-> Player1  One more time");
-                                return;
-                            case 2:
-                                isExchangedWithWhatPlayer = 0;
-                                break;
-                        }
-                        Repository.Instance.ChangeWalkOverWithPlayer2();
-                        Repository.Instance.Refresh();
-                    }
-
+                    Repository.Instance.loserMatch2_1.Refresh();
+                    Repository.Instance.loserMatch2_2.Refresh();
                 }));
             }
         }
@@ -253,14 +207,14 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
         {
             get
             {
-                return Repository.Instance.winnerMatch1_1.player1;
+                return Repository.Instance.winnerMatch1_1.Player1;
             }
             set
             {
                 Log.Log.V(string.Format("Change WinnerMatch({0}) {1}Round Player{2} : {3} -> {4}",
                     1, 1, 1, 
-                    Repository.Instance.winnerMatch1_1.player1, value));
-                Repository.Instance.winnerMatch1_1.player1 = value;
+                    Repository.Instance.winnerMatch1_1.Player1, value));
+                Repository.Instance.winnerMatch1_1.Player1 = value;
                 OnPropertyUpdate("W1_1_P1");
             }
         }
@@ -268,14 +222,14 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
         {
             get
             {
-                return Repository.Instance.winnerMatch1_1.player2;
+                return Repository.Instance.winnerMatch1_1.Player2;
             }
             set
             {
                 Log.Log.V(string.Format("Change WinnerMatch({0}) {1}Round Player{2} : {3} -> {4}",
                     1, 1, 2,
-                    Repository.Instance.winnerMatch1_1.player2, value));
-                Repository.Instance.winnerMatch1_1.player2 = value;
+                    Repository.Instance.winnerMatch1_1.Player2, value));
+                Repository.Instance.winnerMatch1_1.Player2 = value;
                 OnPropertyUpdate("W1_1_P2");
             }
         }
@@ -329,14 +283,14 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
         {
             get
             {
-                return Repository.Instance.winnerMatch1_2.player1;
+                return Repository.Instance.winnerMatch1_2.Player1;
             }
             set
             {
                 Log.Log.V(string.Format("Change WinnerMatch({0}) {1}Round Player{2} : {3} -> {4}",
                    1, 2, 1,
-                   Repository.Instance.winnerMatch1_2.player1, value));
-                Repository.Instance.winnerMatch1_2.player1 = value;
+                   Repository.Instance.winnerMatch1_2.Player1, value));
+                Repository.Instance.winnerMatch1_2.Player1 = value;
                 OnPropertyUpdate("W1_2_P1");
             }
         }
@@ -344,14 +298,14 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
         {
             get
             {
-                return Repository.Instance.winnerMatch1_2.player2;
+                return Repository.Instance.winnerMatch1_2.Player2;
             }
             set
             {
                 Log.Log.V(string.Format("Change WinnerMatch({0}) {1}Round Player{2} : {3} -> {4}",
                    1, 2, 2,
-                   Repository.Instance.winnerMatch1_2.player2, value));
-                Repository.Instance.winnerMatch1_2.player2 = value;
+                   Repository.Instance.winnerMatch1_2.Player2, value));
+                Repository.Instance.winnerMatch1_2.Player2 = value;
                 OnPropertyUpdate("W1_2_P2");
             }
         }
@@ -406,14 +360,14 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
         {
             get
             {
-                return Repository.Instance.winnerMatch1_3.player1;
+                return Repository.Instance.winnerMatch1_3.Player1;
             }
             set
             {
                 Log.Log.V(string.Format("Change WinnerMatch({0}) {1}Round Player{2} : {3} -> {4}",
                    1, 3, 1,
-                   Repository.Instance.winnerMatch1_3.player1, value));
-                Repository.Instance.winnerMatch1_3.player1 = value;
+                   Repository.Instance.winnerMatch1_3.Player1, value));
+                Repository.Instance.winnerMatch1_3.Player1 = value;
                 OnPropertyUpdate("W1_3_P1");
             }
         }
@@ -421,14 +375,14 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
         {
             get
             {
-                return Repository.Instance.winnerMatch1_3.player2;
+                return Repository.Instance.winnerMatch1_3.Player2;
             }
             set
             {
                 Log.Log.V(string.Format("Change WinnerMatch({0}) {1}Round Player{2} : {3} -> {4}",
                    1, 3, 2,
-                   Repository.Instance.winnerMatch1_3.player2, value));
-                Repository.Instance.winnerMatch1_3.player2 = value;
+                   Repository.Instance.winnerMatch1_3.Player2, value));
+                Repository.Instance.winnerMatch1_3.Player2 = value;
                 OnPropertyUpdate("W1_3_P2");
             }
         }
@@ -482,15 +436,15 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
         {
             get
             {
-                return Repository.Instance.winnerMatch1_4.player1;
+                return Repository.Instance.winnerMatch1_4.Player1;
             }
             set
             {
                 Log.Log.V(string.Format("Change WinnerMatch({0}) {1}Round Player{2} : {3} -> {4}",
                    1, 4, 1,
-                   Repository.Instance.winnerMatch1_4.player1, value));
+                   Repository.Instance.winnerMatch1_4.Player1, value));
 
-                Repository.Instance.winnerMatch1_4.player1 = value;
+                Repository.Instance.winnerMatch1_4.Player1 = value;
                 OnPropertyUpdate("W1_4_P1");
             }
         }
@@ -498,14 +452,14 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
         {
             get
             {
-                return Repository.Instance.winnerMatch1_4.player2;
+                return Repository.Instance.winnerMatch1_4.Player2;
             }
             set
             {
                 Log.Log.V(string.Format("Change WinnerMatch({0}) {1}Round Player{2} : {3} -> {4}",
                    1, 4, 2,
-                   Repository.Instance.winnerMatch1_4.player2, value));
-                Repository.Instance.winnerMatch1_4.player2 = value;
+                   Repository.Instance.winnerMatch1_4.Player2, value));
+                Repository.Instance.winnerMatch1_4.Player2 = value;
                 OnPropertyUpdate("W1_4_P2");
             }
         }
@@ -559,14 +513,14 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
         {
             get
             {
-                return Repository.Instance.winnerMatch2_1.player1;
+                return Repository.Instance.winnerMatch2_1.Player1;
             }
             set
             {
                 Log.Log.V(string.Format("Change WinnerMatch({0}) {1}Round Player{2} : {3} -> {4}",
                    2, 1, 1,
-                   Repository.Instance.winnerMatch2_1.player1, value));
-                Repository.Instance.winnerMatch2_1.player1 = value;
+                   Repository.Instance.winnerMatch2_1.Player1, value));
+                Repository.Instance.winnerMatch2_1.Player1 = value;
                 OnPropertyUpdate("W2_1_P1");
             }
         }
@@ -574,14 +528,14 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
         {
             get
             {
-                return Repository.Instance.winnerMatch2_1.player2;
+                return Repository.Instance.winnerMatch2_1.Player2;
             }
             set
             {
                 Log.Log.V(string.Format("Change WinnerMatch({0}) {1}Round Player{2} : {3} -> {4}",
                    2, 1, 2,
-                   Repository.Instance.winnerMatch2_1.player2, value));
-                Repository.Instance.winnerMatch2_1.player2 = value;
+                   Repository.Instance.winnerMatch2_1.Player2, value));
+                Repository.Instance.winnerMatch2_1.Player2 = value;
                 OnPropertyUpdate("W2_1_P2");
             }
         }
@@ -635,15 +589,15 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
         {
             get
             {
-                return Repository.Instance.winnerMatch2_2.player1;
+                return Repository.Instance.winnerMatch2_2.Player1;
             }
             set
             {
                 Log.Log.V(string.Format("Change WinnerMatch({0}) {1}Round Player{2} : {3} -> {4}",
                    2, 2, 1,
-                   Repository.Instance.winnerMatch2_2.player1, value));
+                   Repository.Instance.winnerMatch2_2.Player1, value));
 
-                Repository.Instance.winnerMatch2_2.player1 = value;
+                Repository.Instance.winnerMatch2_2.Player1 = value;
                 OnPropertyUpdate("W2_2_P1");
             }
         }
@@ -651,14 +605,14 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
         {
             get
             {
-                return Repository.Instance.winnerMatch2_2.player2;
+                return Repository.Instance.winnerMatch2_2.Player2;
             }
             set
             {
                 Log.Log.V(string.Format("Change WinnerMatch({0}) {1}Round Player{2} : {3} -> {4}",
                    2, 2, 2,
-                   Repository.Instance.winnerMatch2_2.player2, value));
-                Repository.Instance.winnerMatch2_2.player2 = value;
+                   Repository.Instance.winnerMatch2_2.Player2, value));
+                Repository.Instance.winnerMatch2_2.Player2 = value;
                 OnPropertyUpdate("W2_2_P2");
             }
         }
@@ -713,15 +667,15 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
         {
             get
             {
-                return Repository.Instance.winnerMatch3_1.player1;
+                return Repository.Instance.winnerMatch3_1.Player1;
             }
             set
             {
                 Log.Log.V(string.Format("Change WinnerMatch({0}) {1}Round Player{2} : {3} -> {4}",
                    3, 1, 1,
-                   Repository.Instance.winnerMatch3_1.player1, value));
+                   Repository.Instance.winnerMatch3_1.Player1, value));
 
-                Repository.Instance.winnerMatch3_1.player1 = value;
+                Repository.Instance.winnerMatch3_1.Player1 = value;
                 OnPropertyUpdate("W3_1_P1");
             }
         }
@@ -729,15 +683,15 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
         {
             get
             {
-                return Repository.Instance.winnerMatch3_1.player2;
+                return Repository.Instance.winnerMatch3_1.Player2;
             }
             set
             {
 
                 Log.Log.V(string.Format("Change WinnerMatch({0}) {1}Round Player{2} : {3} -> {4}",
                                    3, 1, 2,
-                                   Repository.Instance.winnerMatch3_1.player2, value));
-                Repository.Instance.winnerMatch3_1.player2 = value;
+                                   Repository.Instance.winnerMatch3_1.Player2, value));
+                Repository.Instance.winnerMatch3_1.Player2 = value;
                 OnPropertyUpdate("W3_1_P2");
             }
         }
@@ -791,14 +745,14 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
         {
             get
             {
-                return Repository.Instance.winnerMatch4_1.player1;
+                return Repository.Instance.winnerMatch4_1.Player1;
             }
             set
             {
                 Log.Log.V(string.Format("Change WinnerMatch({0}) {1}Round Player{2} : {3} -> {4}",
                    4, 1, 1,
-                   Repository.Instance.winnerMatch4_1.player1, value));
-                Repository.Instance.winnerMatch4_1.player1 = value;
+                   Repository.Instance.winnerMatch4_1.Player1, value));
+                Repository.Instance.winnerMatch4_1.Player1 = value;
                 OnPropertyUpdate("W4_1_P1");
             }
         }
@@ -806,14 +760,14 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
         {
             get
             {
-                return Repository.Instance.winnerMatch4_1.player2;
+                return Repository.Instance.winnerMatch4_1.Player2;
             }
             set
             {
                 Log.Log.V(string.Format("Change WinnerMatch({0}) {1}Round Player{2} : {3} -> {4}",
                    4, 1, 2,
-                   Repository.Instance.winnerMatch4_1.player2, value));
-                Repository.Instance.winnerMatch4_1.player2 = value;
+                   Repository.Instance.winnerMatch4_1.Player2, value));
+                Repository.Instance.winnerMatch4_1.Player2 = value;
                 OnPropertyUpdate("W4_1_P2");
             }
         }
@@ -869,14 +823,14 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
         {
             get
             {
-                return Repository.Instance.loserMatch1_1.player1;
+                return Repository.Instance.loserMatch1_1.Player1;
             }
             set
             {
                 Log.Log.V(string.Format("Change LoserMatch({0}) {1}Round Player{2} : {3} -> {4}",
                    1, 1, 1,
-                   Repository.Instance.loserMatch1_1.player1, value));
-                Repository.Instance.loserMatch1_1.player1 = value;
+                   Repository.Instance.loserMatch1_1.Player1, value));
+                Repository.Instance.loserMatch1_1.Player1 = value;
                 OnPropertyUpdate("L1_1_P1");
             }
         }
@@ -884,15 +838,15 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
         {
             get
             {
-                return Repository.Instance.loserMatch1_1.player2;
+                return Repository.Instance.loserMatch1_1.Player2;
             }
             set
             {
 
                 Log.Log.V(string.Format("Change LoserMatch({0}) {1}Round Player{2} : {3} -> {4}",
                                    1, 1, 2,
-                                   Repository.Instance.loserMatch1_1.player2, value));
-                Repository.Instance.loserMatch1_1.player2 = value;
+                                   Repository.Instance.loserMatch1_1.Player2, value));
+                Repository.Instance.loserMatch1_1.Player2 = value;
                 OnPropertyUpdate("L1_1_P2");
             }
         }
@@ -946,15 +900,15 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
         {
             get
             {
-                return Repository.Instance.loserMatch1_2.player1;
+                return Repository.Instance.loserMatch1_2.Player1;
             }
             set
             {
                 Log.Log.V(string.Format("Change LoserMatch({0}) {1}Round Player{2} : {3} -> {4}",
                    1, 2, 1,
-                   Repository.Instance.loserMatch1_2.player1, value));
+                   Repository.Instance.loserMatch1_2.Player1, value));
 
-                Repository.Instance.loserMatch1_2.player1 = value;
+                Repository.Instance.loserMatch1_2.Player1 = value;
                 OnPropertyUpdate("W1_2_P1");
             }
         }
@@ -962,16 +916,16 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
         {
             get
             {
-                return Repository.Instance.loserMatch1_2.player2;
+                return Repository.Instance.loserMatch1_2.Player2;
             }
             set
             {
                 Log.Log.V(string.Format("Change LoserMatch({0}) {1}Round Player{2} : {3} -> {4}",
                    1, 2, 2,
-                   Repository.Instance.loserMatch1_2.player2, value));
+                   Repository.Instance.loserMatch1_2.Player2, value));
 
 
-                Repository.Instance.loserMatch1_2.player2 = value;
+                Repository.Instance.loserMatch1_2.Player2 = value;
                 OnPropertyUpdate("L1_2_P2");
             }
         }
@@ -1026,15 +980,15 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
         {
             get
             {
-                return Repository.Instance.loserMatch2_1.player1;
+                return Repository.Instance.loserMatch2_1.Player1;
             }
             set
             {
                 Log.Log.V(string.Format("Change LoserMatch({0}) {1}Round Player{2} : {3} -> {4}",
                    2, 1, 1,
-                   Repository.Instance.loserMatch2_1.player1, value));
+                   Repository.Instance.loserMatch2_1.Player1, value));
 
-                Repository.Instance.loserMatch2_1.player1 = value;
+                Repository.Instance.loserMatch2_1.Player1 = value;
                 OnPropertyUpdate("L2_1_P1");
             }
         }
@@ -1042,15 +996,15 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
         {
             get
             {
-                return Repository.Instance.loserMatch2_1.player2;
+                return Repository.Instance.loserMatch2_1.Player2;
             }
             set
             {
                 Log.Log.V(string.Format("Change LoserMatch({0}) {1}Round Player{2} : {3} -> {4}",
                    2, 1, 2,
-                   Repository.Instance.loserMatch2_1.player2, value));
+                   Repository.Instance.loserMatch2_1.Player2, value));
 
-                Repository.Instance.loserMatch2_1.player2 = value;
+                Repository.Instance.loserMatch2_1.Player2 = value;
                 OnPropertyUpdate("L2_1_P2");
             }
         }
@@ -1105,15 +1059,15 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
         {
             get
             {
-                return Repository.Instance.loserMatch2_2.player1;
+                return Repository.Instance.loserMatch2_2.Player1;
             }
             set
             {
                 Log.Log.V(string.Format("Change LoserMatch({0}) {1}Round Player{2} : {3} -> {4}",
                    2, 2, 1,
-                   Repository.Instance.loserMatch2_2.player1, value));
+                   Repository.Instance.loserMatch2_2.Player1, value));
 
-                Repository.Instance.loserMatch2_2.player1 = value;
+                Repository.Instance.loserMatch2_2.Player1 = value;
                 OnPropertyUpdate("L2_2_P1");
             }
         }
@@ -1121,16 +1075,16 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
         {
             get
             {
-                return Repository.Instance.loserMatch2_2.player2;
+                return Repository.Instance.loserMatch2_2.Player2;
             }
             set
             {
                 Log.Log.V(string.Format("Change LoserMatch({0}) {1}Round Player{2} : {3} -> {4}",
                    2, 2, 2,
-                   Repository.Instance.loserMatch2_2.player2, value));
+                   Repository.Instance.loserMatch2_2.Player2, value));
 
 
-                Repository.Instance.loserMatch2_2.player2 = value;
+                Repository.Instance.loserMatch2_2.Player2 = value;
                 OnPropertyUpdate("L2_2_P2");
             }
         }
@@ -1185,15 +1139,15 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
         {
             get
             {
-                return Repository.Instance.loserMatch3_1.player1;
+                return Repository.Instance.loserMatch3_1.Player1;
             }
             set
             {
                 Log.Log.V(string.Format("Change LoserMatch({0}) {1}Round Player{2} : {3} -> {4}",
                    3, 1, 1,
-                   Repository.Instance.loserMatch3_1.player1, value));
+                   Repository.Instance.loserMatch3_1.Player1, value));
 
-                Repository.Instance.loserMatch3_1.player1 = value;
+                Repository.Instance.loserMatch3_1.Player1 = value;
                 OnPropertyUpdate("L3_1_P1");
             }
         }
@@ -1201,14 +1155,14 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
         {
             get
             {
-                return Repository.Instance.loserMatch3_1.player2;
+                return Repository.Instance.loserMatch3_1.Player2;
             }
             set
             {
                 Log.Log.V(string.Format("Change LoserMatch({0}) {1}Round Player{2} : {3} -> {4}",
                    3, 1, 2,
-                   Repository.Instance.loserMatch3_1.player2, value));
-                Repository.Instance.loserMatch3_1.player2 = value;
+                   Repository.Instance.loserMatch3_1.Player2, value));
+                Repository.Instance.loserMatch3_1.Player2 = value;
                 OnPropertyUpdate("L3_1_P2");
             }
         }
@@ -1258,68 +1212,19 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
         }
         #endregion
 
-        #region L3_2
-        public string L3_2_P1
-        {
-            get
-            {
-                return Repository.Instance.loserMatch3_2.player1;
-            }
-            set
-            {
-                Log.Log.V(string.Format("Change LoserMatch({0}) {1}Round Player{2} : {3} -> {4}",
-                   3, 2, 1,
-                   Repository.Instance.loserMatch3_2.player1, value));
-                Repository.Instance.loserMatch3_2.player1 = value;
-                OnPropertyUpdate("L3_2_P1");
-            }
-        }
-        public int L3_2_Winner
-        {
-            get
-            {
-                return Repository.Instance.loserMatch3_2.winner;
-            }
-            set
-            {
-                Log.Log.V(string.Format("Change LoserMatch({0}) {1}Round Winner : Player{2} -> Player{3}",
-                                   3, 2,
-                                   Repository.Instance.loserMatch3_2.winner, value));
-                Repository.Instance.loserMatch3_2.winner = value;
-                OnPropertyUpdate("L3_2_Winner");
-            }
-        }
-
-        private ICommand l3_2_player1WinCommand;
-        public ICommand L3_2_Player1WinCommand
-        {
-            get
-            {
-                return l3_2_player1WinCommand ?? (l3_2_player1WinCommand = new DelegateCommand(() =>
-                {
-
-                    Log.Log.V(string.Format("LoserMatch{0}_{1}Round {2}Player Win button is pressed", 3, 2, 1));
-           
-                    DetermineWinnerToPlayer1(Repository.Instance.loserMatch3_2);
-                }));
-            }
-        }
-
-        #endregion
-
         #region L4_1
         public string L4_1_P1
         {
             get
             {
-                return Repository.Instance.loserMatch4_1.player1;
+                return Repository.Instance.loserMatch4_1.Player1;
             }
             set
             {
                 Log.Log.V(string.Format("Change LoserMatch({0}) {1}Round Player{2} : {3} -> {4}",
                    4, 1, 1,
-                   Repository.Instance.loserMatch4_1.player1, value));
-                Repository.Instance.loserMatch4_1.player1 = value;
+                   Repository.Instance.loserMatch4_1.Player1, value));
+                Repository.Instance.loserMatch4_1.Player1 = value;
                 OnPropertyUpdate("L4_1_P1");
             }
         }
@@ -1327,14 +1232,14 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
         {
             get
             {
-                return Repository.Instance.loserMatch4_1.player2;
+                return Repository.Instance.loserMatch4_1.Player2;
             }
             set
             {
                 Log.Log.V(string.Format("Change LoserMatch({0}) {1}Round Player{2} : {3} -> {4}",
                     4, 1, 2,
-                    Repository.Instance.loserMatch4_1.player2, value));
-                Repository.Instance.loserMatch4_1.player2 = value;
+                    Repository.Instance.loserMatch4_1.Player2, value));
+                Repository.Instance.loserMatch4_1.Player2 = value;
                 OnPropertyUpdate("L4_1_P2");
             }
         }

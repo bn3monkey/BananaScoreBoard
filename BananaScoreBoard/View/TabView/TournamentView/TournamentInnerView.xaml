@@ -34,6 +34,7 @@
                 <TextBlock Text="승자 준결승" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 <control:MatchNode x:Name="w2_1" Title="4강 1차" ReadOnly="True" Player1WinCommand="{Binding W2_1_Player1WinCommand}" Player2WinCommand="{Binding W2_1_Player2WinCommand}" Player1="{Binding W2_1_P1}" Player2="{Binding W2_1_P2}" Winner="{Binding W2_1_Winner}"/>
                 <control:MatchNode x:Name="w2_2" Title="4강 2차" ReadOnly="True" Player1WinCommand="{Binding W2_2_Player1WinCommand}" Player2WinCommand="{Binding W2_2_Player2WinCommand}" Player1="{Binding W2_2_P1}" Player2="{Binding W2_2_P2}" Winner="{Binding W2_2_Winner}"/>
+                <Button x:Name="exchangeButton" Margin="5, 15 ,10, 5" Padding ="5, 5, 5, 5" Content="패자 라운드 교체" Command="{Binding ExchangeCommand}"/>
             </StackPanel>
         </Grid>
         <Grid Grid.Row="0" Grid.Column="2">
@@ -66,9 +67,6 @@
             <StackPanel Margin="10">
                 <TextBlock Text="패자 3라운드" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 <control:MatchNode x:Name="l3_1" Title="패자 3라운드" ReadOnly="True" Player1WinCommand="{Binding L3_1_Player1WinCommand}" Player2WinCommand="{Binding L3_1_Player2WinCommand}" Player1="{Binding L3_1_P1}" Player2="{Binding L3_1_P2}" Winner="{Binding L3_1_Winner}"/>
-                <control:MatchNode x:Name="l3_2" Title="패자 부전승" IsOnePlayer="True" ReadOnly="True" Player1WinCommand="{Binding L3_2_Player1WinCommand}" Player1="{Binding L3_2_P1}" Player2="{Binding L3_2_P2}" Winner="{Binding L3_2_Winner}"/>
-                <Button x:Name="ExchangePlayer1" Margin="3, 3, 3, 3" Content="부전승 ↔ Player1" Command="{Binding ExchangePlayer1Command}"/>
-                <Button x:Name="ExchangePlayer2" Margin="3, 3, 3, 3" Content="부전승 ↔ Player2" Command="{Binding ExchangePlayer2Command}"/>
             </StackPanel>
         </Grid>
         <Grid Grid.Row="1" Grid.Column="3">

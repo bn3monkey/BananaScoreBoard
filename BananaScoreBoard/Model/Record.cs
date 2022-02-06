@@ -171,9 +171,16 @@ namespace BananaScoreBoard.Model
             local_name_lock.Wait();
 
             string ret = "";
-            using(StreamReader reader = File.OpenText(full_path))
+            try
             {
-                ret =  reader.ReadLine();
+                using (StreamReader reader = File.OpenText(full_path))
+                {
+                    ret = reader.ReadLine();
+                }
+            }
+            catch(Exception e)
+            {
+                // Do Nothing
             }
 
             local_name_lock.Release();
@@ -187,9 +194,16 @@ namespace BananaScoreBoard.Model
             full_path += filename;
 
             string ret = "";
-            using (StreamReader reader = File.OpenText(full_path))
+            try
             {
-                ret = reader.ReadLine();
+                using (StreamReader reader = File.OpenText(full_path))
+                {
+                    ret = reader.ReadLine();
+                }
+            }
+            catch (Exception e)
+            {
+                // Do Nothing
             }
             return ret;
         }
@@ -201,9 +215,16 @@ namespace BananaScoreBoard.Model
             full_path += filename;
 
             string ret = "";
-            using (StreamReader reader = File.OpenText(full_path))
+            try
             {
-                ret = reader.ReadToEnd();
+                using (StreamReader reader = File.OpenText(full_path))
+                {
+                    ret = reader.ReadToEnd();
+                }
+            }
+            catch(Exception e)
+            {
+                // Do Nothing
             }
             return ret;
         }
@@ -217,9 +238,16 @@ namespace BananaScoreBoard.Model
             SemaphoreSlim local_name_lock = name_lock[name];
             local_name_lock.Wait();
 
-            using (StreamWriter writer = File.CreateText(full_path))
+            try
+            { 
+                using (StreamWriter writer = File.CreateText(full_path))
+                {
+                    writer.WriteLine(value);
+                }
+            }
+            catch (Exception e)
             {
-                writer.WriteLine(value);
+                // Do Nothing
             }
 
             local_name_lock.Release();
@@ -231,11 +259,18 @@ namespace BananaScoreBoard.Model
             full_path += "\\";
             full_path += filename;
 
-            using (StreamWriter writer = File.CreateText(full_path))
+            try
             {
-                writer.WriteLine(value);
+                using (StreamWriter writer = File.CreateText(full_path))
+                {
+                    writer.WriteLine(value);
+                }
             }
-        }
+            catch(Exception e)
+            {
+                // Do Nothing
+            }
+}
 
         public int ReadInt(string filename)
         {
@@ -244,16 +279,23 @@ namespace BananaScoreBoard.Model
             full_path += filename;
 
             int ret = 0;
-            using (StreamReader reader = File.OpenText(full_path))
+            try
             {
-                string result = reader.ReadLine();
-                try
+                using (StreamReader reader = File.OpenText(full_path))
                 {
-                    ret = Int32.Parse(result);
+                    string result = reader.ReadLine();
+                    try
+                    {
+                        ret = Int32.Parse(result);
+                    }
+                    catch
+                    {
+                    }
                 }
-                catch
-                {
-                }
+            }
+            catch(Exception e)
+            {
+                // Do Nothing
             }
             return ret;
         }
@@ -270,16 +312,23 @@ namespace BananaScoreBoard.Model
             local_name_lock.Wait();
 
             int ret = 0;
-            using (StreamReader reader = File.OpenText(full_path))
+            try
+            { 
+                using (StreamReader reader = File.OpenText(full_path))
+                {
+                    string result = reader.ReadLine();
+                    try
+                    {
+                        ret = Int32.Parse(result);
+                    }
+                    catch
+                    {
+                    }
+                }
+            }
+            catch (Exception e)
             {
-                string result = reader.ReadLine();
-                try
-                {
-                    ret = Int32.Parse(result);
-                }
-                catch
-                {
-                }
+                // Do Nothing
             }
 
             local_name_lock.Release();
@@ -292,10 +341,17 @@ namespace BananaScoreBoard.Model
             full_path += "\\";
             full_path += filename;
 
-            using (StreamWriter writer = File.CreateText(full_path))
+            try
+            { 
+                using (StreamWriter writer = File.CreateText(full_path))
+                {
+                    string result = value.ToString();
+                    writer.WriteLine(result);
+                }
+            }
+            catch (Exception e)
             {
-                string result = value.ToString();
-                writer.WriteLine(result);
+                // Do Nothing
             }
 
         }
@@ -308,10 +364,17 @@ namespace BananaScoreBoard.Model
             SemaphoreSlim local_name_lock = name_lock[name];
             local_name_lock.Wait();
 
-            using (StreamWriter writer = File.CreateText(full_path))
+            try
+            { 
+                using (StreamWriter writer = File.CreateText(full_path))
+                {
+                    string result = value.ToString();
+                    writer.WriteLine(result);
+                }
+            }
+            catch (Exception e)
             {
-                string result = value.ToString();
-                writer.WriteLine(result);
+                // Do Nothing
             }
 
             local_name_lock.Release();
@@ -328,26 +391,33 @@ namespace BananaScoreBoard.Model
 
             int minute = 0;
             int second = 0;
-            using (StreamReader reader = File.OpenText(full_path))
-            {
-                string result = reader.ReadLine();
-                char[] delimeters = { ':' };
-                string[] times = result.Split(delimeters);
-                if (times.Length == 2)
+            try
+            { 
+                using (StreamReader reader = File.OpenText(full_path))
                 {
-                    try
+                    string result = reader.ReadLine();
+                    char[] delimeters = { ':' };
+                    string[] times = result.Split(delimeters);
+                    if (times.Length == 2)
                     {
-                        minute = Int32.Parse(times[0]);
-                        second = Int32.Parse(times[1]);
-                        if (second < 0 && second >= 60)
-                            second = 0;
-                    }
-                    catch (Exception e)
-                    {
-                        // Do Nothing
-                    }
+                        try
+                        {
+                            minute = Int32.Parse(times[0]);
+                            second = Int32.Parse(times[1]);
+                            if (second < 0 && second >= 60)
+                                second = 0;
+                        }
+                        catch (Exception e)
+                        {
+                            // Do Nothing
+                        }
 
+                    }
                 }
+            }
+            catch (Exception e)
+            {
+                // Do Nothing
             }
 
             local_name_lock.Release();
@@ -363,13 +433,20 @@ namespace BananaScoreBoard.Model
             SemaphoreSlim local_name_lock = name_lock[Name.Timer];
             local_name_lock.Wait();
 
-            using (StreamWriter writer = File.CreateText(full_path))
-            {
-                String minute_str = minute.ToString("D2");
-                String second_str = second.ToString("D2");
+            try
+            { 
+                using (StreamWriter writer = File.CreateText(full_path))
+                {
+                    String minute_str = minute.ToString("D2");
+                    String second_str = second.ToString("D2");
 
-                String value = minute_str + ":" + second_str;
-                writer.WriteLine(value);
+                    String value = minute_str + ":" + second_str;
+                    writer.WriteLine(value);
+                }
+            }
+            catch (Exception e)
+            {
+                // Do Nothing
             }
 
             local_name_lock.Release();
