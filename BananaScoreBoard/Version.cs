@@ -10,7 +10,7 @@ namespace BananaScoreBoard
     {
         private static string major = "1";
         private static string minor = "1";
-        private static string revision = "0";
+        private static string revision = "1";
         public static string get()
         {
             return string.Format("V{0}.{1}.{2}", major, minor, revision); 

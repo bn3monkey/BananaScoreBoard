@@ -1,12 +1,7 @@
 ﻿using BananaScoreBoard.Auxiliary;
 using BananaScoreBoard.Model;
-using BananaScoreBoard.Model.Type;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
@@ -30,7 +25,8 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             Repository.Instance.winnerMatch2_2.SetNextMatch(Repository.Instance.winnerMatch3_1, 2, Repository.Instance.loserMatch2_2, 1);
 
             Repository.Instance.winnerMatch3_1.SetNextMatch(Repository.Instance.winnerMatch4_1, 1, Repository.Instance.loserMatch4_1, 2);
-            Repository.Instance.winnerMatch4_1.SetNextMatch(null, 0, null, 0);
+            Repository.Instance.winnerMatch4_1.SetNextMatch(Repository.Instance.winnerMatch5_1, 1, Repository.Instance.winnerMatch5_1, 2);
+            Repository.Instance.winnerMatch5_1.SetNextMatch(null, 0, null, 0);
 
 
             Repository.Instance.loserMatch1_1.SetNextMatch(Repository.Instance.loserMatch2_1, 2, null, 0);
@@ -47,82 +43,103 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             {
                 OnPropertyUpdate("W1_1_P1");
                 OnPropertyUpdate("W1_1_P2");
-                OnPropertyUpdate("W1_1_Winner");
+                OnPropertyUpdate("W1_1_P1_Score");
+                OnPropertyUpdate("W1_1_P2_Score");
             });
             Repository.Instance.winnerMatch1_2.registerRefresher(() =>
             {
                 OnPropertyUpdate("W1_2_P1");
                 OnPropertyUpdate("W1_2_P2");
-                OnPropertyUpdate("W1_2_Winner");
+                OnPropertyUpdate("W1_2_P1_Score");
+                OnPropertyUpdate("W1_2_P2_Score");
             });
             Repository.Instance.winnerMatch1_3.registerRefresher(() =>
             {
                 OnPropertyUpdate("W1_3_P1");
                 OnPropertyUpdate("W1_3_P2");
-                OnPropertyUpdate("W1_3_Winner");
+                OnPropertyUpdate("W1_3_P1_Score");
+                OnPropertyUpdate("W1_3_P2_Score");
             });
             Repository.Instance.winnerMatch1_4.registerRefresher(() =>
             {
                 OnPropertyUpdate("W1_4_P1");
                 OnPropertyUpdate("W1_4_P2");
-                OnPropertyUpdate("W1_4_Winner");
+                OnPropertyUpdate("W1_4_P1_Score");
+                OnPropertyUpdate("W1_4_P2_Score");
             });
             Repository.Instance.winnerMatch2_1.registerRefresher(() =>
             {
                 OnPropertyUpdate("W2_1_P1");
                 OnPropertyUpdate("W2_1_P2");
-                OnPropertyUpdate("W2_1_Winner");
+                OnPropertyUpdate("W2_1_P1_Score");
+                OnPropertyUpdate("W2_1_P2_Score");
             });
             Repository.Instance.winnerMatch2_2.registerRefresher(() =>
             {
                 OnPropertyUpdate("W2_2_P1");
                 OnPropertyUpdate("W2_2_P2");
-                OnPropertyUpdate("W2_2_Winner");
+                OnPropertyUpdate("W2_2_P1_Score");
+                OnPropertyUpdate("W2_2_P2_Score");
             });
             Repository.Instance.winnerMatch3_1.registerRefresher(() =>
             {
                 OnPropertyUpdate("W3_1_P1");
                 OnPropertyUpdate("W3_1_P2");
-                OnPropertyUpdate("W3_1_Winner");
+                OnPropertyUpdate("W3_1_P1_Score");
+                OnPropertyUpdate("W3_1_P2_Score");
             });
             Repository.Instance.winnerMatch4_1.registerRefresher(() =>
             {
                 OnPropertyUpdate("W4_1_P1");
                 OnPropertyUpdate("W4_1_P2");
-                OnPropertyUpdate("W4_1_Winner");
+                OnPropertyUpdate("W4_1_P1_Score");
+                OnPropertyUpdate("W4_1_P2_Score");
+            });
+
+            Repository.Instance.winnerMatch5_1.registerRefresher(() =>
+            {
+                OnPropertyUpdate("W5_1_P1");
+                OnPropertyUpdate("W5_1_P2");
+                OnPropertyUpdate("W5_1_P1_Score");
+                OnPropertyUpdate("W5_1_P2_Score");
             });
 
             Repository.Instance.loserMatch1_1.registerRefresher(() =>
             {
                 OnPropertyUpdate("L1_1_P1");
                 OnPropertyUpdate("L1_1_P2");
-                OnPropertyUpdate("L1_1_Winner");
+                OnPropertyUpdate("L1_1_P1_Score");
+                OnPropertyUpdate("L1_1_P2_Score");
             });
             Repository.Instance.loserMatch1_2.registerRefresher(() =>
             {
                 OnPropertyUpdate("L1_2_P1");
                 OnPropertyUpdate("L1_2_P2");
-                OnPropertyUpdate("L1_2_Winner");
+                OnPropertyUpdate("L1_2_P1_Score");
+                OnPropertyUpdate("L1_2_P2_Score");
             });
 
             Repository.Instance.loserMatch2_1.registerRefresher(() =>
             {
                 OnPropertyUpdate("L2_1_P1");
                 OnPropertyUpdate("L2_1_P2");
-                OnPropertyUpdate("L2_1_Winner");
+                OnPropertyUpdate("L2_1_P1_Score");
+                OnPropertyUpdate("L2_1_P2_Score");
             });
             Repository.Instance.loserMatch2_2.registerRefresher(() =>
             {
                 OnPropertyUpdate("L2_2_P1");
                 OnPropertyUpdate("L2_2_P2");
-                OnPropertyUpdate("L2_2_Winner");
+                OnPropertyUpdate("L2_2_P1_Score");
+                OnPropertyUpdate("L2_2_P2_Score");
             });
 
             Repository.Instance.loserMatch3_1.registerRefresher(() =>
             {
                 OnPropertyUpdate("L3_1_P1");
                 OnPropertyUpdate("L3_1_P2");
-                OnPropertyUpdate("L3_1_Winner");
+                OnPropertyUpdate("L3_1_P1_Score");
+                OnPropertyUpdate("L3_1_P2_Score");
             });
 
 
@@ -130,48 +147,11 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             {
                 OnPropertyUpdate("L4_1_P1");
                 OnPropertyUpdate("L4_1_P2");
-                OnPropertyUpdate("L4_1_Winner");
+                OnPropertyUpdate("L4_1_P1_Score");
+                OnPropertyUpdate("L4_1_P2_Score");
             });
         }
 
-        private void DetermineWinnerToPlayer1(Match match)
-        {
-            Match.WinnerCode code = match.WinPlayer1();
-            SendToast(match, code);
-        }
-        private void DetermineWinnerToPlayer2(Match match)
-        {
-            Match.WinnerCode code = match.WinPlayer2();
-            SendToast(match, code);
-        }
-        private void SendToast(Match match, Match.WinnerCode code)
-        {
-            switch (code)
-            {
-                case Model.Type.Match.WinnerCode.PLAYER1_EMPTY:
-                    Repository.Instance.toast.SendMessage("Please Enter Player1");
-                    break;
-                case Model.Type.Match.WinnerCode.PLAYER2_EMPTY:
-                    Repository.Instance.toast.SendMessage("Please Enter Player2");
-                    break;
-                case Model.Type.Match.WinnerCode.ALL_EMPTY:
-                    Repository.Instance.toast.SendMessage("Please Enter Player1 and Player2");
-                    break;
-                case Model.Type.Match.WinnerCode.WINNER_MATCH_NEEDS_NO_WINNER:
-                    Repository.Instance.toast.SendMessage("De-activate Winner in {0}", match.WinnerMatchName);
-                    break;
-                case Model.Type.Match.WinnerCode.LOSER_MATCH_NEEDS_NO_WINNER:
-                    Repository.Instance.toast.SendMessage("De-activate Winner in {0}", match.LoserMatchName);
-                    break;
-                case Model.Type.Match.WinnerCode.ALL_MATCH_NEEDS_NO_WINNER:
-                    Repository.Instance.toast.SendMessage("De-activate Winner in {0} and {1}", match.WinnerMatchName, match.LoserMatchName);
-                    break;
-                case Model.Type.Match.WinnerCode.SUCCESS:
-                    break;
-                default:
-                    break;
-            }
-        }
 
         bool isExchanged = false;
         private ICommand exchangeCommand;
@@ -198,6 +178,20 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
                     Repository.Instance.loserMatch2_1.Refresh();
                     Repository.Instance.loserMatch2_2.Refresh();
                 }));
+            }
+        }
+
+        private Visibility isRematchNeeded = Visibility.Hidden;
+        public Visibility IsRematchNeeded
+        {
+            get
+            {
+                return isRematchNeeded;
+            }
+            set
+            {
+                isRematchNeeded = value;
+                OnPropertyUpdate("IsRematchNeeded");
             }
         }
 
@@ -234,48 +228,47 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             }
         }
 
-        public int W1_1_Winner
+        public int W1_1_P1_Score
         {
             get
             {
-                return Repository.Instance.winnerMatch1_1.winner;
+                return Repository.Instance.winnerMatch1_1.player1_score;
             }
             set
             {
-                Log.Log.V(string.Format("Change WinnerMatch({0}) {1}Round Winner : Player{2} -> Player{3}",
-                    1, 1, 
-                    Repository.Instance.winnerMatch1_1.winner, value));
-                Repository.Instance.winnerMatch1_1.winner = value;
-                OnPropertyUpdate("W1_1_Winner");
+                Log.Log.V(string.Format("Change WinnerMatch({0}) {1}Round Player{2} : {3} -> {4}",
+                    1, 1, 1,
+                    Repository.Instance.winnerMatch1_1.player1_score, value));
+
+                if (Repository.Instance.CheckWinnerDeterminable(Repository.Instance.winnerMatch1_1))
+                {
+                    Repository.Instance.winnerMatch1_1.player1_score = value;
+                }
+                Repository.Instance.winnerMatch1_1.RefreshRecursive();
             }
         }
-
-        private ICommand w1_1_player1WinCommand;
-        public ICommand W1_1_Player1WinCommand
+        public int W1_1_P2_Score
         {
             get
             {
-                return w1_1_player1WinCommand ?? (w1_1_player1WinCommand = new DelegateCommand(() =>
-                {
-                    Log.Log.V(string.Format("WinnerMatch{0}_{1}Round {2}Player Win button is pressed", 1, 1, 1));
-
-                    DetermineWinnerToPlayer1(Repository.Instance.winnerMatch1_1);
-                }));
+                return Repository.Instance.winnerMatch1_1.player2_score;
             }
-        }
-        private ICommand w1_1_player2WinCommand;
-        public ICommand W1_1_Player2WinCommand
-        {
-            get
+            set
             {
-                return w1_1_player2WinCommand ?? (w1_1_player2WinCommand = new DelegateCommand(() =>
-                {
-                    Log.Log.V(string.Format("WinnerMatch{0}_{1}Round {2}Player Win button is pressed", 1, 1, 2));
+                Log.Log.V(string.Format("Change WinnerMatch({0}) {1}Round Player{2} : {3} -> {4}",
+                    1, 1, 2,
+                    Repository.Instance.winnerMatch1_1.player2_score, value));
 
-                    DetermineWinnerToPlayer2(Repository.Instance.winnerMatch1_1);
-                }));
+
+                if (Repository.Instance.CheckWinnerDeterminable(Repository.Instance.winnerMatch1_1))
+                {
+                    Repository.Instance.winnerMatch1_1.player2_score = value;
+                }
+
+                Repository.Instance.winnerMatch1_1.RefreshRecursive();
             }
         }
+
         #endregion
 
         #region W1_2
@@ -310,47 +303,44 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             }
         }
 
-        public int W1_2_Winner
+        public int W1_2_P1_Score
         {
             get
             {
-                return Repository.Instance.winnerMatch1_2.winner;
+                return Repository.Instance.winnerMatch1_2.player1_score;
             }
             set
             {
-                Log.Log.V(string.Format("Change WinnerMatch({0}) {1}Round Winner : Player{2} -> Player{3}",
-                   1, 2,
-                   Repository.Instance.winnerMatch1_2.winner, value));
-                Repository.Instance.winnerMatch1_2.winner = value;
-                OnPropertyUpdate("W1_2_Winner");
+                Log.Log.V(string.Format("Change WinnerMatch({0}) {1}Round Player{2} : {3} -> {4}",
+                    1, 2, 1,
+                    Repository.Instance.winnerMatch1_2.player1_score, value));
+
+                if (Repository.Instance.CheckWinnerDeterminable(Repository.Instance.winnerMatch1_2))
+                {
+                    Repository.Instance.winnerMatch1_2.player1_score = value;
+                }
+                Repository.Instance.winnerMatch1_2.RefreshRecursive();
             }
         }
-
-        private ICommand w1_2_player1WinCommand;
-        public ICommand W1_2_Player1WinCommand
+        public int W1_2_P2_Score
         {
             get
             {
-                return w1_2_player1WinCommand ?? (w1_2_player1WinCommand = new DelegateCommand(() =>
-                {
-                    Log.Log.V(string.Format("WinnerMatch{0}_{1}Round {2}Player Win button is pressed", 1, 2, 1));
-
-                    DetermineWinnerToPlayer1(Repository.Instance.winnerMatch1_2);
-
-                }));
+                return Repository.Instance.winnerMatch1_2.player2_score;
             }
-        }
-        private ICommand w1_2_player2WinCommand;
-        public ICommand W1_2_Player2WinCommand
-        {
-            get
+            set
             {
-                return w1_2_player2WinCommand ?? (w1_2_player2WinCommand = new DelegateCommand(() =>
-                {
-                    Log.Log.V(string.Format("WinnerMatch{0}_{1}Round {2}Player Win button is pressed", 1, 2, 2));
+                Log.Log.V(string.Format("Change WinnerMatch({0}) {1}Round Player{2} : {3} -> {4}",
+                    1, 2, 2,
+                    Repository.Instance.winnerMatch1_2.player2_score, value));
 
-                    DetermineWinnerToPlayer2(Repository.Instance.winnerMatch1_2);
-                }));
+
+                if (Repository.Instance.CheckWinnerDeterminable(Repository.Instance.winnerMatch1_2))
+                {
+                    Repository.Instance.winnerMatch1_2.player2_score = value;
+                }
+
+                Repository.Instance.winnerMatch1_2.RefreshRecursive();
             }
         }
         #endregion
@@ -387,46 +377,44 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             }
         }
 
-        public int W1_3_Winner
+        public int W1_3_P1_Score
         {
             get
             {
-                return Repository.Instance.winnerMatch1_3.winner;
+                return Repository.Instance.winnerMatch1_3.player1_score;
             }
             set
             {
-                Log.Log.V(string.Format("Change WinnerMatch({0}) {1}Round Winner : Player{2} -> Player{3}",
-                   1, 3,
-                   Repository.Instance.winnerMatch1_3.winner, value));
-                Repository.Instance.winnerMatch1_3.winner = value;
-                OnPropertyUpdate("W1_3_Winner");
+                Log.Log.V(string.Format("Change WinnerMatch({0}) {1}Round Player{2} : {3} -> {4}",
+                    1, 3, 1,
+                    Repository.Instance.winnerMatch1_3.player1_score, value));
+
+                if (Repository.Instance.CheckWinnerDeterminable(Repository.Instance.winnerMatch1_3))
+                {
+                    Repository.Instance.winnerMatch1_3.player1_score = value;
+                }
+
+                Repository.Instance.winnerMatch1_3.RefreshRecursive();
             }
         }
-
-        private ICommand w1_3_player1WinCommand;
-        public ICommand W1_3_Player1WinCommand
+        public int W1_3_P2_Score
         {
             get
             {
-                return w1_3_player1WinCommand ?? (w1_3_player1WinCommand = new DelegateCommand(() =>
-                {
-                    Log.Log.V(string.Format("WinnerMatch{0}_{1}Round {2}Player Win button is pressed", 1, 3, 1));
-
-                    DetermineWinnerToPlayer1(Repository.Instance.winnerMatch1_3);
-                }));
+                return Repository.Instance.winnerMatch1_3.player2_score;
             }
-        }
-        private ICommand w1_3_player2WinCommand;
-        public ICommand W1_3_Player2WinCommand
-        {
-            get
+            set
             {
-                return w1_3_player2WinCommand ?? (w1_3_player2WinCommand = new DelegateCommand(() =>
-                {
-                    Log.Log.V(string.Format("WinnerMatch{0}_{1}Round {2}Player Win button is pressed", 1, 3, 2));
+                Log.Log.V(string.Format("Change WinnerMatch({0}) {1}Round Player{2} : {3} -> {4}",
+                    1, 3, 2,
+                    Repository.Instance.winnerMatch1_3.player2_score, value));
 
-                    DetermineWinnerToPlayer2(Repository.Instance.winnerMatch1_3);
-                }));
+                if (Repository.Instance.CheckWinnerDeterminable(Repository.Instance.winnerMatch1_3))
+                {
+                    Repository.Instance.winnerMatch1_3.player2_score = value;
+                }
+
+                Repository.Instance.winnerMatch1_3.RefreshRecursive();
             }
         }
         #endregion
@@ -459,51 +447,50 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
                 Log.Log.V(string.Format("Change WinnerMatch({0}) {1}Round Player{2} : {3} -> {4}",
                    1, 4, 2,
                    Repository.Instance.winnerMatch1_4.Player2, value));
+
+
                 Repository.Instance.winnerMatch1_4.Player2 = value;
                 OnPropertyUpdate("W1_4_P2");
             }
         }
 
-        public int W1_4_Winner
+        public int W1_4_P1_Score
         {
             get
             {
-                return Repository.Instance.winnerMatch1_4.winner;
+                return Repository.Instance.winnerMatch1_4.player1_score;
             }
             set
             {
-                Log.Log.V(string.Format("Change WinnerMatch({0}) {1}Round Winner : Player{2} -> Player{3}",
-                   1, 4,
-                   Repository.Instance.winnerMatch1_4.winner, value));
-                Repository.Instance.winnerMatch1_4.winner = value;
-                OnPropertyUpdate("W1_4_Winner");
+     
+                Log.Log.V(string.Format("Change WinnerMatch({0}) {1}Round Player{2} : {3} -> {4}",
+                    1, 4, 1,
+                    Repository.Instance.winnerMatch1_4.player1_score, value));
+
+                if (Repository.Instance.CheckWinnerDeterminable(Repository.Instance.winnerMatch1_4))
+                {
+                    Repository.Instance.winnerMatch1_4.player1_score = value;
+                }
+                Repository.Instance.winnerMatch1_4.RefreshRecursive();
             }
         }
-
-        private ICommand w1_4_player1WinCommand;
-        public ICommand W1_4_Player1WinCommand
+        public int W1_4_P2_Score
         {
             get
             {
-                return w1_4_player1WinCommand ?? (w1_4_player1WinCommand = new DelegateCommand(() =>
-                {
-                    Log.Log.V(string.Format("WinnerMatch{0}_{1}Round {2}Player Win button is pressed", 1, 4, 1));
-
-                    DetermineWinnerToPlayer1(Repository.Instance.winnerMatch1_4);
-                }));
+                return Repository.Instance.winnerMatch1_4.player2_score;
             }
-        }
-        private ICommand w1_4_player2WinCommand;
-        public ICommand W1_4_Player2WinCommand
-        {
-            get
+            set
             {
-                return w1_4_player2WinCommand ?? (w1_4_player2WinCommand = new DelegateCommand(() =>
-                {
-                    Log.Log.V(string.Format("WinnerMatch{0}_{1}Round {2}Player Win button is pressed", 1, 4, 2));
+                Log.Log.V(string.Format("Change WinnerMatch({0}) {1}Round Player{2} : {3} -> {4}",
+                    1, 4, 2,
+                    Repository.Instance.winnerMatch1_4.player2_score, value));
 
-                    DetermineWinnerToPlayer2(Repository.Instance.winnerMatch1_4);
-                }));
+                if (Repository.Instance.CheckWinnerDeterminable(Repository.Instance.winnerMatch1_4))
+                {
+                    Repository.Instance.winnerMatch1_4.player2_score = value;
+                }
+                Repository.Instance.winnerMatch1_4.RefreshRecursive();
             }
         }
         #endregion
@@ -540,46 +527,43 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             }
         }
 
-        public int W2_1_Winner
+        public int W2_1_P1_Score
         {
             get
             {
-                return Repository.Instance.winnerMatch2_1.winner;
+                return Repository.Instance.winnerMatch2_1.player1_score;
             }
             set
             {
-                Log.Log.V(string.Format("Change WinnerMatch({0}) {1}Round Winner : Player{2} -> Player{3}",
-                   2, 1,
-                   Repository.Instance.winnerMatch2_1.winner, value));
-                Repository.Instance.winnerMatch2_1.winner = value;
-                OnPropertyUpdate("W2_1_Winner");
+                Log.Log.V(string.Format("Change WinnerMatch({0}) {1}Round Player{2} : {3} -> {4}",
+                    2, 1, 1,
+                    Repository.Instance.winnerMatch2_1.player1_score, value));
+
+                if (Repository.Instance.CheckWinnerDeterminable(Repository.Instance.winnerMatch2_1))
+                {
+                    Repository.Instance.winnerMatch2_1.player1_score = value;
+                }
+
+                Repository.Instance.winnerMatch2_1.RefreshRecursive();
             }
         }
-
-        private ICommand w2_1_player1WinCommand;
-        public ICommand W2_1_Player1WinCommand
+        public int W2_1_P2_Score
         {
             get
             {
-                return w2_1_player1WinCommand ?? (w2_1_player1WinCommand = new DelegateCommand(() =>
-                {
-                    Log.Log.V(string.Format("WinnerMatch{0}_{1}Round {2}Player Win button is pressed", 2, 1, 1));
-
-                    DetermineWinnerToPlayer1(Repository.Instance.winnerMatch2_1);
-                }));
+                return Repository.Instance.winnerMatch2_1.player2_score;
             }
-        }
-        private ICommand w2_1_player2WinCommand;
-        public ICommand W2_1_Player2WinCommand
-        {
-            get
+            set
             {
-                return w2_1_player2WinCommand ?? (w2_1_player2WinCommand = new DelegateCommand(() =>
-                {
-                    Log.Log.V(string.Format("WinnerMatch{0}_{1}Round {2}Player Win button is pressed", 2, 1, 2));
+                Log.Log.V(string.Format("Change WinnerMatch({0}) {1}Round Player{2} : {3} -> {4}",
+                    2, 1, 2,
+                    Repository.Instance.winnerMatch2_1.player2_score, value));
 
-                    DetermineWinnerToPlayer2(Repository.Instance.winnerMatch2_1);
-                }));
+                if (Repository.Instance.CheckWinnerDeterminable(Repository.Instance.winnerMatch2_1))
+                {
+                    Repository.Instance.winnerMatch2_1.player2_score = value;
+                }
+                Repository.Instance.winnerMatch2_1.RefreshRecursive();
             }
         }
         #endregion
@@ -616,48 +600,42 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
                 OnPropertyUpdate("W2_2_P2");
             }
         }
-
-        public int W2_2_Winner
+        public int W2_2_P1_Score
         {
             get
             {
-                return Repository.Instance.winnerMatch2_2.winner;
+                return Repository.Instance.winnerMatch2_2.player1_score;
             }
             set
             {
-                Log.Log.V(string.Format("Change WinnerMatch({0}) {1}Round Winner : Player{2} -> Player{3}",
-                   2, 2,
-                   Repository.Instance.winnerMatch2_2.winner, value));
+                Log.Log.V(string.Format("Change WinnerMatch({0}) {1}Round Player{2} : {3} -> {4}",
+                    2, 2, 1,
+                    Repository.Instance.winnerMatch2_2.player1_score, value));
 
-                Repository.Instance.winnerMatch2_2.winner = value;
-                OnPropertyUpdate("W2_2_Winner");
+                if (Repository.Instance.CheckWinnerDeterminable(Repository.Instance.winnerMatch2_2))
+                {
+                    Repository.Instance.winnerMatch2_2.player1_score = value;
+                }
+                Repository.Instance.winnerMatch2_2.RefreshRecursive();
             }
         }
-
-        private ICommand w2_2_player1WinCommand;
-        public ICommand W2_2_Player1WinCommand
+        public int W2_2_P2_Score
         {
             get
             {
-                return w2_2_player1WinCommand ?? (w2_2_player1WinCommand = new DelegateCommand(() =>
-                {
-                    Log.Log.V(string.Format("WinnerMatch{0}_{1}Round {2}Player Win button is pressed", 2, 2, 1));
-
-                    DetermineWinnerToPlayer1(Repository.Instance.winnerMatch2_2);
-                }));
+                return Repository.Instance.winnerMatch2_2.player2_score;
             }
-        }
-        private ICommand w2_2_player2WinCommand;
-        public ICommand W2_2_Player2WinCommand
-        {
-            get
+            set
             {
-                return w2_2_player2WinCommand ?? (w2_2_player2WinCommand = new DelegateCommand(() =>
-                {
-                    Log.Log.V(string.Format("WinnerMatch{0}_{1}Round {2}Player Win button is pressed", 2, 2, 2));
+                Log.Log.V(string.Format("Change WinnerMatch({0}) {1}Round Player{2} : {3} -> {4}",
+                    2, 2, 2,
+                    Repository.Instance.winnerMatch2_2.player2_score, value));
 
-                    DetermineWinnerToPlayer2(Repository.Instance.winnerMatch2_2);
-                }));
+                if (Repository.Instance.CheckWinnerDeterminable(Repository.Instance.winnerMatch2_2))
+                {
+                    Repository.Instance.winnerMatch2_2.player2_score = value;
+                }
+                Repository.Instance.winnerMatch2_2.RefreshRecursive();
             }
         }
         #endregion
@@ -696,46 +674,42 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             }
         }
 
-        public int W3_1_Winner
+        public int W3_1_P1_Score
         {
             get
             {
-                return Repository.Instance.winnerMatch3_1.winner;
+                return Repository.Instance.winnerMatch3_1.player1_score;
             }
             set
             {
-                Log.Log.V(string.Format("Change WinnerMatch({0}) {1}Round Winner : Player{2} -> Player{3}",
-                   3, 1,
-                   Repository.Instance.winnerMatch3_1.winner, value));
-                Repository.Instance.winnerMatch3_1.winner = value;
-                OnPropertyUpdate("W3_1_Winner");
+                Log.Log.V(string.Format("Change WinnerMatch({0}) {1}Round Player{2} : {3} -> {4}",
+                    3, 1, 1,
+                    Repository.Instance.winnerMatch3_1.player1_score, value));
+
+                if (Repository.Instance.CheckWinnerDeterminable(Repository.Instance.winnerMatch3_1))
+                {
+                    Repository.Instance.winnerMatch3_1.player1_score = value;
+                }
+                Repository.Instance.winnerMatch3_1.RefreshRecursive();
             }
         }
-
-        private ICommand w3_1_player1WinCommand;
-        public ICommand W3_1_Player1WinCommand
+        public int W3_1_P2_Score
         {
             get
             {
-                return w3_1_player1WinCommand ?? (w3_1_player1WinCommand = new DelegateCommand(() =>
-                {
-                    Log.Log.V(string.Format("WinnerMatch{0}_{1}Round {2}Player Win button is pressed", 3, 1, 1));
-
-                    DetermineWinnerToPlayer1(Repository.Instance.winnerMatch3_1);
-                }));
+                return Repository.Instance.winnerMatch3_1.player2_score;
             }
-        }
-        private ICommand w3_1_player2WinCommand;
-        public ICommand W3_1_Player2WinCommand
-        {
-            get
+            set
             {
-                return w3_1_player2WinCommand ?? (w3_1_player2WinCommand = new DelegateCommand(() =>
-                {
-                    Log.Log.V(string.Format("WinnerMatch{0}_{1}Round {2}Player Win button is pressed", 3, 1, 2));
+                Log.Log.V(string.Format("Change WinnerMatch({0}) {1}Round Player{2} : {3} -> {4}",
+                    3, 1, 2,
+                    Repository.Instance.winnerMatch3_1.player2_score, value));
 
-                    DetermineWinnerToPlayer2(Repository.Instance.winnerMatch3_1);
-                }));
+                if (Repository.Instance.CheckWinnerDeterminable(Repository.Instance.winnerMatch3_1))
+                {
+                    Repository.Instance.winnerMatch3_1.player2_score = value;
+                }
+                Repository.Instance.winnerMatch3_1.RefreshRecursive();
             }
         }
         #endregion
@@ -772,49 +746,133 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             }
         }
 
-        public int W4_1_Winner
+        private void DetermineRematch()
+        {
+            if (Repository.Instance.winnerMatch4_1.player1_score > Repository.Instance.winnerMatch4_1.player2_score)
+            {
+                Repository.Instance.toast.SendMessage("Final Winner is {0}", Repository.Instance.winnerMatch4_1.Player1);
+                IsRematchNeeded = Visibility.Hidden;
+            }
+            else if(Repository.Instance.winnerMatch4_1.player1_score < Repository.Instance.winnerMatch4_1.player2_score)
+            {
+                Repository.Instance.toast.SendMessage("Rematch is Needed", Repository.Instance.winnerMatch4_1.Player1);
+                IsRematchNeeded = Visibility.Visible;
+            }
+        }
+        public int W4_1_P1_Score
         {
             get
             {
-                return Repository.Instance.winnerMatch4_1.winner;
+                return Repository.Instance.winnerMatch4_1.player1_score;
             }
             set
             {
-                Log.Log.V(string.Format("Change WinnerMatch({0}) {1}Round Winner : Player{2} -> Player{3}",
-                   4, 1,
-                   Repository.Instance.winnerMatch4_1.winner, value));
-                Repository.Instance.winnerMatch4_1.winner = value;
-                OnPropertyUpdate("W4_1_Winner");
+                Log.Log.V(string.Format("Change WinnerMatch({0}) {1}Round Player{2} : {3} -> {4}",
+                    4, 1, 1,
+                    Repository.Instance.winnerMatch4_1.player1_score, value));
+
+                if (Repository.Instance.CheckWinnerDeterminable(Repository.Instance.winnerMatch4_1))
+                {
+                    Repository.Instance.winnerMatch4_1.player1_score = value;
+                    DetermineRematch();
+                }
+                Repository.Instance.winnerMatch4_1.RefreshRecursive();
             }
         }
-
-        private ICommand w4_1_player1WinCommand;
-        public ICommand W4_1_Player1WinCommand
+        public int W4_1_P2_Score
         {
             get
             {
-                return w4_1_player1WinCommand ?? (w4_1_player1WinCommand = new DelegateCommand(() =>
-                {
-                    Log.Log.V(string.Format("WinnerMatch{0}_{1}Round {2}Player Win button is pressed", 4, 1, 1));
-
-                    DetermineWinnerToPlayer1(Repository.Instance.winnerMatch4_1);
-                }));
+                return Repository.Instance.winnerMatch4_1.player2_score;
             }
-        }
-        private ICommand w4_1_player2WinCommand;
-        public ICommand W4_1_Player2WinCommand
-        {
-            get
+            set
             {
-                return w4_1_player2WinCommand ?? (w4_1_player2WinCommand = new DelegateCommand(() =>
-                {
-                    Log.Log.V(string.Format("WinnerMatch{0}_{1}Round {2}Player Win button is pressed", 4, 1, 2));
+                Log.Log.V(string.Format("Change WinnerMatch({0}) {1}Round Player{2} : {3} -> {4}",
+                    4, 1, 2,
+                    Repository.Instance.winnerMatch4_1.player2_score, value));
 
-                    DetermineWinnerToPlayer2(Repository.Instance.winnerMatch4_1);
-                }));
+                if (Repository.Instance.CheckWinnerDeterminable(Repository.Instance.winnerMatch4_1))
+                {
+                    Repository.Instance.winnerMatch4_1.player2_score = value;
+                    DetermineRematch();
+                }
+                Repository.Instance.winnerMatch4_1.RefreshRecursive();
             }
         }
         #endregion
+
+        #region W5_1
+        public string W5_1_P1
+        {
+            get
+            {
+                return Repository.Instance.winnerMatch5_1.Player1;
+            }
+            set
+            {
+                Log.Log.V(string.Format("Change WinnerMatch({0}) {1}Round Player{2} : {3} -> {4}",
+                   5, 1, 1,
+                   Repository.Instance.winnerMatch5_1.Player1, value));
+                Repository.Instance.winnerMatch5_1.Player1 = value;
+                OnPropertyUpdate("W5_1_P1");
+            }
+        }
+        public string W5_1_P2
+        {
+            get
+            {
+                return Repository.Instance.winnerMatch5_1.Player2;
+            }
+            set
+            {
+                Log.Log.V(string.Format("Change WinnerMatch({0}) {1}Round Player{2} : {3} -> {4}",
+                   5, 1, 2,
+                   Repository.Instance.winnerMatch5_1.Player2, value));
+                Repository.Instance.winnerMatch5_1.Player2 = value;
+                OnPropertyUpdate("W5_1_P2");
+            }
+        }
+
+        public int W5_1_P1_Score
+        {
+            get
+            {
+                return Repository.Instance.winnerMatch5_1.player1_score;
+            }
+            set
+            {
+                Log.Log.V(string.Format("Change WinnerMatch({0}) {1}Round Player{2} : {3} -> {4}",
+                    5, 1, 1,
+                    Repository.Instance.winnerMatch5_1.player1_score, value));
+
+                if (Repository.Instance.CheckWinnerDeterminable(Repository.Instance.winnerMatch5_1))
+                {
+                    Repository.Instance.winnerMatch5_1.player1_score = value;
+                }
+                Repository.Instance.winnerMatch5_1.RefreshRecursive();
+            }
+        }
+        public int W5_1_P2_Score
+        {
+            get
+            {
+                return Repository.Instance.winnerMatch5_1.player2_score;
+            }
+            set
+            {
+                Log.Log.V(string.Format("Change WinnerMatch({0}) {1}Round Player{2} : {3} -> {4}",
+                    5, 1, 2,
+                    Repository.Instance.winnerMatch5_1.player2_score, value));
+
+                if (Repository.Instance.CheckWinnerDeterminable(Repository.Instance.winnerMatch5_1))
+                {
+                    Repository.Instance.winnerMatch5_1.player2_score = value;
+                }
+                Repository.Instance.winnerMatch5_1.RefreshRecursive();
+            }
+        }
+        #endregion
+
         #endregion
 
         #region Loser
@@ -851,46 +909,42 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             }
         }
 
-        public int L1_1_Winner
+        public int L1_1_P1_Score
         {
             get
             {
-                return Repository.Instance.loserMatch1_1.winner;
+                return Repository.Instance.loserMatch1_1.player1_score;
             }
             set
             {
-                Log.Log.V(string.Format("Change LoserMatch({0}) {1}Round Winner : Player{2} -> Player{3}",
-                   1, 1,
-                   Repository.Instance.loserMatch1_1.winner, value));
-                Repository.Instance.loserMatch1_1.winner = value;
-                OnPropertyUpdate("L1_1_Winner");
+                Log.Log.V(string.Format("Change LoserMatch({0}) {1}Round Player{2} : {3} -> {4}",
+                    1, 1, 1,
+                    Repository.Instance.loserMatch1_1.player1_score, value));
+
+                if (Repository.Instance.CheckWinnerDeterminable(Repository.Instance.loserMatch1_1))
+                {
+                    Repository.Instance.loserMatch1_1.player1_score = value;
+                }
+                Repository.Instance.loserMatch1_1.RefreshRecursive();
             }
         }
-
-        private ICommand l1_1_player1WinCommand;
-        public ICommand L1_1_Player1WinCommand
+        public int L1_1_P2_Score
         {
             get
             {
-                return l1_1_player1WinCommand ?? (l1_1_player1WinCommand = new DelegateCommand(() =>
-                {
-                    Log.Log.V(string.Format("LoserMatch{0}_{1}Round {2}Player Win button is pressed", 1, 1, 1));
-
-                    DetermineWinnerToPlayer1(Repository.Instance.loserMatch1_1);
-                }));
+                return Repository.Instance.loserMatch1_1.player2_score;
             }
-        }
-        private ICommand l1_1_player2WinCommand;
-        public ICommand L1_1_Player2WinCommand
-        {
-            get
+            set
             {
-                return l1_1_player2WinCommand ?? (l1_1_player2WinCommand = new DelegateCommand(() =>
-                {
-                    Log.Log.V(string.Format("LoserMatch{0}_{1}Round {2}Player Win button is pressed", 1, 1, 2));
+                Log.Log.V(string.Format("Change LoserMatch({0}) {1}Round Player{2} : {3} -> {4}",
+                    1, 1, 2,
+                    Repository.Instance.loserMatch1_1.player2_score, value));
 
-                    DetermineWinnerToPlayer2(Repository.Instance.loserMatch1_1);
-                }));
+                if (Repository.Instance.CheckWinnerDeterminable(Repository.Instance.loserMatch1_1))
+                {
+                    Repository.Instance.loserMatch1_1.player2_score = value;
+                }
+                Repository.Instance.loserMatch1_1.RefreshRecursive();
             }
         }
         #endregion
@@ -930,47 +984,43 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             }
         }
 
-        public int L1_2_Winner
+
+        public int L1_2_P1_Score
         {
             get
             {
-                return Repository.Instance.loserMatch1_2.winner;
+                return Repository.Instance.loserMatch1_2.player1_score;
             }
             set
             {
-                Log.Log.V(string.Format("Change LoserMatch({0}) {1}Round Winner : Player{2} -> Player{3}",
-                   1, 2,
-                   Repository.Instance.loserMatch1_2.winner, value));
+                Log.Log.V(string.Format("Change LoserMatch({0}) {1}Round Player{2} : {3} -> {4}",
+                    1, 2, 1,
+                    Repository.Instance.loserMatch1_2.player1_score, value));
 
-                Repository.Instance.loserMatch1_2.winner = value;
-                OnPropertyUpdate("L1_2_Winner");
+                if (Repository.Instance.CheckWinnerDeterminable(Repository.Instance.loserMatch1_2))
+                {
+                    Repository.Instance.loserMatch1_2.player1_score = value;
+                }
+                Repository.Instance.loserMatch1_2.RefreshRecursive();
             }
         }
-
-        private ICommand l1_2_player1WinCommand;
-        public ICommand L1_2_Player1WinCommand
+        public int L1_2_P2_Score
         {
             get
             {
-                return l1_2_player1WinCommand ?? (l1_2_player1WinCommand = new DelegateCommand(() =>
-                {
-                    Log.Log.V(string.Format("LoserMatch{0}_{1}Round {2}Player Win button is pressed", 1, 2, 1));
-
-                    DetermineWinnerToPlayer1(Repository.Instance.loserMatch1_2);
-                }));
+                return Repository.Instance.loserMatch1_2.player2_score;
             }
-        }
-        private ICommand l1_2_player2WinCommand;
-        public ICommand L1_2_Player2WinCommand
-        {
-            get
+            set
             {
-                return l1_2_player2WinCommand ?? (l1_2_player2WinCommand = new DelegateCommand(() =>
-                {
-                    Log.Log.V(string.Format("LoserMatch{0}_{1}Round {2}Player Win button is pressed", 1, 2, 2));
+                Log.Log.V(string.Format("Change LoserMatch({0}) {1}Round Player{2} : {3} -> {4}",
+                    1, 2, 2,
+                    Repository.Instance.loserMatch1_2.player2_score, value));
 
-                    DetermineWinnerToPlayer2(Repository.Instance.loserMatch1_2);
-                }));
+                if (Repository.Instance.CheckWinnerDeterminable(Repository.Instance.loserMatch1_2))
+                {
+                    Repository.Instance.loserMatch1_2.player2_score = value;
+                }
+                Repository.Instance.loserMatch1_2.RefreshRecursive();
             }
         }
         #endregion
@@ -1009,47 +1059,42 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             }
         }
 
-        public int L2_1_Winner
+        public int L2_1_P1_Score
         {
             get
             {
-                return Repository.Instance.loserMatch2_1.winner;
+                return Repository.Instance.loserMatch2_1.player1_score;
             }
             set
             {
-                Log.Log.V(string.Format("Change LoserMatch({0}) {1}Round Winner : Player{2} -> Player{3}",
-                   2, 1,
-                   Repository.Instance.loserMatch2_1.winner, value));
+                Log.Log.V(string.Format("Change LoserMatch({0}) {1}Round Player{2} : {3} -> {4}",
+                    2, 1, 1,
+                    Repository.Instance.loserMatch2_1.player1_score, value));
 
-                Repository.Instance.loserMatch2_1.winner = value;
-                OnPropertyUpdate("L2_1_Winner");
+                if (Repository.Instance.CheckWinnerDeterminable(Repository.Instance.loserMatch2_1))
+                {
+                    Repository.Instance.loserMatch2_1.player1_score = value;
+                }
+                Repository.Instance.loserMatch2_1.RefreshRecursive();
             }
         }
-
-        private ICommand l2_1_player1WinCommand;
-        public ICommand L2_1_Player1WinCommand
+        public int L2_1_P2_Score
         {
             get
             {
-                return l2_1_player1WinCommand ?? (l2_1_player1WinCommand = new DelegateCommand(() =>
-                {
-                    Log.Log.V(string.Format("LoserMatch{0}_{1}Round {2}Player Win button is pressed", 2, 1, 1));
-
-                    DetermineWinnerToPlayer1(Repository.Instance.loserMatch2_1);
-                }));
+                return Repository.Instance.loserMatch2_1.player2_score;
             }
-        }
-        private ICommand l2_1_player2WinCommand;
-        public ICommand L2_1_Player2WinCommand
-        {
-            get
+            set
             {
-                return l2_1_player2WinCommand ?? (l2_1_player2WinCommand = new DelegateCommand(() =>
-                {
-                    Log.Log.V(string.Format("LoserMatch{0}_{1}Round {2}Player Win button is pressed", 2, 1, 2));
+                Log.Log.V(string.Format("Change LoserMatch({0}) {1}Round Player{2} : {3} -> {4}",
+                    2, 1, 2,
+                    Repository.Instance.loserMatch2_1.player2_score, value));
 
-                    DetermineWinnerToPlayer2(Repository.Instance.loserMatch2_1);
-                }));
+                if (Repository.Instance.CheckWinnerDeterminable(Repository.Instance.loserMatch2_1))
+                {
+                    Repository.Instance.loserMatch2_1.player2_score = value;
+                }
+                Repository.Instance.loserMatch2_1.RefreshRecursive();
             }
         }
         #endregion
@@ -1089,47 +1134,42 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
             }
         }
 
-        public int L2_2_Winner
+        public int L2_2_P1_Score
         {
             get
             {
-                return Repository.Instance.loserMatch2_2.winner;
+                return Repository.Instance.loserMatch2_2.player1_score;
             }
             set
             {
-                Log.Log.V(string.Format("Change LoserMatch({0}) {1}Round Winner : Player{2} -> Player{3}",
-                   2, 2,
-                   Repository.Instance.loserMatch2_2.winner, value));
+                Log.Log.V(string.Format("Change LoserMatch({0}) {1}Round Player{2} : {3} -> {4}",
+                    2, 2, 1,
+                    Repository.Instance.loserMatch2_2.player1_score, value));
 
-                Repository.Instance.loserMatch2_2.winner = value;
-                OnPropertyUpdate("L2_2_Winner");
+                if (Repository.Instance.CheckWinnerDeterminable(Repository.Instance.loserMatch2_2))
+                {
+                    Repository.Instance.loserMatch2_2.player1_score = value;
+                }
+                Repository.Instance.loserMatch2_2.RefreshRecursive();
             }
         }
-
-        private ICommand l2_2_player1WinCommand;
-        public ICommand L2_2_Player1WinCommand
+        public int L2_2_P2_Score
         {
             get
             {
-                return l2_2_player1WinCommand ?? (l2_2_player1WinCommand = new DelegateCommand(() =>
-                {
-                    Log.Log.V(string.Format("LoserMatch{0}_{1}Round {2}Player Win button is pressed", 2, 2, 1));
-
-                    DetermineWinnerToPlayer1(Repository.Instance.loserMatch2_2);
-                }));
+                return Repository.Instance.loserMatch2_2.player2_score;
             }
-        }
-        private ICommand l2_2_player2WinCommand;
-        public ICommand L2_2_Player2WinCommand
-        {
-            get
+            set
             {
-                return l2_2_player2WinCommand ?? (l2_2_player2WinCommand = new DelegateCommand(() =>
-                {
-                    Log.Log.V(string.Format("LoserMatch{0}_{1}Round {2}Player Win button is pressed", 2, 2, 2));
+                Log.Log.V(string.Format("Change LoserMatch({0}) {1}Round Player{2} : {3} -> {4}",
+                    2, 2, 2,
+                    Repository.Instance.loserMatch2_2.player2_score, value));
 
-                    DetermineWinnerToPlayer2(Repository.Instance.loserMatch2_2);
-                }));
+                if (Repository.Instance.CheckWinnerDeterminable(Repository.Instance.loserMatch2_2))
+                {
+                    Repository.Instance.loserMatch2_2.player2_score = value;
+                }
+                Repository.Instance.loserMatch2_2.RefreshRecursive();
             }
         }
         #endregion
@@ -1166,48 +1206,42 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
                 OnPropertyUpdate("L3_1_P2");
             }
         }
-
-        
-        public int L3_1_Winner
+        public int L3_1_P1_Score
         {
             get
             {
-                return Repository.Instance.loserMatch3_1.winner;
+                return Repository.Instance.loserMatch3_1.player1_score;
             }
             set
             {
-                Log.Log.V(string.Format("Change LoserMatch({0}) {1}Round Winner : Player{2} -> Player{3}",
-                   3, 1,
-                   Repository.Instance.loserMatch3_1.winner, value));
-                Repository.Instance.loserMatch3_1.winner = value;
-                OnPropertyUpdate("L3_1_Winner");
+                Log.Log.V(string.Format("Change LoserMatch({0}) {1}Round Player{2} : {3} -> {4}",
+                    3, 1, 1,
+                    Repository.Instance.loserMatch3_1.player1_score, value));
+
+                if (Repository.Instance.CheckWinnerDeterminable(Repository.Instance.loserMatch3_1))
+                {
+                    Repository.Instance.loserMatch3_1.player1_score = value;
+                }
+                Repository.Instance.loserMatch3_1.RefreshRecursive();
             }
         }
-
-        private ICommand l3_1_player1WinCommand;
-        public ICommand L3_1_Player1WinCommand
+        public int L3_1_P2_Score
         {
             get
             {
-                return l3_1_player1WinCommand ?? (l3_1_player1WinCommand = new DelegateCommand(() =>
-                {
-                    Log.Log.V(string.Format("LoserMatch{0}_{1}Round {2}Player Win button is pressed", 3, 1, 1));
-
-                    DetermineWinnerToPlayer1(Repository.Instance.loserMatch3_1);
-                }));
+                return Repository.Instance.loserMatch3_1.player2_score;
             }
-        }
-        private ICommand l3_1_player2WinCommand;
-        public ICommand L3_1_Player2WinCommand
-        {
-            get
+            set
             {
-                return l3_1_player2WinCommand ?? (l3_1_player2WinCommand = new DelegateCommand(() =>
-                {
-                    Log.Log.V(string.Format("LoserMatch{0}_{1}Round {2}Player Win button is pressed", 3, 1, 2));
+                Log.Log.V(string.Format("Change LoserMatch({0}) {1}Round Player{2} : {3} -> {4}",
+                    3, 1, 2,
+                    Repository.Instance.loserMatch3_1.player2_score, value));
 
-                    DetermineWinnerToPlayer2(Repository.Instance.loserMatch3_1);
-                }));
+                if (Repository.Instance.CheckWinnerDeterminable(Repository.Instance.loserMatch3_1))
+                {
+                    Repository.Instance.loserMatch3_1.player2_score = value;
+                }
+                Repository.Instance.loserMatch3_1.RefreshRecursive();
             }
         }
         #endregion
@@ -1243,45 +1277,42 @@ namespace BananaScoreBoard.ViewModel.TabViewModel.TournamentViewModel
                 OnPropertyUpdate("L4_1_P2");
             }
         }
-
-        public int L4_1_Winner
+        public int L4_1_P1_Score
         {
             get
             {
-                return Repository.Instance.loserMatch4_1.winner;
+                return Repository.Instance.loserMatch4_1.player1_score;
             }
             set
             {
-                Log.Log.V(string.Format("Change LoserMatch({0}) {1}Round Winner : Player{2} -> Player{3}",
-                    4, 1,
-                    Repository.Instance.loserMatch4_1.winner, value));
-                Repository.Instance.loserMatch4_1.winner = value;
-                OnPropertyUpdate("L4_1_Winner");
-            }
-        }
+                Log.Log.V(string.Format("Change LoserMatch({0}) {1}Round Player{2} : {3} -> {4}",
+                    4, 1, 1,
+                    Repository.Instance.loserMatch4_1.player1_score, value));
 
-        private ICommand l4_1_player1WinCommand;
-        public ICommand L4_1_Player1WinCommand
-        {
-            get
-            {
-                return l4_1_player1WinCommand ?? (l4_1_player1WinCommand = new DelegateCommand(() =>
+                if (Repository.Instance.CheckWinnerDeterminable(Repository.Instance.loserMatch4_1))
                 {
-                    Log.Log.V(string.Format("LoserMatch{0}_{1}Round {2}Player Win button is pressed", 4, 1, 1));
-                    DetermineWinnerToPlayer1(Repository.Instance.loserMatch4_1);
-                }));
+                    Repository.Instance.loserMatch4_1.player1_score = value;
+                }
+                Repository.Instance.loserMatch4_1.RefreshRecursive();
             }
         }
-        private ICommand l4_1_player2WinCommand;
-        public ICommand L4_1_Player2WinCommand
+        public int L4_1_P2_Score
         {
             get
             {
-                return l4_1_player2WinCommand ?? (l4_1_player2WinCommand = new DelegateCommand(() =>
+                return Repository.Instance.loserMatch4_1.player2_score;
+            }
+            set
+            {
+                Log.Log.V(string.Format("Change LoserMatch({0}) {1}Round Player{2} : {3} -> {4}",
+                    4, 1, 2,
+                    Repository.Instance.loserMatch4_1.player2_score, value));
+
+                if (Repository.Instance.CheckWinnerDeterminable(Repository.Instance.loserMatch4_1))
                 {
-                    Log.Log.V(string.Format("LoserMatch{0}_{1}Round {2}Player Win button is pressed", 4, 1, 2));
-                    DetermineWinnerToPlayer2(Repository.Instance.loserMatch4_1);
-                }));
+                    Repository.Instance.loserMatch4_1.player2_score = value;
+                }
+                Repository.Instance.loserMatch4_1.RefreshRecursive();
             }
         }
         #endregion

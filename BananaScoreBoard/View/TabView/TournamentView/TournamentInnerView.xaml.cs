@@ -26,6 +26,7 @@ namespace BananaScoreBoard.View.TabView.TournamentView
         {
             InitializeComponent();
             DataContext = viewModel = new TournamentInnerViewModel();
+
         }
     }
 }

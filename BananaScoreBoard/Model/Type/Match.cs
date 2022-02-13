@@ -9,13 +9,16 @@ namespace BananaScoreBoard.Model.Type
     class Match : Refreshable
     {
         private Match winnerMatch = null;
+        private int winner_player_number;
         private Match loserMatch = null;
+        private int loser_player_number;
 
         private Match player1OriginMatch = null;
         private Match player2OriginMatch = null;
 
 
-        public int winner;
+        public int player1_score;
+        public int player2_score;
 
         private string player1;
         public string Player1
@@ -26,20 +29,26 @@ namespace BananaScoreBoard.Model.Type
                     return player1;
                 else
                 {
-                    if (player1OriginMatch.winnerMatch.Equals(this))
+                    if (player1OriginMatch.winnerMatch != null)
                     {
-                        switch (player1OriginMatch.winner)
+                        if (player1OriginMatch.winnerMatch.Equals(this) && player1OriginMatch.winner_player_number == 1)
                         {
-                            case 1: return player1OriginMatch.Player1;
-                            case 2: return player1OriginMatch.Player2;
+                            if (player1OriginMatch.player1_score > player1OriginMatch.player2_score)
+                                return player1OriginMatch.Player1;
+                            else if (player1OriginMatch.player1_score < player1OriginMatch.player2_score)
+                                return player1OriginMatch.Player2;
+
                         }
                     }
-                    else if(player1OriginMatch.loserMatch.Equals(this))
+                    if (player1OriginMatch.loserMatch != null)
                     {
-                        switch (player1OriginMatch.winner)
+                        if (player1OriginMatch.loserMatch.Equals(this) && player1OriginMatch.loser_player_number == 1)
                         {
-                            case 2: return player1OriginMatch.Player1;
-                            case 1: return player1OriginMatch.Player2;
+                            if (player1OriginMatch.player1_score < player1OriginMatch.player2_score)
+                                return player1OriginMatch.Player1;
+                            else if (player1OriginMatch.player1_score > player1OriginMatch.player2_score)
+                                return player1OriginMatch.Player2;
+
                         }
                     }
                 }
@@ -61,20 +70,24 @@ namespace BananaScoreBoard.Model.Type
                     return player2;
                 else
                 {
-                    if (player2OriginMatch.winnerMatch.Equals(this))
+                    if (player2OriginMatch.winnerMatch != null)
                     {
-                        switch (player2OriginMatch.winner)
+                        if (player2OriginMatch.winnerMatch.Equals(this) && player2OriginMatch.winner_player_number == 2)
                         {
-                            case 1: return player2OriginMatch.Player1;
-                            case 2: return player2OriginMatch.Player2;
+                            if (player2OriginMatch.player1_score > player2OriginMatch.player2_score)
+                                return player2OriginMatch.Player1;
+                            else if (player2OriginMatch.player1_score < player2OriginMatch.player2_score)
+                                return player2OriginMatch.Player2;
                         }
                     }
-                    else if (player2OriginMatch.loserMatch.Equals(this))
+                    if (player2OriginMatch.loserMatch != null)
                     {
-                        switch (player2OriginMatch.winner)
+                        if (player2OriginMatch.loserMatch.Equals(this) && player2OriginMatch.loser_player_number == 2)
                         {
-                            case 2: return player2OriginMatch.Player1;
-                            case 1: return player2OriginMatch.Player2;
+                            if (player2OriginMatch.player1_score < player2OriginMatch.player2_score)
+                                return player2OriginMatch.Player1;
+                            else if (player2OriginMatch.player1_score > player2OriginMatch.player2_score)
+                                return player2OriginMatch.Player2;
                         }
                     }
                 }
@@ -87,16 +100,6 @@ namespace BananaScoreBoard.Model.Type
             }
         }
         
-
-        #region PlayerCount
-        bool isOnePlayer = false;
-        public bool IsOnePlayer
-        {
-            get { return isOnePlayer; }
-            set { isOnePlayer = value; }
-        }
-        #endregion
-
         #region Name
         private string name;
         public string Name
@@ -132,14 +135,17 @@ namespace BananaScoreBoard.Model.Type
             this.name = name;
             this.player1 = player1;
             this.player2 = player2;
-            this.winner = 0;
+            this.player1_score = 0;
+            this.player2_score = 0;
         }
 
         
         public void SetNextWinnerMatch(Match winnerMatch, int winner_player_number)
         {
             this.winnerMatch = winnerMatch;
-            switch(winner_player_number)
+            this.winner_player_number = winner_player_number;
+
+            switch (winner_player_number)
             {
                 case 1: winnerMatch.player1OriginMatch = this;
                     break;
@@ -150,6 +156,7 @@ namespace BananaScoreBoard.Model.Type
         public void SetNextLoserMatch(Match loserMatch, int loser_player_number)
         {
             this.loserMatch = loserMatch;
+            this.loser_player_number = loser_player_number;
             switch (loser_player_number)
             {
                 case 1:
@@ -172,7 +179,8 @@ namespace BananaScoreBoard.Model.Type
         {
             this.Player1 = "";
             this.Player2 = "";
-            this.winner = 0;
+            this.player1_score = 0;
+            this.player2_score = 0;
         }
         #endregion
 
@@ -187,136 +195,30 @@ namespace BananaScoreBoard.Model.Type
         }
         #endregion
 
-        public enum WinnerCode
+        public enum MatchStatus
         {
+            OK,
             PLAYER1_EMPTY,
             PLAYER2_EMPTY,
-            ALL_EMPTY,
-            WINNER_MATCH_NEEDS_NO_WINNER,
-            LOSER_MATCH_NEEDS_NO_WINNER,
-            ALL_MATCH_NEEDS_NO_WINNER,
-            SUCCESS,
+            BOTH_EMPTY
         }
 
-        private WinnerCode ReturnWinnerCode()
+        public MatchStatus CheckWinnerDeterminable()
         {
-            if (isOnePlayer)
+            if (Player1 == "" && Player2 == "")
             {
-                if (Player1 == "")
-                    return WinnerCode.PLAYER1_EMPTY;
+                return MatchStatus.BOTH_EMPTY;
+            }
+            else if (Player1 == "" && Player2 != "")
+            {
+                return MatchStatus.PLAYER1_EMPTY;
+            }
+            else if (Player1 != "" && Player2 == "")
+            {
+                return MatchStatus.PLAYER2_EMPTY;
             }
             else
-            {
-                if (Player1 == "")
-                {
-                    if (Player2 == "")
-                    {
-                        return WinnerCode.ALL_EMPTY;
-                    }
-                    else
-                    {
-                        return WinnerCode.PLAYER1_EMPTY;
-                    }
-                }
-                else
-                {
-                    if (Player2 == "")
-                    {
-                        return WinnerCode.PLAYER2_EMPTY;
-                    }
-                }
-            }
-
-            if (winnerMatch != null && loserMatch != null)
-            {
-                if (winnerMatch.winner != 0)
-                {
-                    if (loserMatch.winner != 0)
-                    {
-                        return WinnerCode.ALL_MATCH_NEEDS_NO_WINNER;
-                    }
-                    else
-                    {
-                        return WinnerCode.WINNER_MATCH_NEEDS_NO_WINNER;
-                    }
-                }
-                else
-                {
-                    if (loserMatch.winner != 0)
-                    {
-                        return WinnerCode.LOSER_MATCH_NEEDS_NO_WINNER;
-                    }
-                }
-            }
-            else if (winnerMatch == null && loserMatch != null)
-            {
-                if (loserMatch.winner != 0)
-                    return WinnerCode.LOSER_MATCH_NEEDS_NO_WINNER;
-            }
-            else if (loserMatch == null && winnerMatch != null)
-            {
-
-                if (winnerMatch.winner != 0)
-                    return WinnerCode.WINNER_MATCH_NEEDS_NO_WINNER;
-            }
-            return WinnerCode.SUCCESS;
+                return MatchStatus.OK;
         }
-
-        
-
-        public WinnerCode WinPlayer1()
-        {
-            WinnerCode code = ReturnWinnerCode();
-            if (code != WinnerCode.SUCCESS)
-                return code;
-
-            switch(winner)
-            {
-                case 0: winner = 1;
-                    break;
-                case 1:winner = 0;
-                    break;
-                case 2:winner = 1;
-                    break;
-            }
-            
-            this.Refresh();
-            if (winnerMatch != null)
-                winnerMatch.Refresh();
-            if (loserMatch != null)
-                loserMatch.Refresh();
-
-            return WinnerCode.SUCCESS;
-        }
-
-
-        public WinnerCode WinPlayer2()
-        {
-            WinnerCode code = ReturnWinnerCode();
-            if (code != WinnerCode.SUCCESS)
-                return code;
-
-            switch (winner)
-            {
-                case 0:
-                    winner = 2;
-                    break;
-                case 1:
-                    winner = 2;
-                    break;
-                case 2:
-                    winner = 0;
-                    break;
-            }
-
-            this.Refresh();
-            if (winnerMatch != null)
-                winnerMatch.Refresh();
-            if (loserMatch != null)
-                loserMatch.Refresh();
-
-            return WinnerCode.SUCCESS;
-        }
-
     }
 }

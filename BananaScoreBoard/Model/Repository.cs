@@ -27,13 +27,13 @@ namespace BananaScoreBoard.Model
         public Match winnerMatch2_2;
         public Match winnerMatch3_1;
         public Match winnerMatch4_1;
+        public Match winnerMatch5_1;
 
         public Match loserMatch1_1;
         public Match loserMatch1_2;
         public Match loserMatch2_1;
         public Match loserMatch2_2;
         public Match loserMatch3_1;
-        public Match loserMatch3_2;
         public Match loserMatch4_1;
 
         public Roster roster;
@@ -67,15 +67,14 @@ namespace BananaScoreBoard.Model
             winnerMatch2_1 = new Match("Semi-Final 1st", "", "");
             winnerMatch2_2 = new Match("Semi-Final 2nd", "", "");
             winnerMatch3_1 = new Match("Winner Final", "", "");
-            winnerMatch4_1 = new Match("Final", "", "");
+            winnerMatch4_1 = new Match("Grand Final", "", "");
+            winnerMatch5_1 = new Match("Grand Final Rematch", "", "");
 
             loserMatch1_1 = new Match("Loser Match 1Round 1st", "", "");
             loserMatch1_2 = new Match("Loser Match 1Round 2nd", "", "");
             loserMatch2_1 = new Match("Loser Match 2Round 1st", "", "");
             loserMatch2_2 = new Match("Loser Match 2Round 2nd", "", "");
             loserMatch3_1 = new Match("Loser Match 3Round 1st", "", "");
-            loserMatch3_2 = new Match("Loser Match 3Round 2nd", "", "");
-            loserMatch3_2.IsOnePlayer = true;
             loserMatch4_1 = new Match("Loser Match Final", "", "");
 
             roster = new Roster();
@@ -120,12 +119,12 @@ namespace BananaScoreBoard.Model
             record.WriteString(Record.GetTournamentFileName(true, 2, 2, 1),  winnerMatch2_2.Player1);
             record.WriteString(Record.GetTournamentFileName(true, 3, 1, 1),  winnerMatch3_1.Player1);
             record.WriteString(Record.GetTournamentFileName(true, 4, 1, 1),  winnerMatch4_1.Player1);
+            record.WriteString(Record.GetTournamentFileName(true, 5, 1, 1), winnerMatch5_1.Player1);
             record.WriteString(Record.GetTournamentFileName(false, 1, 1, 1), loserMatch1_1.Player1);
             record.WriteString(Record.GetTournamentFileName(false, 1, 2, 1), loserMatch1_2.Player1);
             record.WriteString(Record.GetTournamentFileName(false, 2, 1, 1), loserMatch2_1.Player1);
             record.WriteString(Record.GetTournamentFileName(false, 2, 2, 1), loserMatch2_2.Player1);
             record.WriteString(Record.GetTournamentFileName(false, 3, 1, 1), loserMatch3_1.Player1);
-            record.WriteString(Record.GetTournamentFileName(false, 3, 2, 1), loserMatch3_2.Player1);
             record.WriteString(Record.GetTournamentFileName(false, 4, 1, 1), loserMatch4_1.Player1);
 
             record.WriteString(Record.GetTournamentFileName(true, 1, 1,  2), winnerMatch1_1.Player2);
@@ -136,29 +135,45 @@ namespace BananaScoreBoard.Model
             record.WriteString(Record.GetTournamentFileName(true, 2, 2,  2), winnerMatch2_2.Player2);
             record.WriteString(Record.GetTournamentFileName(true, 3, 1,  2), winnerMatch3_1.Player2);
             record.WriteString(Record.GetTournamentFileName(true, 4, 1,  2), winnerMatch4_1.Player2);
+            record.WriteString(Record.GetTournamentFileName(true, 5, 1, 1), winnerMatch5_1.Player2);
             record.WriteString(Record.GetTournamentFileName(false, 1, 1, 2), loserMatch1_1.Player2);
             record.WriteString(Record.GetTournamentFileName(false, 1, 2, 2), loserMatch1_2.Player2);
             record.WriteString(Record.GetTournamentFileName(false, 2, 1, 2), loserMatch2_1.Player2);
             record.WriteString(Record.GetTournamentFileName(false, 2, 2, 2), loserMatch2_2.Player2);
             record.WriteString(Record.GetTournamentFileName(false, 3, 1, 2), loserMatch3_1.Player2);
-            record.WriteString(Record.GetTournamentFileName(false, 3, 2, 2), loserMatch3_2.Player2);
             record.WriteString(Record.GetTournamentFileName(false, 4, 1, 2), loserMatch3_1.Player2);
 
-            record.WriteInt(Record.GetTournamentWinnerFileName(true, 1, 1), winnerMatch1_1.winner);
-            record.WriteInt(Record.GetTournamentWinnerFileName(true, 1, 2), winnerMatch1_2.winner);
-            record.WriteInt(Record.GetTournamentWinnerFileName(true, 1, 3), winnerMatch1_3.winner);
-            record.WriteInt(Record.GetTournamentWinnerFileName(true, 1, 4), winnerMatch1_4.winner);
-            record.WriteInt(Record.GetTournamentWinnerFileName(true, 2, 1), winnerMatch2_1.winner);
-            record.WriteInt(Record.GetTournamentWinnerFileName(true, 2, 2), winnerMatch2_2.winner);
-            record.WriteInt(Record.GetTournamentWinnerFileName(true, 3, 1), winnerMatch3_1.winner);
-            record.WriteInt(Record.GetTournamentWinnerFileName(true, 4, 1), winnerMatch4_1.winner);
-            record.WriteInt(Record.GetTournamentWinnerFileName(false, 1, 1), loserMatch1_1.winner);
-            record.WriteInt(Record.GetTournamentWinnerFileName(false, 1, 2), loserMatch1_2.winner);
-            record.WriteInt(Record.GetTournamentWinnerFileName(false, 2, 1), loserMatch2_1.winner);
-            record.WriteInt(Record.GetTournamentWinnerFileName(false, 2, 2), loserMatch2_2.winner);
-            record.WriteInt(Record.GetTournamentWinnerFileName(false, 3, 1), loserMatch3_1.winner);
-            record.WriteInt(Record.GetTournamentWinnerFileName(false, 3, 2), loserMatch3_2.winner);
-            record.WriteInt(Record.GetTournamentWinnerFileName(false, 4, 1), loserMatch4_1.winner);
+            record.WriteInt(Record.GetTournamentScoreFileName(true, 1, 1,  1), winnerMatch1_1.player1_score);
+            record.WriteInt(Record.GetTournamentScoreFileName(true, 1, 2,  1), winnerMatch1_2.player1_score);
+            record.WriteInt(Record.GetTournamentScoreFileName(true, 1, 3,  1), winnerMatch1_3.player1_score);
+            record.WriteInt(Record.GetTournamentScoreFileName(true, 1, 4,  1), winnerMatch1_4.player1_score);
+            record.WriteInt(Record.GetTournamentScoreFileName(true, 2, 1,  1), winnerMatch2_1.player1_score);
+            record.WriteInt(Record.GetTournamentScoreFileName(true, 2, 2,  1), winnerMatch2_2.player1_score);
+            record.WriteInt(Record.GetTournamentScoreFileName(true, 3, 1,  1), winnerMatch3_1.player1_score);
+            record.WriteInt(Record.GetTournamentScoreFileName(true, 4, 1,  1), winnerMatch4_1.player1_score);
+            record.WriteInt(Record.GetTournamentScoreFileName(true, 5, 1,  1), winnerMatch5_1.player1_score);
+            record.WriteInt(Record.GetTournamentScoreFileName(false, 1, 1, 1), loserMatch1_1.player1_score);
+            record.WriteInt(Record.GetTournamentScoreFileName(false, 1, 2, 1), loserMatch1_2.player1_score);
+            record.WriteInt(Record.GetTournamentScoreFileName(false, 2, 1, 1), loserMatch2_1.player1_score);
+            record.WriteInt(Record.GetTournamentScoreFileName(false, 2, 2, 1), loserMatch2_2.player1_score);
+            record.WriteInt(Record.GetTournamentScoreFileName(false, 3, 1, 1), loserMatch3_1.player1_score);
+            record.WriteInt(Record.GetTournamentScoreFileName(false, 4, 1, 1), loserMatch4_1.player1_score);
+
+            record.WriteInt(Record.GetTournamentScoreFileName(true, 1, 1,  2), winnerMatch1_1.player2_score);
+            record.WriteInt(Record.GetTournamentScoreFileName(true, 1, 2,  2), winnerMatch1_2.player2_score);
+            record.WriteInt(Record.GetTournamentScoreFileName(true, 1, 3,  2), winnerMatch1_3.player2_score);
+            record.WriteInt(Record.GetTournamentScoreFileName(true, 1, 4,  2), winnerMatch1_4.player2_score);
+            record.WriteInt(Record.GetTournamentScoreFileName(true, 2, 1,  2), winnerMatch2_1.player2_score);
+            record.WriteInt(Record.GetTournamentScoreFileName(true, 2, 2,  2), winnerMatch2_2.player2_score);
+            record.WriteInt(Record.GetTournamentScoreFileName(true, 3, 1,  2), winnerMatch3_1.player2_score);
+            record.WriteInt(Record.GetTournamentScoreFileName(true, 4, 1,  2), winnerMatch4_1.player2_score);
+            record.WriteInt(Record.GetTournamentScoreFileName(true, 5, 1,  2), winnerMatch5_1.player2_score);
+            record.WriteInt(Record.GetTournamentScoreFileName(false, 1, 1, 2),  loserMatch1_1.player2_score);
+            record.WriteInt(Record.GetTournamentScoreFileName(false, 1, 2, 2),  loserMatch1_2.player2_score);
+            record.WriteInt(Record.GetTournamentScoreFileName(false, 2, 1, 2),  loserMatch2_1.player2_score);
+            record.WriteInt(Record.GetTournamentScoreFileName(false, 2, 2, 2),  loserMatch2_2.player2_score);
+            record.WriteInt(Record.GetTournamentScoreFileName(false, 3, 1, 2),  loserMatch3_1.player2_score);
+            record.WriteInt(Record.GetTournamentScoreFileName(false, 4, 1, 2),  loserMatch4_1.player2_score);
         }
 
         public void update()
@@ -205,6 +220,7 @@ namespace BananaScoreBoard.Model
                             winnerMatch2_2.Refresh();
                             winnerMatch3_1.Refresh();
                             winnerMatch4_1.Refresh();
+                            winnerMatch5_1.Refresh();
 
                             loserMatch1_1.Refresh();
                             loserMatch1_2.Refresh();
@@ -297,20 +313,37 @@ namespace BananaScoreBoard.Model
                             // loserMatch3_1.Player2 = record.ReadString(Record.GetTournamentFileName(false, 3, 1, 2));
                             // loserMatch4_1.Player2 = record.ReadString(Record.GetTournamentFileName(false, 4, 1, 2));
 
-                            winnerMatch1_1.winner = record.ReadInt(Record.GetTournamentWinnerFileName(true, 1, 1));
-                            winnerMatch1_2.winner = record.ReadInt(Record.GetTournamentWinnerFileName(true, 1, 2));
-                            winnerMatch1_3.winner = record.ReadInt(Record.GetTournamentWinnerFileName(true, 1, 3));
-                            winnerMatch1_4.winner = record.ReadInt(Record.GetTournamentWinnerFileName(true, 1, 4));
-                            winnerMatch2_1.winner = record.ReadInt(Record.GetTournamentWinnerFileName(true, 2, 1));
-                            winnerMatch2_2.winner = record.ReadInt(Record.GetTournamentWinnerFileName(true, 2, 2));
-                            winnerMatch3_1.winner = record.ReadInt(Record.GetTournamentWinnerFileName(true, 3, 1));
-                            winnerMatch4_1.winner = record.ReadInt(Record.GetTournamentWinnerFileName(true, 4, 1));
-                            loserMatch1_1.winner = record.ReadInt(Record.GetTournamentWinnerFileName(false, 1, 1));
-                            loserMatch1_2.winner = record.ReadInt(Record.GetTournamentWinnerFileName(false, 1, 2));
-                            loserMatch2_1.winner = record.ReadInt(Record.GetTournamentWinnerFileName(false, 2, 1));
-                            loserMatch2_2.winner = record.ReadInt(Record.GetTournamentWinnerFileName(false, 2, 2));
-                            loserMatch3_1.winner = record.ReadInt(Record.GetTournamentWinnerFileName(false, 3, 1));
-                            loserMatch4_1.winner = record.ReadInt(Record.GetTournamentWinnerFileName(false, 4, 1));
+                            winnerMatch1_1.player1_score = record.ReadInt(Record.GetTournamentScoreFileName(true, 1, 1, 1));
+                            winnerMatch1_2.player1_score = record.ReadInt(Record.GetTournamentScoreFileName(true, 1, 2, 1));
+                            winnerMatch1_3.player1_score = record.ReadInt(Record.GetTournamentScoreFileName(true, 1, 3, 1));
+                            winnerMatch1_4.player1_score = record.ReadInt(Record.GetTournamentScoreFileName(true, 1, 4, 1));
+                            winnerMatch2_1.player1_score = record.ReadInt(Record.GetTournamentScoreFileName(true, 2, 1, 1));
+                            winnerMatch2_2.player1_score = record.ReadInt(Record.GetTournamentScoreFileName(true, 2, 2, 1));
+                            winnerMatch3_1.player1_score = record.ReadInt(Record.GetTournamentScoreFileName(true, 3, 1, 1));
+                            winnerMatch4_1.player1_score = record.ReadInt(Record.GetTournamentScoreFileName(true, 4, 1, 1));
+                            winnerMatch5_1.player1_score = record.ReadInt(Record.GetTournamentScoreFileName(true, 5, 1, 1));
+                            loserMatch1_1.player1_score  = record.ReadInt(Record.GetTournamentScoreFileName(false, 1, 1, 1));
+                            loserMatch1_2.player1_score  = record.ReadInt(Record.GetTournamentScoreFileName(false, 1, 2, 1));
+                            loserMatch2_1.player1_score  = record.ReadInt(Record.GetTournamentScoreFileName(false, 2, 1, 1));
+                            loserMatch2_2.player1_score  = record.ReadInt(Record.GetTournamentScoreFileName(false, 2, 2, 1));
+                            loserMatch3_1.player1_score  = record.ReadInt(Record.GetTournamentScoreFileName(false, 3, 1, 1));
+                            loserMatch4_1.player1_score  = record.ReadInt(Record.GetTournamentScoreFileName(false, 4, 1, 1));
+
+                            winnerMatch1_1.player2_score = record.ReadInt(Record.GetTournamentScoreFileName(true, 1, 1, 2));
+                            winnerMatch1_2.player2_score = record.ReadInt(Record.GetTournamentScoreFileName(true, 1, 2, 2));
+                            winnerMatch1_3.player2_score = record.ReadInt(Record.GetTournamentScoreFileName(true, 1, 3, 2));
+                            winnerMatch1_4.player2_score = record.ReadInt(Record.GetTournamentScoreFileName(true, 1, 4, 2));
+                            winnerMatch2_1.player2_score = record.ReadInt(Record.GetTournamentScoreFileName(true, 2, 1, 2));
+                            winnerMatch2_2.player2_score = record.ReadInt(Record.GetTournamentScoreFileName(true, 2, 2, 2));
+                            winnerMatch3_1.player2_score = record.ReadInt(Record.GetTournamentScoreFileName(true, 3, 1, 2));
+                            winnerMatch4_1.player2_score = record.ReadInt(Record.GetTournamentScoreFileName(true, 4, 1, 2));
+                            winnerMatch5_1.player2_score = record.ReadInt(Record.GetTournamentScoreFileName(true, 5, 1, 2));
+                            loserMatch1_1.player2_score  = record.ReadInt(Record.GetTournamentScoreFileName(false, 1, 1, 2));
+                            loserMatch1_2.player2_score  = record.ReadInt(Record.GetTournamentScoreFileName(false, 1, 2, 2));
+                            loserMatch2_1.player2_score  = record.ReadInt(Record.GetTournamentScoreFileName(false, 2, 1, 2));
+                            loserMatch2_2.player2_score  = record.ReadInt(Record.GetTournamentScoreFileName(false, 2, 2, 2));
+                            loserMatch3_1.player2_score  = record.ReadInt(Record.GetTournamentScoreFileName(false, 3, 1, 2));
+                            loserMatch4_1.player2_score  = record.ReadInt(Record.GetTournamentScoreFileName(false, 4, 1, 2));
                         }
                         else
                         {
@@ -323,9 +356,12 @@ namespace BananaScoreBoard.Model
 
         public void ReadRoster()
         {
-            string roster_text = record.ReadText("roster.txt");
-            roster.Read(roster_text);
-            roster.Refresh();
+            if (record.Exists("roster.txt"))
+            {
+                string roster_text = record.ReadText("roster.txt");
+                roster.Read(roster_text);
+                roster.Refresh();
+            }
         }
 
         public void CommitRoster()
@@ -340,6 +376,26 @@ namespace BananaScoreBoard.Model
             winnerMatch1_4.Player1 = roster.players[6].name;
             winnerMatch1_4.Player2 = roster.players[7].name;
 
+        }
+
+        public bool CheckWinnerDeterminable(Match match)
+        {
+            var ret = match.CheckWinnerDeterminable();
+            switch(ret)
+            {
+                case Match.MatchStatus.PLAYER1_EMPTY:
+                    toast.SendMessage("{0} | Player1 is Empty", match.Name);
+                    return false;
+                case Match.MatchStatus.PLAYER2_EMPTY:
+                    toast.SendMessage("{0} | Player2 is Empty", match.Name);
+                    return false;
+                case Match.MatchStatus.BOTH_EMPTY:
+                    toast.SendMessage("{0} | Player1 and Player2 is Empty", match.Name);
+                    return false;
+                case Match.MatchStatus.OK:
+                    return true;
+            }
+            return true;
         }
 
         private static readonly Lazy<Repository> _instance = new Lazy<Repository>(() => new Repository());

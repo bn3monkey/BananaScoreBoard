@@ -30,13 +30,14 @@
             x:Name="Player2TextBox" Text="{Binding Player2, ElementName=Main, UpdateSourceTrigger=PropertyChanged}" 
             VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="15"
             Margin="3,3,3,3"/>
-        <Button Grid.Row="1" Grid.Column="1"
-            Content="W" Focusable="False"
-            x:Name="Player1Button" Command="{Binding Player1WinCommand, ElementName=Main}"
+
+        <TextBox Grid.Row="1" Grid.Column="1" 
+            x:Name="Player1ScoreTextBox" Text="{Binding Player1Score, ElementName=Main}"
+            VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="15" 
             Margin="3,3,3,3"/>
-        <Button Grid.Row="2" Grid.Column="1"
-            Content="W" Focusable="False"
-            x:Name="Player2Button" Command="{Binding Player2WinCommand, ElementName=Main}"
+        <TextBox Grid.Row="2" Grid.Column="1" 
+            x:Name="Player2ScoreTextBox" Text="{Binding Player2Score, ElementName=Main}" 
+            VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="15"
             Margin="3,3,3,3"/>
     </Grid>
 </UserControl>

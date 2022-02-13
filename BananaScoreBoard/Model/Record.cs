@@ -24,14 +24,15 @@ namespace BananaScoreBoard.Model
             Timer = 9,
         }
 
-        public static string GetTournamentWinnerFileName(bool isWinnerMatch, int round, int match_num)
+        public static string GetTournamentScoreFileName(bool isWinnerMatch, int round, int match_num, int player_num)
         {
             string ret = isWinnerMatch ? "W" : "L";
             ret += round.ToString();
             ret += "_";
             ret += match_num.ToString();
-            ret += "_";
-            ret += "Winner.txt";
+            ret += "_P";
+            ret += player_num.ToString();
+            ret += "_score.txt";
             return ret;
         }
         public static string GetTournamentFileName(bool isWinnerMatch, int round, int match_num, int player_num)
@@ -40,8 +41,7 @@ namespace BananaScoreBoard.Model
             ret += round.ToString();
             ret += "_";
             ret += match_num.ToString();
-            ret += "_";
-            ret += "P";
+            ret += "_P";
             ret += player_num.ToString();
             ret += ".txt";
             return ret;

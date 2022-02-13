@@ -86,57 +86,85 @@ namespace BananaScoreBoard.Control
             MatchNode self = d as MatchNode;
             self.Player2TextBox.Text = e.NewValue.ToString();
         }
-        
 
-        private static readonly DependencyProperty Player1WinCommandProperty =
-                   DependencyProperty.Register("Player1WinCommand", typeof(ICommand), typeof(MatchNode));
 
-        public ICommand Player1WinCommand
+        private static readonly DependencyProperty Player1ScoreTextProperty =
+            DependencyProperty.Register("Player1Score", typeof(int), typeof(MatchNode), new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, new PropertyChangedCallback(OnPlayer1ScoreTextPropertyChanged)));
+        public int Player1Score
         {
             get
             {
-                return (ICommand)GetValue(Player1WinCommandProperty);
+                return (int)GetValue(Player1ScoreTextProperty);
             }
-            
             set
             {
-                SetValue(Player1WinCommandProperty, value);
+                SetValue(Player1ScoreTextProperty, value);
             }
-            
         }
 
-        
-        private static void OnPlayer1WinCommandPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void ChangeTextBoxColor(MatchNode self, int player1_score, int player2_score)
+        {
+            if (player1_score == player2_score)
+            {
+                self.Player1TextBox.Background = Brushes.White;
+                self.Player2TextBox.Background = Brushes.White;
+                self.Player1ScoreTextBox.Background = Brushes.White;
+                self.Player2ScoreTextBox.Background = Brushes.White;
+            }
+            else if (player1_score > player2_score)
+            {
+                self.Player1TextBox.Background = new SolidColorBrush(Color.FromArgb(255, 73, 144, 226));
+                self.Player2TextBox.Background = Brushes.White;
+                self.Player1ScoreTextBox.Background = new SolidColorBrush(Color.FromArgb(255, 73, 144, 226));
+                self.Player2ScoreTextBox.Background = Brushes.White;
+            }
+            else
+            {
+                self.Player1TextBox.Background = Brushes.White;
+                self.Player2TextBox.Background = new SolidColorBrush(Color.FromArgb(255, 73, 144, 226));
+                self.Player1ScoreTextBox.Background = Brushes.White;
+                self.Player2ScoreTextBox.Background = new SolidColorBrush(Color.FromArgb(255, 73, 144, 226));
+            }
+        }
+
+        private static void OnPlayer1ScoreTextPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             MatchNode self = d as MatchNode;
-            self.Player1Button.Command = e.NewValue as ICommand;
+            self.Player1ScoreTextBox.Text = e.NewValue.ToString();
+
+            int player1_score = int.Parse(e.NewValue.ToString());
+            int player2_score = self.Player2Score;
+
+            ChangeTextBoxColor(self, player1_score, player2_score);
         }
-        
 
-        private static readonly DependencyProperty Player2WinCommandProperty =
-                    DependencyProperty.Register("Player2WinCommand", typeof(ICommand), typeof(MatchNode));
-
-        public ICommand Player2WinCommand
+        private static readonly DependencyProperty Player2ScoreTextProperty =
+            DependencyProperty.Register("Player2Score", typeof(int), typeof(MatchNode), new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, new PropertyChangedCallback(OnPlayer2ScoreTextPropertyChanged)));
+        public int Player2Score
         {
             get
             {
-                return (ICommand)GetValue(Player2WinCommandProperty);
+                return (int)GetValue(Player2ScoreTextProperty);
             }
-            
             set
             {
-                SetValue(Player2WinCommandProperty, value);
+                SetValue(Player2ScoreTextProperty, value);
             }
-            
         }
 
-        
-        private static void OnPlayer2WinCommandPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void OnPlayer2ScoreTextPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             MatchNode self = d as MatchNode;
-            self.Player2Button.Command = e.NewValue as ICommand;
+            self.Player2ScoreTextBox.Text = e.NewValue.ToString();
+
+            int player1_score = self.Player1Score;
+            int player2_score = int.Parse(e.NewValue.ToString());
+
+            ChangeTextBoxColor(self, player1_score, player2_score);
         }
-        
+
+
+
 
         private static readonly DependencyProperty ReadOnlyProperty =
             DependencyProperty.Register("ReadOnly", typeof(bool), typeof(MatchNode), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, new PropertyChangedCallback(OnReadOnlyPrpoertyChanged)));
@@ -160,181 +188,9 @@ namespace BananaScoreBoard.Control
             bool? temp = e.NewValue as bool?;
             self.Player1TextBox.IsReadOnly = temp ?? temp.Value;
             self.Player2TextBox.IsReadOnly = temp ?? temp.Value;
+            self.Player1TextBox.Focusable = false;
+            self.Player2TextBox.Focusable = false;
         }
 
-        private static readonly DependencyProperty IsOnePlayerProperty =
-            DependencyProperty.Register("IsOnePlayer", typeof(bool), typeof(MatchNode), new FrameworkPropertyMetadata(false, new PropertyChangedCallback(OnIsOnePlayerPropertyChanged)));
-        public bool IsOnePlayer
-        {
-            get
-            {
-                return (bool)GetValue(IsOnePlayerProperty);
-            }
-            set
-            {
-                SetValue(IsOnePlayerProperty, value);
-            }
-        }
-
-        private static void OnIsOnePlayerPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            MatchNode self = d as MatchNode;
-            bool? temp = e.NewValue as bool?;
-            self.Player2TextBox.Visibility = temp ?? temp.Value ? Visibility.Collapsed : Visibility.Visible;
-            self.Player2Button.Visibility = temp ?? temp.Value ? Visibility.Collapsed : Visibility.Visible;
-        }
-
-        private static readonly DependencyProperty WinnerProperty =
-            DependencyProperty.Register("Winner", typeof(int), typeof(MatchNode), new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, new PropertyChangedCallback(OnWinnerChanged)));
-
-        public int Winner
-        {
-            get
-            {
-                return (int)GetValue(WinnerProperty);
-            }
-            set
-            {
-                SetValue(WinnerProperty, value);
-            }
-        }
-
-        private static void OnWinnerChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            MatchNode self = d as MatchNode;
-            switch(e.NewValue)
-            {
-                case 0:
-                    self.Player1TextBox.Background = Brushes.White;
-                    self.Player2TextBox.Background = Brushes.White;
-                    break;
-
-                case 1:
-                    self.Player1TextBox.Background = new SolidColorBrush(Color.FromArgb(255, 73, 144, 226));
-                    self.Player2TextBox.Background = Brushes.White;
-                    break;
-
-                case 2:
-                    self.Player1TextBox.Background = Brushes.White; 
-                    self.Player2TextBox.Background = new SolidColorBrush(Color.FromArgb(255, 73, 144, 226));
-                    break;
-            }
-        }
-
-
-        /*
-        private MatchNode winnerMatch;
-        private PlayerNumber winnermatch_winner_number = PlayerNumber.None;
-
-        private MatchNode loserMatch;
-        private PlayerNumber losermatch_loser_number = PlayerNumber.None;
-
-        
-        private void ResetNextMatch()
-        {
-            switch(winnermatch_winner_number)
-            {
-                case PlayerNumber.None: break;
-                case PlayerNumber.P1:
-                    winnerMatch.Player1 = "";
-                    break;
-                case PlayerNumber.P2:
-                    winnerMatch.Player2 = "";
-                    break;
-            }
-            switch (losermatch_loser_number)
-            {
-                case PlayerNumber.None: break;
-                case PlayerNumber.P1:
-                    loserMatch.Player1 = "";
-                    break;
-                case PlayerNumber.P2:
-                    loserMatch.Player2 = "";
-                    break;
-            }
-        }
-        private void DetermineNextMatch(string winner, string loser)
-        {
-            if (Player1.Length == 0 || Player2.Length == 0)
-                return;
-
-            if (winnerMatch.Player1 == "")
-            {
-                winnermatch_winner_number = PlayerNumber.P1;
-                winnerMatch.Player1 = winner;
-            }
-            else
-            {
-                winnermatch_winner_number = PlayerNumber.P2;
-                winnerMatch.Player2 = winner;
-            }
-
-            if (loserMatch.Player1 == "")
-            {
-                losermatch_loser_number = PlayerNumber.P1;
-                loserMatch.Player1 = loser;
-            }
-            else
-            {
-                losermatch_loser_number = PlayerNumber.P2;
-                loserMatch.Player2 = loser;
-            }
-        }
-
-        public void RegisterResultNode(MatchNode winnerMatch, MatchNode loserMatch)
-        {
-            this.winnerMatch = winnerMatch;
-            this.loserMatch = loserMatch;
-
-            Player1WinCommand = new DelegateCommand(() =>
-            {
-                switch (Winner)
-                {
-                    case PlayerNumber.None:
-                        DetermineNextMatch(Player1, Player2);
-                        Winner = PlayerNumber.P1;
-                        break;
-                    case PlayerNumber.P1:
-                        ResetNextMatch();
-                        Winner = PlayerNumber.None;
-                        break;
-                    case PlayerNumber.P2:
-                        ResetNextMatch();
-                        DetermineNextMatch(Player1, Player2);
-                        Winner = PlayerNumber.P1;
-                        break;
-                }
-
-            });
-            Player2WinCommand = new DelegateCommand(() =>
-            {
-                switch (Winner)
-                {
-                    case PlayerNumber.None:
-                        DetermineNextMatch(Player2, Player1);
-                        Winner = PlayerNumber.P2;
-                        break;
-                    case PlayerNumber.P1:
-                        ResetNextMatch();
-                        DetermineNextMatch(Player2, Player1);
-                        Winner = PlayerNumber.None;
-                        break;
-                    case PlayerNumber.P2:
-                        ResetNextMatch();
-                        Winner = PlayerNumber.P2;
-                        break;
-                }
-
-            });
-        }
-
-        public void UnregisterResultNode()
-        {
-            this.winnerMatch = null;
-            this.loserMatch = null;
-            Player1WinCommand = null;
-            Player2WinCommand = null;
-        }
-        */
     }
 }
